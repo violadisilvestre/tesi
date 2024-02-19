@@ -37,12 +37,11 @@ int main() {
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
     int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
 
-    double minTime = *std::min_element(time.begin(), time.end());
-    double maxTime = minTime + 1.0; 
+    double minTime = *std::min_element(time.begin(), time.end()); 
 
     std::vector<double> selectedTimes;
     for (int i = 0; i < time.size() && selectedTimes.size() < numEventsToSelect; ++i) {
-        if (time[i] < maxTime ) {
+        if (time[i] < minTime+6 ) {
             selectedTimes.push_back(time[i]);
         }
     }
