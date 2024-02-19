@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include <cmath>
+#include <map>
 #include "TH1F.h"
 #include "TCanvas.h"
 
@@ -36,34 +37,48 @@ int main() {
     // Seleziona i primi 100 eventi dal vettore time (o meno se il vettore ha meno di 100 elementi)
     int numEventsToSelect = std::min(100, static_cast<int>(time.size()));
 
-    // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
-    double sigma = 1.0; // Larghezza della gaussiana
-    std::vector<double> sumGaussians(numEventsToSelect, 0.0); // Vettore per memorizzare la somma delle gaussiane
-    for (int i = 0; i < numEventsToSelect; ++i) {
-        double mean = time[i]; // Media della gaussiana
-        double randomValue = generateGaussian(mean, sigma, g);
-        sumGaussians[i] = randomValue; // Memorizza il valore gaussiano nel vettore di somma
-    }
-
-    // Calcola la somma di tutte le gaussiane generate
-    double totalSum = 0.0;
-    for (double value : sumGaussians) {
-        totalSum += value;
-    }
-
-    // Creazione dell'istogramma con la somma delle gaussiane
-    TH1F *histogram = new TH1F("histogram", "Somma delle Gaussiane", 100, totalSum - 5*sigma, totalSum + 5*sigma);
-    for (double value : sumGaussians) {
-        histogram->Fill(value);
-    }
-
-    // Disegna l'istogramma
-    TCanvas *canvas = new TCanvas("canvas", "Canvas", 800, 600);
-    histogram->Draw();
-    canvas->SaveAs("time_distributiom.pdf");
-
-    return 0;
+ 
+// Creazione di gaussiane solo per gli eventi selezionati in modo casuale
+double sigma = 1; // Larghezza della gaussiana
+std::vector<std::pair<double, double>> sumGaussians; // Vettore per memorizzare coppie (x, y) delle gaussiane generate
+for (int i = 0; i < numEventsToSelect; ++i) {
+    double mean = time[i]; // Media della gaussiana
+    double randomValue = generateGaussian(mean, sigma, g); // Genera un valore gaussiano
+    sumGaussians.push_back(std::make_pair(mean, randomValue)); // Memorizza la coppia (x, y) nel vettore di somma
 }
 
+// Calcola la somma dei conteggi delle gaussiane per le stesse x
+std::map<double, double> sumByX; // Mappa per memorizzare la somma dei conteggi delle gaussiane per le stesse x
+for (const auto& point : sumGaussians) {
+    double x = point.first;
+    double y = point.second;
+    sumByX[x] += y; // Somma i conteggi delle gaussiane per le stesse x
+}
 
+double minX = std::numeric_limits<double>::max();
+double maxX = -std::numeric_limits<double>::max();
+for (const auto& pair : sumByX) {
+    double x = pair.first;
+    minX = std::min(minX, x);
+    maxX = std::max(maxX, x);
+}
+TH1F *histogram = new TH1F("histogram", "Somma dei conteggi delle Gaussiane per le stesse X", 100, minX, maxX);
+for (const auto& pair : sumByX) {
+    double x = pair.first;
+    double y = pair.second;
+    histogram->Fill(x, y); // Aggiunge il conteggio delle gaussiane all'istogramma
+}
+
+// Creazione del canvas e disegno dell'istogramma
+TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
+histogram->Draw();
+
+// Salva l'istogramma su un file o visualizzalo a schermo
+canvas->SaveAs("histogram.png"); // Salva l'istogramma come immagine
+canvas->Print("histogram.pdf"); // Salva l'istogramma come file PDF
+canvas->Draw(); // Visualizza l'istogramma a schermo
+
+ return 0;
+
+}
 
