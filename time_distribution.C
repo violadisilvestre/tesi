@@ -42,7 +42,7 @@ int main() {
 
     std::vector<double> selectedTimes;
     for (int i = 0; i < time.size() && selectedTimes.size() < numEventsToSelect; ++i) {
-        if (time[i] >= minTime && time[i] <= maxTime) {
+        if (time[i] < maxTime ) {
             selectedTimes.push_back(time[i]);
         }
     }
