@@ -35,7 +35,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Seleziona i primi 100 eventi dal vettore time (o meno se il vettore ha meno di 100 elementi)
-    int numEventsToSelect = std::min(100, static_cast<int>(time.size()));
+    int numEventsToSelect = std::min(150, static_cast<int>(time.size()));
 
  
 // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
@@ -62,8 +62,8 @@ for (const auto& pair : sumByX) {
     minX = std::min(minX, x);
     maxX = std::max(maxX, x);
 }
-TH1F *histogram = new TH1F("histogram", "time distribution", 100, minX, maxX);
-histogram->SetFillColor(kRed); // Imposta il colore di riempimento dell'istogramma a rosso
+TH1F *histogram = new TH1F("histogram", "time distribution", 90, minX, maxX);
+histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [s]"); // Imposta l'etichetta dell'asse x
 histogram->SetYTitle("counts"); // Imposta l'etichetta dell'asse y
 
@@ -79,8 +79,8 @@ TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
 histogram->Draw("hist"); 
 
 // Salva l'istogramma su un file o visualizzalo a schermo
-canvas->SaveAs("histogram.png"); // Salva l'istogramma come immagine
-canvas->Print("histogram.pdf"); // Salva l'istogramma come file PDF
+canvas->SaveAs("time_distribution.png"); // Salva l'istogramma come immagine
+canvas->Print("time_distribution.pdf"); // Salva l'istogramma come file PDF
 canvas->Draw(); // Visualizza l'istogramma a schermo
 
  return 0;
