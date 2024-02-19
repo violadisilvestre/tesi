@@ -68,13 +68,13 @@ for (const auto& pair : sumByX) {
 TH1F *histogram = new TH1F("histogram", "time distribution", 150, 0, 70);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
-histogram->SetYTitle("frequency"); // Imposta l'etichetta dell'asse y
+histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
 
 // Riempimento dell'istogramma
 for (const auto& pair : sumByX) {
     double x = pair.first;
     double y = pair.second;
-    histogram->Fill(x-minX, y/maxY); // Aggiunge il conteggio delle gaussiane all'istogramma
+    histogram->Fill(x-minX, y); // Aggiunge il conteggio delle gaussiane all'istogramma
 }
 
 // Creazione del canvas e disegno dell'istogramma
