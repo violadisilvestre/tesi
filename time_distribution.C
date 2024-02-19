@@ -38,7 +38,7 @@ int main() {
     int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
 
     double minTime = *std::min_element(time.begin(), time.end());
-    double maxTime = minTime + 4.0; // Tempo più piccolo + 4ns
+    double maxTime = minTime + 1.0; 
 
     std::vector<double> selectedTimes;
     for (int i = 0; i < time.size() && selectedTimes.size() < numEventsToSelect; ++i) {
