@@ -73,7 +73,6 @@ for (const auto& pair : sumByX) {
     double y = pair.second;
     histogram->Fill(x, y); // Aggiunge il conteggio delle gaussiane all'istogramma
 }
-histogram->SetMaximum(1.0);
 
 // Creazione del canvas e disegno dell'istogramma
 TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
