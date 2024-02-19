@@ -65,7 +65,7 @@ for (const auto& pair : sumByX) {
     maxX = std::max(maxX, x);
     maxY=std::max(maxY,y);
 }
-TH1F *histogram = new TH1F("histogram", "time distribution", 150, minX, 100);
+TH1F *histogram = new TH1F("histogram", "time distribution", 150, 0, 70);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
 histogram->SetYTitle("frequency"); // Imposta l'etichetta dell'asse y
