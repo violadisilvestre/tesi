@@ -29,27 +29,29 @@ int main() {
         time.push_back(value);
     }
 
-    // Mescola il vettore time in modo casuale
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(time.begin(), time.end(), g);
-
-    // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
-    int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
-
-    double minTime = *std::min_element(time.begin(), time.end()); 
+    // Calcoliamo il tempo massimo tra i primi tempi letti e aggiungiamo 4
+    double tmin = *std::min_element(time.begin(), time.end());
+    double tmax = tmin + 4.0;
 
     std::vector<double> selectedTimes;
-    for (int i = 0; i < time.size() && selectedTimes.size() < numEventsToSelect; ++i) {
-        if (time[i] < minTime+6 ) {
+    for (int i = 0; i < time.size(); ++i) {
+        if (time[i] < tmax) {
             selectedTimes.push_back(time[i]);
         }
     }
 
+    // Mescola il vettore selectedTimes in modo casuale
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(selectedTimes.begin(), selectedTimes.end(), g);
+
+    // Seleziona i primi 500 eventi dal vettore selectedTimes (o meno se il vettore ha meno di 500 elementi)
+    int numEventsToSelect = std::min(500, static_cast<int>(selectedTimes.size()));
+
     // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
     double sigma = 0.01; // Larghezza della gaussiana
     std::vector<std::pair<double, double>> sumGaussians; // Vettore per memorizzare coppie (x, y) delle gaussiane generate
-    for (int i = 0; i < selectedTimes.size(); ++i) {
+    for (int i = 0; i < numEventsToSelect; ++i) {
         double mean = selectedTimes[i]; // Media della gaussiana
         double randomValue = generateGaussian(mean, sigma, g); // Genera un valore gaussiano
         sumGaussians.push_back(std::make_pair(mean, randomValue)); // Memorizza la coppia (x, y) nel vettore di somma
@@ -96,5 +98,6 @@ int main() {
 
     return 0;
 }
+
 
 
