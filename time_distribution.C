@@ -34,8 +34,8 @@ int main() {
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
 
-    // Seleziona i primi 100 eventi dal vettore time (o meno se il vettore ha meno di 100 elementi)
-    int numEventsToSelect = std::min(150, static_cast<int>(time.size()));
+    // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
+    int numEventsToSelect = std::min(300, static_cast<int>(time.size()));
 
  
 // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
@@ -62,10 +62,10 @@ for (const auto& pair : sumByX) {
     minX = std::min(minX, x);
     maxX = std::max(maxX, x);
 }
-TH1F *histogram = new TH1F("histogram", "time distribution", 90, minX, maxX);
+TH1F *histogram = new TH1F("histogram", "time distribution", 200, minX, maxX);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
-histogram->SetXTitle("time [s]"); // Imposta l'etichetta dell'asse x
-histogram->SetYTitle("counts"); // Imposta l'etichetta dell'asse y
+histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
+histogram->SetYTitle("frequency"); // Imposta l'etichetta dell'asse y
 
 // Riempimento dell'istogramma
 for (const auto& pair : sumByX) {
@@ -73,6 +73,7 @@ for (const auto& pair : sumByX) {
     double y = pair.second;
     histogram->Fill(x, y); // Aggiunge il conteggio delle gaussiane all'istogramma
 }
+histogram->SetMaximum(1.0);
 
 // Creazione del canvas e disegno dell'istogramma
 TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
