@@ -57,10 +57,13 @@ for (const auto& point : sumGaussians) {
 
 double minX = std::numeric_limits<double>::max();
 double maxX = -std::numeric_limits<double>::max();
+double maxY = -std::numeric_limits<double>::max();
 for (const auto& pair : sumByX) {
     double x = pair.first;
+    double y = pair.second;
     minX = std::min(minX, x);
     maxX = std::max(maxX, x);
+    maxY=std::max(maxY,y);
 }
 TH1F *histogram = new TH1F("histogram", "time distribution", 150, minX, 100);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
@@ -71,7 +74,7 @@ histogram->SetYTitle("frequency"); // Imposta l'etichetta dell'asse y
 for (const auto& pair : sumByX) {
     double x = pair.first;
     double y = pair.second;
-    histogram->Fill(x, y); // Aggiunge il conteggio delle gaussiane all'istogramma
+    histogram->Fill(x-minX, y/maxY); // Aggiunge il conteggio delle gaussiane all'istogramma
 }
 
 // Creazione del canvas e disegno dell'istogramma
