@@ -75,7 +75,7 @@ int main() {
         maxX = std::max(maxX, x);
         maxY=std::max(maxY,y);
     }
-    TH1F *histogram = new TH1F("histogram", "time distribution", 150, 0, 70);
+    TH1F *histogram = new TH1F("histogram", "time distribution", 150, 0, 15);
     histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
     histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
     histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
