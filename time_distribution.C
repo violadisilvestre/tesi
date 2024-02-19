@@ -62,7 +62,12 @@ for (const auto& pair : sumByX) {
     minX = std::min(minX, x);
     maxX = std::max(maxX, x);
 }
-TH1F *histogram = new TH1F("histogram", "Somma dei conteggi delle Gaussiane per le stesse X", 100, minX, maxX);
+TH1F *histogram = new TH1F("histogram", "time distribution", 100, minX, maxX);
+histogram->SetFillColor(kRed); // Imposta il colore di riempimento dell'istogramma a rosso
+histogram->SetXTitle("time [s]"); // Imposta l'etichetta dell'asse x
+histogram->SetYTitle("counts"); // Imposta l'etichetta dell'asse y
+
+// Riempimento dell'istogramma
 for (const auto& pair : sumByX) {
     double x = pair.first;
     double y = pair.second;
@@ -71,7 +76,7 @@ for (const auto& pair : sumByX) {
 
 // Creazione del canvas e disegno dell'istogramma
 TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
-histogram->Draw();
+histogram->Draw("hist"); 
 
 // Salva l'istogramma su un file o visualizzalo a schermo
 canvas->SaveAs("histogram.png"); // Salva l'istogramma come immagine
