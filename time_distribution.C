@@ -33,49 +33,23 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-
-    // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
-    int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
-
- 
-// Creazione di gaussiane solo per gli eventi selezionati in modo casuale
-double sigma = 0.01; // Larghezza della gaussiana
-std::vector<std::pair<double, double>> sumGaussians; // Vettore per memorizzare coppie (x, y) delle gaussiane generate
-for (int i = 0; i < numEventsToSelect; ++i) {
-    double mean = time[i]; // Media della gaussiana
-    double randomValue = generateGaussian(mean, sigma, g); // Genera un valore gaussiano
-    sumGaussians.push_back(std::make_pair(mean, randomValue)); // Memorizza la coppia (x, y) nel vettore di somma
-}
-
-// Calcola la somma dei conteggi delle gaussiane per le stesse x
-std::map<double, double> sumByX; // Mappa per memorizzare la somma dei conteggi delle gaussiane per le stesse x
-for (const auto& point : sumGaussians) {
-    double x = point.first;
-    double y = point.second;
-    sumByX[x] += y; // Somma i conteggi delle gaussiane per le stesse x
-}
-
-double minX = std::numeric_limits<double>::max();
-double maxX = -std::numeric_limits<double>::max();
-double maxY = -std::numeric_limits<double>::max();
-for (const auto& pair : sumByX) {
-    double x = pair.first;
-    double y = pair.second;
-    minX = std::min(minX, x);
-    maxX = std::max(maxX, x);
-    maxY=std::max(maxY,y);
-}
-TH1F *histogram = new TH1F("histogram", "time distribution", 150, 0, 70);
+    
+    TH1F *histogram = new TH1F("histogram", "time distribution", 100, 0, 70);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
 histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
-
-// Riempimento dell'istogramma
-for (const auto& pair : sumByX) {
-    double x = pair.first;
-    double y = pair.second;
-    histogram->Fill(x-minX, y); // Aggiunge il conteggio delle gaussiane all'istogramma
-}
+    // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
+    int numEventsToSelect = std::min(10, static_cast<int>(time.size()));
+ 
+    // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
+    double sigma = 1;
+    int dim=pow(5,numEventsToSelect);
+    for (int i = 0; i < numEventsToSelect; ++i) {
+      double mean = time[i];
+      for (int j = 0; j < 5; ++j) {
+	histogram->Fill(generateGaussian(mean, sigma, g));
+        }
+    }
 
 // Creazione del canvas e disegno dell'istogramma
 TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
