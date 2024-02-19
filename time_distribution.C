@@ -34,7 +34,7 @@ int main() {
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
     
-    TH1F *histogram = new TH1F("histogram", "time distribution", 100, 55, 100);
+    TH1F *histogram = new TH1F("histogram", "time distribution", 200, 55, 100);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
 histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
@@ -43,10 +43,9 @@ histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
  
     // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
     double sigma = 1;
-    int dim=pow(5,numEventsToSelect);
     for (int i = 0; i < numEventsToSelect; ++i) {
       double mean = time[i];
-      for (int j = 0; j < 5; ++j) {
+      for (int j = 0; j < 100; ++j) {
 	histogram->Fill(generateGaussian(mean, sigma, g));
         }
     }
