@@ -1,0 +1,19 @@
+{ decls }
+namespace std {  }
+
+[ libStruct.so ]
+# List of selected classes
+class cluster
+class dg_cell
+class dg_ps
+class dg_tube
+class event
+class pe
+class track
+class vector<cluster>
+class vector<dg_cell>
+class vector<dg_ps>
+class vector<dg_tube>
+class vector<pe>
+class vector<track>
+header struct.h

@@ -1,0 +1,16 @@
+module "Struct" {
+  requires cplusplus
+  module "struct.h" { header "struct.h" export * }
+  link "libStruct.so"
+  export *
+}
+
+module "SANDGeoManager" {
+  requires cplusplus
+  module "SANDGeoManager.h" { header "SANDGeoManager.h" export * }
+  module "SANDSTTTubeInfo.h" { header "SANDSTTTubeInfo.h" export * }
+  module "SANDECALCellInfo.h" { header "SANDECALCellInfo.h" export * }
+  link "libSANDGeoManager.so"
+  export *
+}
+

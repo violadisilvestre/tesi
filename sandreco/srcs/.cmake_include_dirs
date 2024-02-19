@@ -1,0 +1,4 @@
+# DO NOT DELETE 
+# sandreco package block
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/sandreco)
+include_directories($ENV{MRB_BUILDDIR}/sandreco)

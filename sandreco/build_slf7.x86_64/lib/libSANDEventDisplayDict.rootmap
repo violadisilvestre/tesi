@@ -1,0 +1,4 @@
+[ libSANDEventDisplayDict.so ]
+# List of selected classes
+class SANDEventDisplay
+header SANDEventDisplay.h

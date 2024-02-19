@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/storage/gpfs_data/neutrino/users/disilves/sandreco/srcs/sandreco/include/StructLinkDef.h
+struct.h
+/storage/gpfs_data/neutrino/users/disilves/sandreco/srcs/sandreco/include/struct.h
+
+/storage/gpfs_data/neutrino/users/disilves/sandreco/srcs/sandreco/include/struct.h
+map
+-
+string
+-
+vector
+-
+

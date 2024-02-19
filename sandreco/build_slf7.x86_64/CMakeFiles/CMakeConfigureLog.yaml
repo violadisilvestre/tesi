@@ -1,0 +1,533 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
+      - "CMakeLists.txt:7 (project)"
+    message: |
+      The system is: Linux - 3.10.0-1160.102.1.el7.x86_64 - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "sandreco/CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/3.27.4/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "sandreco/CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d6000/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d6000.dir/build.make CMakeFiles/cmTC_d6000.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4'
+        Building CXX object CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -v -o CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -c /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++
+        Target: x86_64-pc-linux-gnu
+        Configured with: /scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/src/gcc-9.3.0/configure --prefix=/scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/Linux64bit+3.10-2.17 --disable-libgcj --enable-threads=posix --enable-__cxa_atexit --enable-languages=c,c++,fortran,lto --with-system-zlib --enable-libstdcxx-time=rt --enable-stage1-checking=yes --enable-checking=release --enable-plugin --enable-lto
+        Thread model: posix
+        gcc version 9.3.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -iprefix /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/ -D_GNU_SOURCE /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccLXQyGi.s
+        GNU C++14 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+        	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.18-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+        ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0"
+        ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu"
+        ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward"
+        ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include"
+        ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed"
+        ignoring nonexistent directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+         /usr/local/include
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../include
+         /usr/include
+        End of search list.
+        GNU C++14 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+        	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.18-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: dc3b2bd628154baa68a7c9e3106d599e
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         as -v --64 -o CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccLXQyGi.s
+        GNU assembler version 2.27 (x86_64-redhat-linux) using BFD version version 2.27-44.base.el7_9.1
+        COMPILER_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/
+        LIBRARY_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+        Linking CXX executable cmTC_d6000
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d6000.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++  -v -rdynamic CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_d6000 
+        Using built-in specs.
+        COLLECT_GCC=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++
+        COLLECT_LTO_WRAPPER=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper
+        Target: x86_64-pc-linux-gnu
+        Configured with: /scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/src/gcc-9.3.0/configure --prefix=/scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/Linux64bit+3.10-2.17 --disable-libgcj --enable-threads=posix --enable-__cxa_atexit --enable-languages=c,c++,fortran,lto --with-system-zlib --enable-libstdcxx-time=rt --enable-stage1-checking=yes --enable-checking=release --enable-plugin --enable-lto
+        Thread model: posix
+        gcc version 9.3.0 (GCC) 
+        COMPILER_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/
+        LIBRARY_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_d6000' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+         /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/collect2 -plugin /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/liblto_plugin.so -plugin-opt=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGxpCCk.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_d6000 /lib/../lib64/crt1.o /lib/../lib64/crti.o /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0 -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../.. CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o /lib/../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_d6000' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "sandreco/CMakeLists.txt:8 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed]
+          add: [/usr/local/include]
+          add: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include] ==> [/cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0/x86_64-pc-linux-gnu]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0/backward]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../include] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0/x86_64-pc-linux-gnu;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include/c++/9.3.0/backward;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed;/usr/local/include;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "sandreco/CMakeLists.txt:8 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4']
+        ignore line: []
+        ignore line: [Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d6000/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_d6000.dir/build.make CMakeFiles/cmTC_d6000.dir/build]
+        ignore line: [gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-xlCMk4']
+        ignore line: [Building CXX object CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -v -o CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -c /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/src/gcc-9.3.0/configure --prefix=/scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/Linux64bit+3.10-2.17 --disable-libgcj --enable-threads=posix --enable-__cxa_atexit --enable-languages=c c++ fortran lto --with-system-zlib --enable-libstdcxx-time=rt --enable-stage1-checking=yes --enable-checking=release --enable-plugin --enable-lto]
+        ignore line: [Thread model: posix]
+        ignore line: [gcc version 9.3.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -iprefix /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/ -D_GNU_SOURCE /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccLXQyGi.s]
+        ignore line: [GNU C++14 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)]
+        ignore line: [	compiled by GNU C version 9.3.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.18-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"]
+        ignore line: [ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0"]
+        ignore line: [ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu"]
+        ignore line: [ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward"]
+        ignore line: [ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include"]
+        ignore line: [ignoring duplicate directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/tbb/v2021_7_0/Linux64bit+3.10-2.17-e20/include]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/../../include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++14 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)]
+        ignore line: [	compiled by GNU C version 9.3.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.18-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: dc3b2bd628154baa68a7c9e3106d599e]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccLXQyGi.s]
+        ignore line: [GNU assembler version 2.27 (x86_64-redhat-linux) using BFD version version 2.27-44.base.el7_9.1]
+        ignore line: [COMPILER_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/]
+        ignore line: [LIBRARY_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        ignore line: [Linking CXX executable cmTC_d6000]
+        ignore line: [/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d6000.dir/link.txt --verbose=1]
+        ignore line: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++  -v -rdynamic CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_d6000 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper]
+        ignore line: [Target: x86_64-pc-linux-gnu]
+        ignore line: [Configured with: /scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/src/gcc-9.3.0/configure --prefix=/scratch/workspace/art-build-base/v11_00_00/SLF7/build/gcc/v9_3_0/Linux64bit+3.10-2.17 --disable-libgcj --enable-threads=posix --enable-__cxa_atexit --enable-languages=c c++ fortran lto --with-system-zlib --enable-libstdcxx-time=rt --enable-stage1-checking=yes --enable-checking=release --enable-plugin --enable-lto]
+        ignore line: [Thread model: posix]
+        ignore line: [gcc version 9.3.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/]
+        ignore line: [LIBRARY_PATH=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_d6000' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+        link line: [ /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/collect2 -plugin /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/liblto_plugin.so -plugin-opt=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccGxpCCk.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_d6000 /lib/../lib64/crt1.o /lib/../lib64/crti.o /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0 -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../.. CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o /lib/../lib64/crtn.o]
+          arg [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccGxpCCk.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-export-dynamic] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_d6000] ==> ignore
+          arg [/lib/../lib64/crt1.o] ==> obj [/lib/../lib64/crt1.o]
+          arg [/lib/../lib64/crti.o] ==> obj [/lib/../lib64/crti.o]
+          arg [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o] ==> obj [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o]
+          arg [-L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0] ==> dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0]
+          arg [-L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc] ==> dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc]
+          arg [-L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64] ==> dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../..] ==> dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../..]
+          arg [CMakeFiles/cmTC_d6000.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o] ==> obj [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o]
+          arg [/lib/../lib64/crtn.o] ==> obj [/lib/../lib64/crtn.o]
+        collapse obj [/lib/../lib64/crt1.o] ==> [/lib64/crt1.o]
+        collapse obj [/lib/../lib64/crti.o] ==> [/lib64/crti.o]
+        collapse obj [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o]
+        collapse obj [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o]
+        collapse obj [/lib/../lib64/crtn.o] ==> [/lib64/crtn.o]
+        collapse library dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0]
+        collapse library dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc]
+        collapse library dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/../lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../..] ==> [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/lib64/crt1.o;/lib64/crti.o;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o;/lib64/crtn.o]
+        implicit dirs: [/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc/x86_64-pc-linux-gnu/9.3.0;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib/gcc;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib64;/lib64;/usr/lib64;/cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:682 (check_library_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8f333/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8f333.dir/build.make CMakeFiles/cmTC_8f333.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc'
+        Building CXX object CMakeFiles/cmTC_8f333.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=XOpenDisplay -std=c++17 -o CMakeFiles/cmTC_8f333.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_8f333
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8f333.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_8f333.dir/CheckFunctionExists.cxx.o -o cmTC_8f333  /usr/lib64/libX11.so /usr/lib64/libXext.so 
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-Ky1oCc'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:697 (check_function_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3aab0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_3aab0.dir/build.make CMakeFiles/cmTC_3aab0.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl'
+        Building CXX object CMakeFiles/cmTC_3aab0.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=gethostbyname -std=c++17 -o CMakeFiles/cmTC_3aab0.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_3aab0
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3aab0.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_3aab0.dir/CheckFunctionExists.cxx.o -o cmTC_3aab0 
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-TNu4Zl'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:711 (check_function_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_daacd/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_daacd.dir/build.make CMakeFiles/cmTC_daacd.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v'
+        Building CXX object CMakeFiles/cmTC_daacd.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=connect -std=c++17 -o CMakeFiles/cmTC_daacd.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_daacd
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_daacd.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_daacd.dir/CheckFunctionExists.cxx.o -o cmTC_daacd 
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SfXK6v'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:720 (check_function_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_cba60/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_cba60.dir/build.make CMakeFiles/cmTC_cba60.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G'
+        Building CXX object CMakeFiles/cmTC_cba60.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=remove -std=c++17 -o CMakeFiles/cmTC_cba60.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_cba60
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cba60.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_cba60.dir/CheckFunctionExists.cxx.o -o cmTC_cba60 
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-SFHK7G'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:729 (check_function_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e86bc/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e86bc.dir/build.make CMakeFiles/cmTC_e86bc.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS'
+        Building CXX object CMakeFiles/cmTC_e86bc.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=shmat -std=c++17 -o CMakeFiles/cmTC_e86bc.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_e86bc
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e86bc.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_e86bc.dir/CheckFunctionExists.cxx.o -o cmTC_e86bc 
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-XUMZPS'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/FindX11.cmake:739 (check_library_exists)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Geant4Config.cmake:478 (find_dependency)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/FindGeant4.cmake:16 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "/cvmfs/dune.opensciencegrid.org/products/dune/edepsim/v3_2_0b/Linux64bit+3.10-2.17-e20-prof/lib/cmake/EDepSim/EDepSimConfig.cmake:64 (find_package)"
+      - "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetOverrideFindPackage.cmake:174 (_find_package)"
+      - "sandreco/CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for IceConnectionNumber in ICE"
+    directories:
+      source: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5"
+      binary: "/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "  -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_10_6_p01f/Linux64bit+3.10-2.17-e20-prof/lib64/Geant4-10.6.1/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules"
+      CMAKE_USER_MAKE_RULES_OVERRIDE: "/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/private/CetToolchainOverrides.cmake"
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5'
+        
+        Run Build Command(s): /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1bed7/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1bed7.dir/build.make CMakeFiles/cmTC_1bed7.dir/build
+        gmake[1]: Entering directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5'
+        Building CXX object CMakeFiles/cmTC_1bed7.dir/CheckFunctionExists.cxx.o
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -std=c++17 -o CMakeFiles/cmTC_1bed7.dir/CheckFunctionExists.cxx.o -c /storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_1bed7
+        /cvmfs/larsoft.opensciencegrid.org/products/cmake/v3_27_4/Linux64bit+3.10-2.17/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bed7.dir/link.txt --verbose=1
+        /cvmfs/larsoft.opensciencegrid.org/products/gcc/v9_3_0/Linux64bit+3.10-2.17/bin/g++   -fdiagnostics-color=always -std=c++17 -pipe -fsigned-char -pthread -DCHECK_FUNCTION_EXISTS=IceConnectionNumber CMakeFiles/cmTC_1bed7.dir/CheckFunctionExists.cxx.o -o cmTC_1bed7  -lICE 
+        /usr/bin/ld: impossibile trovare -lICE
+        collect2: error: ld returned 1 exit status
+        gmake[1]: *** [cmTC_1bed7] Errore 1
+        gmake[1]: Leaving directory `/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/CMakeFiles/CMakeScratch/TryCompile-D6NHm5'
+        gmake: *** [cmTC_1bed7/fast] Errore 2
+        
+      exitCode: 2
+...

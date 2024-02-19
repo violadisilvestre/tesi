@@ -1,0 +1,8 @@
+[ libSANDGeoManager.so ]
+# List of selected classes
+class SANDECALCellInfo
+class SANDGeoManager
+class SANDSTTTubeInfo
+header SANDECALCellInfo.h
+header SANDGeoManager.h
+header SANDSTTTubeInfo.h
