@@ -39,7 +39,7 @@ int main() {
 
  
 // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
-double sigma = 0.1; // Larghezza della gaussiana
+double sigma = 0.01; // Larghezza della gaussiana
 std::vector<std::pair<double, double>> sumGaussians; // Vettore per memorizzare coppie (x, y) delle gaussiane generate
 for (int i = 0; i < numEventsToSelect; ++i) {
     double mean = time[i]; // Media della gaussiana
@@ -62,7 +62,7 @@ for (const auto& pair : sumByX) {
     minX = std::min(minX, x);
     maxX = std::max(maxX, x);
 }
-TH1F *histogram = new TH1F("histogram", "time distribution", 250, minX, 200);
+TH1F *histogram = new TH1F("histogram", "time distribution", 250, minX, 100);
 histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
 histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
 histogram->SetYTitle("frequency"); // Imposta l'etichetta dell'asse y
