@@ -33,7 +33,7 @@ int main() {
   std::mt19937 g(rd());
   std::shuffle(time.begin(), time.end(), g);
   
-  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 55, 73);
+  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 75);
   histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
   histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
   histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
