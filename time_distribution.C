@@ -28,6 +28,16 @@ int main() {
     double value = std::stod(line);
     time.push_back(value);
   }
+  auto min_time = *std::min_element(time.begin(), time.end());
+  double threshold = min_time + 30.0;
+  
+  for (int i = 0; i < time.size(); ++i) {
+    if (time[i] > threshold) {
+      time.erase(time.begin() + i); // Cancella l'elemento dal vector
+      --i; // Decrementa l'indice per compensare la rimozione dell'elemento
+    }
+}
+
   
   // Mescola il vettore time in modo casuale
   std::random_device rd;
@@ -36,7 +46,9 @@ int main() {
   
   TH1F *histogram = new TH1F("histogram", "time distribution", 400, 55, 100);
   histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
-  histogram->Fill(time);
+  for (int i = 0; i < time.size(); ++i) {
+    histogram->Fill(time[i]);
+  }
   histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
   histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
   // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
