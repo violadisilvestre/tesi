@@ -42,9 +42,8 @@ int main() {
 	
   // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
   double sigma =0.35;
-  double min_value = *std::min_element(time.begin(), time.end());
   for (int i = 0; i < numEventsToSelect; ++i) {
-    double mean = time[i]-min_value;
+    double mean = time[i];
     for (int j = 0; j < 1000; ++j) {
       histogram->Fill(generateGaussian(mean, sigma, g));
     }
