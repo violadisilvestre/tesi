@@ -33,7 +33,7 @@ int main() {
   std::mt19937 g(rd());
   std::shuffle(time.begin(), time.end(), g);
   
-  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 73);
+  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 100);
   histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
   histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
   histogram->SetYTitle("Frequancy"); // Imposta l'etichetta dell'asse y
@@ -55,8 +55,8 @@ int main() {
   histogram->Draw("hist"); 
   
   // Salva l'istogramma su un file o visualizzalo a schermo
-  canvas->SaveAs("time_distribution.png"); // Salva l'istogramma come immagine
-  canvas->Print("time_distribution.pdf"); // Salva l'istogramma come file PDF
+  canvas->SaveAs("time_distribution_all.png"); // Salva l'istogramma come immagine
+  canvas->Print("time_distribution_all.pdf"); // Salva l'istogramma come file PDF
   canvas->Draw(); // Visualizza l'istogramma a schermo 
   
   return 0;
