@@ -33,10 +33,10 @@ int main() {
   std::mt19937 g(rd());
   std::shuffle(time.begin(), time.end(), g);
   
-  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 75);
+  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 78);
   histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
   histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
-  histogram->SetYTitle("Counts"); // Imposta l'etichetta dell'asse y
+  histogram->SetYTitle("Frequancy"); // Imposta l'etichetta dell'asse y
 //Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
      int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
 	
