@@ -39,11 +39,12 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma di somma
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 100);
+    //TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 100);
+    TH1F* histogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 100);
 
-    sumHistogram->SetFillColor(kBlue);
-    sumHistogram->SetXTitle("time [ns]");
-    sumHistogram->SetYTitle("Voltage [V]");
+    histogram->SetFillColor(kBlue);
+    histogram->SetXTitle("time [ns]");
+    histogram->SetYTitle("Voltage [V]");
 
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
     int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
@@ -53,13 +54,13 @@ int main() {
 
     for (int i = 0; i < numEventsToSelect; ++i) {
         double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 50, 100);
+        //TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 58, 100);
 
         // Riempimento e normalizzazione dell'istogramma corrente
         for (int j = 0; j < 1000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
-        double integral = histogram->Integral();
+        /*double integral = histogram->Integral();
         histogram->Scale(1.0 / integral);
 
         // Riempimento dell'istogramma di somma con l'istogramma normalizzato
@@ -69,12 +70,12 @@ int main() {
             sumHistogram->SetBinContent(bin, sumBinContent + binContent);
         }
 
-        delete histogram; // Liberazione della memoria dall'istogramma corrente
+        delete histogram; */ // Liberazione della memoria dall'istogramma corrente
     }
 
     // Creazione del canvas e disegno dell'istogramma
     TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
-    sumHistogram->Draw("hist");
+    histogram->Draw("hist");
 
     // Salva l'istogramma su un file o visualizzalo a schermo
     canvas->SaveAs("time_distribution_all.png");
