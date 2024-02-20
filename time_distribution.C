@@ -62,15 +62,9 @@ int main() {
         double integral = histogram->Integral();
         histogram->Scale(1.0 / integral);
 
-	// Controllo se l'istogramma di somma ha già dei dati
-	if (sumHistogram->Integral() == 0) {
-	  // Se è vuoto, copia l'istogramma corrente direttamente in sumHistogram
-	  sumHistogram = (TH1F*)histogram->Clone();
-	} else {
-	  // Altrimenti, aggiungi i contenuti dell'istogramma corrente a sumHistogram
-	  sumHistogram->Add(histogram);
-	}
-	
+        // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
+        sumHistogram->Add(histogram);
+
         delete histogram;  // Liberazione della memoria dall'istogramma corrente
     }
 
