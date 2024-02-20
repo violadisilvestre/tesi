@@ -40,7 +40,7 @@ int main() {
 
     // Creazione dell'istogramma di somma
     TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 100);
-     TH1F* sumcutHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 73);
+    TH1F* sumcutHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 73);
 
 
     sumHistogram->SetFillColor(kBlue);
