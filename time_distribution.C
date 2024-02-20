@@ -33,26 +33,46 @@ int main() {
   std::mt19937 g(rd());
   std::shuffle(time.begin(), time.end(), g);
   
-  TH1F *histogram = new TH1F("histogram", "time distribution", 400, 58, 100);
-  histogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
-  histogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
-  histogram->SetYTitle("Frequancy"); // Imposta l'etichetta dell'asse y
+  TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 100); // Istogramma di somma
+  
+  sumHistogram->SetFillColor(kBlue); // Imposta il colore di riempimento dell'istogramma a rosso
+  sumHistogram->SetXTitle("time [ns]"); // Imposta l'etichetta dell'asse x
+  sumHistogram->SetYTitle("Voltage [V]"); // Imposta l'etichetta dell'asse y
 //Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
      int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
 	
   // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
-  double sigma =0.35;
-  for (int i = 0; i < numEventsToSelect; ++i) {
+  
+  double sigma = 0.35;
+
+
+for (int i = 0; i < numEventsToSelect; ++i) {
     double mean = time[i];
+    TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 100, -5.0, 5.0); // Istogramma normalizzato
+
+    // Riempimento e normalizzazione dell'istogramma corrente
     for (int j = 0; j < 1000; ++j) {
-      histogram->Fill(generateGaussian(mean, sigma, g));
+        histogram->Fill(generateGaussian(mean, sigma, g));
     }
-  }
-  Double_t integral = histogram->Integral(); // Calcola l'integrale dell'istogramma
-  histogram->Scale(1.0 / integral); // Normalizza l'istogramma
+    double integral = histogram->Integral(); // Calcola l'integrale dell'istogramma
+    histogram->Scale(1.0 / integral); // Normalizza l'istogramma
+
+    // Riempimento dell'istogramma di somma con l'istogramma normalizzato
+    for (int bin = 1; bin <= histogram->GetNbinsX(); ++bin) {
+        double binContent = histogram->GetBinContent(bin);
+        double sumBinContent = sumHistogram->GetBinContent(bin);
+        sumHistogram->SetBinContent(bin, sumBinContent + binContent);
+    }
+
+    delete histogram; // Liberazione della memoria dall'istogramma corrente
+}
+
+// Ora l'istogramma di somma contiene la somma dei valori normalizzati degli istogrammi
+// Puoi fare ulteriori operazioni con sumHistogram qui
+
   // Creazione del canvas e disegno dell'istogramma
   TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
-  histogram->Draw("hist"); 
+  sumHistogram->Draw("hist"); 
   
   // Salva l'istogramma su un file o visualizzalo a schermo
   canvas->SaveAs("time_distribution_all.png"); // Salva l'istogramma come immagine
