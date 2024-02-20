@@ -59,8 +59,8 @@ int main() {
         for (int j = 0; j < 1000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
-        double integral = histogram->Integral();
-        histogram->Scale(1.0 / integral);
+	
+        histogram->Scale(1.0 /1000);
 
         // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
         sumHistogram->Add(histogram);
