@@ -48,7 +48,7 @@ int main() {
 
 for (int i = 0; i < numEventsToSelect; ++i) {
     double mean = time[i];
-    TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 100, -5.0, 5.0); // Istogramma normalizzato
+    TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 50, 100); // Istogramma normalizzato
 
     // Riempimento e normalizzazione dell'istogramma corrente
     for (int j = 0; j < 1000; ++j) {
