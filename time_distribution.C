@@ -43,12 +43,13 @@ int main() {
   // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
   double sigma =0.35;
   for (int i = 0; i < numEventsToSelect; ++i) {
-  double mean = time[i];
-  for (int j = 0; j < 1000; ++j) {
-  histogram->Fill(generateGaussian(mean, sigma, g));
+    double mean = time[i];
+    for (int j = 0; j < 1000; ++j) {
+      histogram->Fill(generateGaussian(mean, sigma, g));
+    }
   }
-  }
-  
+  Double_t integral = histogram->Integral(); // Calcola l'integrale dell'istogramma
+  histogram->Scale(1.0 / integral); // Normalizza l'istogramma
   // Creazione del canvas e disegno dell'istogramma
   TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
   histogram->Draw("hist"); 
