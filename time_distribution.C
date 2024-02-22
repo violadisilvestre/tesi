@@ -7,6 +7,7 @@
 #include <map>
 #include "TH1F.h"
 #include "TCanvas.h"
+#include "TF1.h"
 
 // Funzione per generare numeri casuali distribuiti gaussianamente
 double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
@@ -24,9 +25,9 @@ int main() {
 
     // Lettura dei dati dal file e inserimento in un vector
     std::vector<double> time;
-    std::string line;
-    while (std::getline(file, line)) {
-        double value = std::stod(line);
+    std::string lineString; // Rinominata la variabile 'line' in 'lineString'
+    while (std::getline(file, lineString)) {
+        double value = std::stod(lineString);
         time.push_back(value);
     }
 
@@ -40,16 +41,10 @@ int main() {
 
     // Creazione dell'istogramma di somma
     TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 50, 100);
-    //  TH1F* sumcutHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 58, 73);
-
 
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Voltage [V]");
-
-    // sumcutHistogram->SetFillColor(kRed);
-    //sumcutHistogram->SetXTitle("time [ns]");
-    //sumcutHistogram->SetYTitle("Voltage [V]");
 
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
     int numEventsToSelect = std::min(100, static_cast<int>(time.size()));
@@ -58,50 +53,58 @@ int main() {
     double sigma = 0.35;
 
     for (int i = 0; i < numEventsToSelect; ++i) {
-      double mean = time[i];
-      TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 50, 100);
-      // TH1F* cuthistogram = new TH1F("histogram", "Normalized Histogram", 400, 58, 73);
-      
-      // Riempimento e normalizzazione dell'istogramma corrente
-      for (int j = 0; j < 100000; ++j) {
-	histogram->Fill(generateGaussian(mean, sigma, g));
-	//	cuthistogram->Fill(generateGaussian(mean, sigma, g));
-			   
-      }
-	  
-	  
-      histogram->Scale(1.0 /100000);
-      // cuthistogram->Scale(1.0/1000);
-      
-      // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
-      sumHistogram->Add(histogram);
-      //sumcutHistogram->Add(cuthistogram);
+        double mean = time[i];
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 50, 100);
 
-        delete histogram; 
-	//delete cuthistogram;// Liberazione della memoria dall'istogramma corrente
+        // Riempimento e normalizzazione dell'istogramma corrente
+        for (int j = 0; j < 100000; ++j) {
+            histogram->Fill(generateGaussian(mean, sigma, g));
+        }
+
+        histogram->Scale(1.0 /100000);
+
+        // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
+        sumHistogram->Add(histogram);
+
+        delete histogram; // Liberazione della memoria dall'istogramma corrente
     }
 
     // Creazione del canvas e disegno dell'istogramma
-    TCanvas *canvas = new TCanvas("canvas", "canvas", 800, 600);
+    TCanvas *canvasHist = new TCanvas("canvasHist", "canvasHist", 800, 600);
     sumHistogram->Draw("hist");
 
-    // Salva l'istogramma su un file o visualizzalo a schermo
-    canvas->SaveAs("time_distribution_all.png");
-    canvas->Print("time_distribution_all.pdf");
-    canvas->Draw();
+    // Trova il bin corrispondente al massimo dell'istogramma
+    int binMax = sumHistogram->GetMaximumBin();
+    double xMax = sumHistogram->GetXaxis()->GetBinCenter(binMax);
+    double yMax = sumHistogram->GetBinContent(binMax);
 
- // Creazione del canvas e disegno dell'istogramma
-    /* TCanvas *c = new TCanvas("canvas", "canvas", 800, 600);
-    sumcutHistogram->Draw("hist");
+    // Disegna una linea passante per il massimo dell'istogramma
+    TF1 *line = new TF1("line", "pol1", 50, 100); // Interpolazione lineare
+    line->SetParameters(yMax, -0.02); // Valori iniziali per la pendenza e l'intercetta
+    line->SetLineColor(kRed);
+    line->Draw("same");
 
-    // Salva l'istogramma su un file o visualizzalo a schermo
-    c->SaveAs("time_distribution.png");
-    c->Print("time_distribution.pdf");
-    c->Draw();*/
+    // Salva l'istogramma su un file
+    sumHistogram->SaveAs("time_distribution_all_hist.root");
 
+    // Salva il canvas dell'istogramma su un file
+    canvasHist->SaveAs("time_distribution_all.png");
+    canvasHist->Print("time_distribution_all.pdf");
+    canvasHist->Draw();
 
+    // Creazione del canvas per il plot
+    TCanvas *canvasPlot = new TCanvas("canvasPlot", "canvasPlot", 800, 600);
 
-    
+    // Disegna il plot sul nuovo canvas
+    // Aggiungi qui il codice per disegnare il plot
+    // Ad esempio:
+     TF1 *plot = new TF1("plot", "x", 50, 100);
+     plot->Draw();
+
+    // Salva il canvas del plot su un file
+    canvasPlot->SaveAs("time_distribution_plot.png");
+    canvasPlot->Print("time_distribution_plot.pdf");
+    canvasPlot->Draw();
 
     return 0;
 }
