@@ -52,7 +52,7 @@ int main() {
     //sumcutHistogram->SetYTitle("Voltage [V]");
 
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
-    int numEventsToSelect = std::min(10, static_cast<int>(time.size()));
+    int numEventsToSelect = std::min(100, static_cast<int>(time.size()));
 
     // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
     double sigma = 0.35;
