@@ -34,13 +34,16 @@ int main() {
     // Chiusura del file dopo la lettura
     file.close();
 
+    // Trova il valore minimo per la traslazione
+    double minTime = *std::min_element(time.begin(), time.end());
+
     // Mescola il vettore time in modo casuale
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma di somma
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 50, 100);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, minTime, minTime + 100);
 
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
@@ -53,15 +56,15 @@ int main() {
     double sigma = 0.35;
 
     for (int i = 0; i < numEventsToSelect; ++i) {
-        double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 50, 100);
+        double mean = time[i] - minTime; // Traslazione negativa per rimuovere l'offset
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, minTime, minTime + 100);
 
         // Riempimento e normalizzazione dell'istogramma corrente
         for (int j = 0; j < 100000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
 
-        histogram->Scale(1.0 /100000);
+        histogram->Scale(1.0 / 100000);
 
         // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
         sumHistogram->Add(histogram);
@@ -73,15 +76,13 @@ int main() {
     TCanvas *canvasHist = new TCanvas("canvasHist", "canvasHist", 800, 600);
     sumHistogram->Draw("hist");
 
-     // Salva l'istogramma su un file
+    // Salva l'istogramma su un file
     sumHistogram->SaveAs("time_distribution_all_hist.root");
 
     // Salva il canvas dell'istogramma su un file
     canvasHist->SaveAs("time_distribution_all.png");
     canvasHist->Print("time_distribution_all.pdf");
     canvasHist->Draw();
-
-    
 
     return 0;
 }
