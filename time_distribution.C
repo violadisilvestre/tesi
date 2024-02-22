@@ -17,7 +17,7 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 
 int main() {
     // Apertura del file
-    std::ifstream file("dati2.txt");
+    std::ifstream file("dati.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -47,7 +47,7 @@ int main() {
     sumHistogram->SetYTitle("Voltage [V]");
 
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
-    int numEventsToSelect = std::min(100, static_cast<int>(time.size()));
+    int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
 
     // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
     double sigma = 0.35;
@@ -93,18 +93,18 @@ int main() {
     canvasHist->Draw();
 
     // Creazione del canvas per il plot
-    TCanvas *canvasPlot = new TCanvas("canvasPlot", "canvasPlot", 800, 600);
+    // TCanvas *canvasPlot = new TCanvas("canvasPlot", "canvasPlot", 800, 600);
 
     // Disegna il plot sul nuovo canvas
     // Aggiungi qui il codice per disegnare il plot
     // Ad esempio:
-     TF1 *plot = new TF1("plot", "x", 50, 100);
+    /* TF1 *plot = new TF1("plot", "x", 50, 100);
      plot->Draw();
 
     // Salva il canvas del plot su un file
     canvasPlot->SaveAs("time_distribution_plot.png");
     canvasPlot->Print("time_distribution_plot.pdf");
-    canvasPlot->Draw();
+    canvasPlot->Draw();*/
 
     return 0;
 }
