@@ -73,18 +73,7 @@ int main() {
     TCanvas *canvasHist = new TCanvas("canvasHist", "canvasHist", 800, 600);
     sumHistogram->Draw("hist");
 
-    // Trova il bin corrispondente al massimo dell'istogramma
-    int binMax = sumHistogram->GetMaximumBin();
-    double xMax = sumHistogram->GetXaxis()->GetBinCenter(binMax);
-    double yMax = sumHistogram->GetBinContent(binMax);
-
-    // Disegna una linea passante per il massimo dell'istogramma
-    TF1 *line = new TF1("line", "pol1", 50, 100); // Interpolazione lineare
-    line->SetParameters(yMax, -0.02); // Valori iniziali per la pendenza e l'intercetta
-    line->SetLineColor(kRed);
-    line->Draw("same");
-
-    // Salva l'istogramma su un file
+     // Salva l'istogramma su un file
     sumHistogram->SaveAs("time_distribution_all_hist.root");
 
     // Salva il canvas dell'istogramma su un file
@@ -92,19 +81,7 @@ int main() {
     canvasHist->Print("time_distribution_all.pdf");
     canvasHist->Draw();
 
-    // Creazione del canvas per il plot
-    // TCanvas *canvasPlot = new TCanvas("canvasPlot", "canvasPlot", 800, 600);
-
-    // Disegna il plot sul nuovo canvas
-    // Aggiungi qui il codice per disegnare il plot
-    // Ad esempio:
-    /* TF1 *plot = new TF1("plot", "x", 50, 100);
-     plot->Draw();
-
-    // Salva il canvas del plot su un file
-    canvasPlot->SaveAs("time_distribution_plot.png");
-    canvasPlot->Print("time_distribution_plot.pdf");
-    canvasPlot->Draw();*/
+    
 
     return 0;
 }
