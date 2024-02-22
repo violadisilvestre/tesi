@@ -43,7 +43,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma di somma
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, minTime, minTime + 100);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 0, 70);
 
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
@@ -57,7 +57,7 @@ int main() {
 
     for (int i = 0; i < numEventsToSelect; ++i) {
         double mean = time[i] - minTime; // Traslazione negativa per rimuovere l'offset
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, minTime, minTime + 100);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 70);
 
         // Riempimento e normalizzazione dell'istogramma corrente
         for (int j = 0; j < 100000; ++j) {
@@ -86,4 +86,3 @@ int main() {
 
     return 0;
 }
-
