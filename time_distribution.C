@@ -52,7 +52,7 @@ int main() {
     //sumcutHistogram->SetYTitle("Voltage [V]");
 
     // Seleziona i primi n eventi dal vettore time (o meno se il vettore ha meno di n elementi)
-    int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
+    int numEventsToSelect = std::min(10, static_cast<int>(time.size()));
 
     // Creazione di gaussiane solo per gli eventi selezionati in modo casuale
     double sigma = 0.35;
@@ -63,14 +63,14 @@ int main() {
       // TH1F* cuthistogram = new TH1F("histogram", "Normalized Histogram", 400, 58, 73);
       
       // Riempimento e normalizzazione dell'istogramma corrente
-      for (int j = 0; j < 1000; ++j) {
+      for (int j = 0; j < 100000; ++j) {
 	histogram->Fill(generateGaussian(mean, sigma, g));
 	//	cuthistogram->Fill(generateGaussian(mean, sigma, g));
 			   
       }
 	  
 	  
-      histogram->Scale(1.0 /1000);
+      histogram->Scale(1.0 /100000);
       // cuthistogram->Scale(1.0/1000);
       
       // Aggiungi i contenuti dell'istogramma corrente a sumHistogram
