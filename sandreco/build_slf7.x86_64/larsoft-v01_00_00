@@ -19,14 +19,20 @@ tdefined UPS_OVERRIDE_SAFE && unsetenv_ UPS_OVERRIDE_SAFE
 tdefined UPS_OVERRIDE && setenv UPS_OVERRIDE_SAFE "$UPS_OVERRIDE"
 tdefined UPS_OVERRIDE && unsetenv_ UPS_OVERRIDE
 # > cetmodules <
-setup -B cetmodules v3_22_02; test "$?" != 0 && \
-  echo ERROR\:\ setup\ \-B\ cetmodules\ v3_22_02\ failed && \
+setup -B cetmodules v3_24_01; test "$?" != 0 && \
+  echo ERROR\:\ setup\ \-B\ cetmodules\ v3_24_01\ failed && \
   return 1 || true
 
 # Restore any previous value for UPS_OVERRIDE.
 tdefined UPS_OVERRIDE_SAFE && setenv UPS_OVERRIDE "$UPS_OVERRIDE_SAFE"
 tdefined UPS_OVERRIDE_SAFE && unsetenv_ UPS_OVERRIDE_SAFE
 ##################
+
+setenv PATH `dropit -p "${PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined LD_LIBRARY_PATH && setenv LD_LIBRARY_PATH `dropit -p "${LD_LIBRARY_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined DYLD_LIBRARY_PATH setenv DYLD_LIBRARY_PATH `dropit -p "${DYLD_LIBRARY_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined CET_PLUGIN_PATH setenv CET_PLUGIN_PATH `dropit -p "${CET_PLUGIN_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined ROOT_INCLUDE_PATH setenv CET_PLUGIN_PATH `dropit -p "${CET_PLUGIN_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
 
 ##################
 # >> sandreco <<
