@@ -73,7 +73,7 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution Real", 20, 50, 70);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution Real", 20, 59, 75);
 
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
