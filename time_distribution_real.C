@@ -9,12 +9,6 @@
 #include "TCanvas.h"
 #include "TF1.h"
 
-// Funzione per generare numeri casuali distribuiti gaussianamente
-double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
-    std::normal_distribution<double> distribution(mean, sigma);
-    return distribution(gen);
-}
-
 int main() {
     // Apertura del file
     std::ifstream file("dati.txt");
@@ -42,7 +36,7 @@ int main() {
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
 
-    // Creazione dell'istogramma 'sumHistogram'
+    // Creazione dell'istogramma di somma
     TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 0, 30);
 
     sumHistogram->SetFillColor(kBlue);
@@ -72,30 +66,17 @@ int main() {
         delete histogram; // Liberazione della memoria dall'istogramma corrente
     }
 
-    // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution Real", 20, 0, 30);
-
-    realHistogram->SetFillColor(kViolet);
-    realHistogram->SetXTitle("time [ns]");
-    realHistogram->SetYTitle("# photoelectrons");
-
-    // Creazione di gaussiane per tutti i dati senza selezionare casualmente
-    for (size_t i = 0; i < time.size(); ++i) {
-         realHistogram->Fill(time[i]);
-    }
-    // Creazione del canvas e disegno degli istogrammi
+    // Creazione del canvas e disegno dell'istogramma
     TCanvas *canvasHist = new TCanvas("canvasHist", "canvasHist", 800, 600);
     sumHistogram->Draw("hist");
-    TCanvas *c =new TCanvas ("c","c",800,600);
-    realHistogram->Draw("hist");
-    
-    
-    // Salva il canvas degli istogrammi su file
-    canvasHist->SaveAs("time_distribution_all.pdf");
-    c->SaveAs("time_distribution_all_and_real.pdf");
+
+    // Salva l'istogramma su un file
+    sumHistogram->SaveAs("time_distribution_all_hist.root");
+
+    // Salva il canvas dell'istogramma su un file
+    canvasHist->SaveAs("time_distribution_all.png");
+    canvasHist->Print("time_distribution_all.pdf");
     canvasHist->Draw();
-    c->Draw();
-    
+
     return 0;
 }
-
