@@ -90,7 +90,7 @@ int main() {
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
-    sumHistogram->Draw("hist");
+    //sumHistogram->Draw("hist");
     graph->Draw("C");
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
