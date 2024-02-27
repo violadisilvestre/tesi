@@ -50,7 +50,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 20, 59, 79);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 20, 0, 30);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
@@ -58,8 +58,8 @@ int main() {
     double sigma = 0.35;
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
-        double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 59, 79);
+        double mean = time[i] - minTime;
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
 
         for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
@@ -71,21 +71,28 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 59, 79);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 20);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
     realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
-         realHistogram->Fill(time[i]);
+         realHistogram->Fill(time[i]-minTime);
     }
 
+    // Normalization factor for realHistogram
+    // double normalizationFactorReal = 1.0 / realHistogram->Integral();
+    //realHistogram->Scale(normalizationFactorReal);
+
+    // Normalization factor for sumHistogram
+    // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+    //sumHistogram->Scale(normalizationFactorSum);
 
     double F[time.size()];
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
-      F[i] = myFunction(time[i]-minTime,time.size())+minTime;
-        x[i]=time[i];
+      F[i] = myFunction(time[i]-minTime,time.size());
+        x[i]=time[i]-minTime;
     }
 
     TGraph *graph = new TGraph(time.size(), x, F);
