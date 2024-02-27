@@ -61,11 +61,11 @@ int main() {
         double mean = time[i] - minTime;
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 30);
 
-        for (int j = 0; j < 100000; ++j) {
+        for (int j = 0; j < 1000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
 
-        //histogram->Scale(1.0 / (100000 * histogram->GetBinWidth(1))); // Normalize the histogram
+        histogram->Scale(1.0 / 1000); // Normalize the histogram
         sumHistogram->Add(histogram);
         delete histogram;
     }
