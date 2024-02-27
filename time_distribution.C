@@ -18,11 +18,11 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 
 // Funzione da plottare sopra agli istogrammi
 double myFunction(double x) {
-  double tau=3.08;
-  double a =0.588;
-  double num=std::pow(x/tau,(1/a)-1);
-  double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-  return num/den;
+    double tau=3.08;
+    double a =0.588;
+    double num=std::pow(x/tau,(1/a)-1);
+    double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
+    return num/den;
 }
 
 int main() {
@@ -80,7 +80,13 @@ int main() {
          realHistogram->Fill(time[i]-minTime);
     }
 
-    realHistogram->Scale(1.0 / (realHistogram->GetEntries() * realHistogram->GetBinWidth(1))); // Normalize the histogram
+    // Normalization factor for realHistogram
+    double normalizationFactorReal = 1.0 / realHistogram->Integral();
+    realHistogram->Scale(normalizationFactorReal);
+
+    // Normalization factor for sumHistogram
+    double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+    sumHistogram->Scale(normalizationFactorSum);
 
     double F[time.size()];
     double x[time.size()];
@@ -106,3 +112,4 @@ int main() {
 
     return 0;
 }
+
