@@ -58,7 +58,7 @@ int main() {
     double sigma = 0.35;
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
-        double mean = time[i] - minTime;
+        double mean = time[i];
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
 
         for (int j = 0; j < 10000; ++j) {
@@ -77,7 +77,7 @@ int main() {
     realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
-         realHistogram->Fill(time[i]-minTime);
+         realHistogram->Fill(time[i]);
     }
 
     // Normalization factor for realHistogram
@@ -91,7 +91,7 @@ int main() {
     double F[time.size()];
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
-      F[i] = myFunction(time[i]-minTime,time.size());
+      F[i] = myFunction(time[i]-minTime,time.size())+minTime;
         x[i]=time[i]-minTime;
     }
 
