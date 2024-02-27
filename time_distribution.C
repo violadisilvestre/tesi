@@ -104,7 +104,7 @@ int main() {
     graph->Draw();
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
-    realHistogram->Draw("hist");
+    realHistogram->Draw();
     //realHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same");
   
