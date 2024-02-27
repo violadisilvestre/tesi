@@ -71,7 +71,7 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 80, 0, 20);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 20);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
     realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
