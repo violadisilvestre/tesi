@@ -92,7 +92,7 @@ int main() {
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
       F[i] = myFunction(time[i]-minTime,time.size())+minTime;
-        x[i]=time[i]-minTime;
+        x[i]=time[i];
     }
 
     TGraph *graph = new TGraph(time.size(), x, F);
