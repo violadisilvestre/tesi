@@ -50,7 +50,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 0, 500);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 0, 30);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
@@ -59,7 +59,7 @@ int main() {
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i] - minTime;
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 500);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 30);
 
         for (int j = 0; j < 1000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
@@ -100,12 +100,12 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
     sumHistogram->Draw("hist");
-    sumHistogram->GetXaxis()->SetLimits(0, 20);
+    //sumHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same");
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
-    realHistogram->GetXaxis()->SetLimits(0, 20);
+    //realHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same");
   
     // Salva i canvas degli istogrammi su file
