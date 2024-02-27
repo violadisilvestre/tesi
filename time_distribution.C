@@ -92,7 +92,7 @@ int main() {
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
       F[i] = myFunction(time[i]-minTime,time.size());
-        x[i]=time[i]-minTime+1;
+        x[i]=time[i]-minTime;
     }
 
     TGraph *graph = new TGraph(time.size(), x, F);
@@ -109,8 +109,8 @@ int main() {
     graph->Draw("same");
   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum.pdf");
-    canvasRealHist->SaveAs("time_distribution_real.pdf");
+    canvasSumHist->SaveAs("time_distribution_sum_1000.pdf");
+    canvasRealHist->SaveAs("time_distribution_real_1000.pdf");
 
     return 0;
 }
