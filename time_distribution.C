@@ -17,12 +17,12 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 }
 
 // Funzione da plottare sopra agli istogrammi
-double myFunction(double x) {
-    double tau=0.308;
+double myFunction(double x,int dim) {
+    double tau=3.08;
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return num/den;
+    return (num*dim)/den;
 }
 
 int main() {
@@ -61,11 +61,11 @@ int main() {
         double mean = time[i] - minTime;
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 30);
 
-        for (int j = 0; j < 1000; ++j) {
+        for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
 
-	// histogram->Scale(1.0 / 1000); // Normalize the histogram
+        histogram->Scale(1.0 / 10000); // Normalize the histogram
         sumHistogram->Add(histogram);
         delete histogram;
     }
@@ -85,13 +85,13 @@ int main() {
     realHistogram->Scale(normalizationFactorReal);
 
     // Normalization factor for sumHistogram
-    double normalizationFactorSum = 1.0 / sumHistogram->Integral();
-    sumHistogram->Scale(normalizationFactorSum);
+    // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+    //sumHistogram->Scale(normalizationFactorSum);
 
     double F[time.size()];
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
-        F[i] = myFunction(time[i]-minTime);
+      F[i] = myFunction(time[i]-minTime,time.size());
         x[i]=time[i]-minTime;
     }
 
