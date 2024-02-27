@@ -53,7 +53,7 @@ int main() {
     TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 400, 0, 30);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
-    sumHistogram->SetYTitle("Voltage [V]");
+    sumHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
 
     double sigma = 0.35;
     std::sort(time.begin(), time.end());
@@ -65,7 +65,7 @@ int main() {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
 
-        histogram->Scale(1.0 / 100000);
+        histogram->Scale(1.0 / (100000 * histogram->GetBinWidth(1))); // Normalize the histogram
         sumHistogram->Add(histogram);
         delete histogram;
     }
@@ -74,31 +74,32 @@ int main() {
     TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 80, 0, 30);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
-    realHistogram->SetYTitle("# photoelectrons");
+    realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
          realHistogram->Fill(time[i]-minTime);
     }
+
+    realHistogram->Scale(1.0 / (realHistogram->GetEntries() * realHistogram->GetBinWidth(1))); // Normalize the histogram
+
     double F[time.size()];
     double x[time.size()];
     for (int i = 0; i < time.size(); ++i) {
         F[i] = myFunction(time[i]-minTime);
-	x[i]=time[i]-minTime;
-	//	std::cout<<"time:"<<time[i]<<"x:"<<x[i]<<"F:"<<F[i]<<"i:"<<i<<std::endl;
+        x[i]=time[i]-minTime;
     }
-    std::cout<<time.size()<<std::endl;
+
     TGraph *graph = new TGraph(time.size(), x, F);
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
-    //sumHistogram->Draw("hist");
+    sumHistogram->Draw("hist");
     graph->Draw();
+
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
-    graph->Draw("C");
+    graph->Draw();
   
-
-
     // Salva i canvas degli istogrammi su file
     canvasSumHist->SaveAs("time_distribution_sum.pdf");
     canvasRealHist->SaveAs("time_distribution_real.pdf");
