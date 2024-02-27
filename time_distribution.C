@@ -65,7 +65,7 @@ int main() {
             histogram->Fill(generateGaussian(mean, sigma, g));
         }
 
-        histogram->Scale(1.0 / 1000); // Normalize the histogram
+	// histogram->Scale(1.0 / 1000); // Normalize the histogram
         sumHistogram->Add(histogram);
         delete histogram;
     }
