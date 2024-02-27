@@ -15,7 +15,7 @@
 ########################
 
 //Build documentation (all_projects).
-BUILD_DOCS:BOOL=ON
+BUILD_DOCS:BOOL=OFF
 
 //Build shared libraries (all projects).
 BUILD_SHARED_LIBS:BOOL=ON
@@ -963,7 +963,7 @@ XercesC_LIBRARY_DEBUG:FILEPATH=XercesC_LIBRARY_DEBUG-NOTFOUND
 XercesC_LIBRARY_RELEASE:FILEPATH=/cvmfs/larsoft.opensciencegrid.org/products/xerces_c/v3_2_3c/Linux64bit+3.10-2.17-e20/lib/libxerces-c.so
 
 //The directory containing a CMake configuration file for cetmodules.
-cetmodules_DIR:PATH=/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/slf7.x86_64/share/cetmodules/cmake
+cetmodules_DIR:PATH=/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_24_01/slf7.x86_64/share/cetmodules/cmake
 
 //Value Computed by CMake
 larsoft_MRB_BINARY_DIR:STATIC=/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64
@@ -996,12 +996,14 @@ CETMODULES_CMAKE_INSTALL_PREFIX_ORIG:INTERNAL=/storage/gpfs_data/neutrino/users/
 //Project name for previous CMAKE_MODULE_PATH checkpoint
 CETMODULES_CMAKE_MODULE_PATH_CHECKPOINT_PROJECT:INTERNAL=
 //Propagate CMAKE_MODULE_PATH additions between subprojects
-CETMODULES_CMAKE_MODULE_PATH_CHECKPOINT_VALUE:INTERNAL=/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_22_02/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules
+CETMODULES_CMAKE_MODULE_PATH_CHECKPOINT_VALUE:INTERNAL=/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_24_01/Modules;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_24_01/Modules/compat;/cvmfs/larsoft.opensciencegrid.org/products/cetmodules/v3_24_01/Modules/compat-aux;/cvmfs/larsoft.opensciencegrid.org/products/mrb/v6_09_05/Modules
 //Project name for previous INCLUDE_DIRECTORIES checkpoint
 CETMODULES_DIRECTORY_INCLUDE_DIRECTORIES_CHECKPOINT_PROJECT:INTERNAL=
 //Propagate directory-scope INCLUDE_DIRECTORIES additions between
 // subprojects
 CETMODULES_DIRECTORY_INCLUDE_DIRECTORIES_CHECKPOINT_VALUE:INTERNAL=/storage/gpfs_data/neutrino/users/disilves/sandreco/srcs/sandreco;/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64/sandreco
+//Transitive dependency project names for 
+CETMODULES_FIND_DEPS_PNAMES_PROJECT_:INTERNAL=ROOT;CLHEP;PkgConfig;EXPAT;XercesC;Freetype;Fontconfig;X11;OpenGL;Geant4;EDepSim
 //ADVANCED property for variable: CLHEP_DIR
 CLHEP_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_ADDR2LINE
@@ -1676,7 +1678,7 @@ __pkg_config_arguments_PKG_FONTCONFIG:INTERNAL=QUIET;fontconfig
 __pkg_config_checked_PC_EXPAT:INTERNAL=1
 __pkg_config_checked_PKG_FONTCONFIG:INTERNAL=1
 //modules_idx_deps
-modules_idx_deps:INTERNAL=Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict
+modules_idx_deps:INTERNAL=Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict;Struct;SANDGeoManager;SANDEventDisplayDict
 //ADVANCED property for variable: pkgcfg_lib_PC_EXPAT_expat
 pkgcfg_lib_PC_EXPAT_expat-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PKG_FONTCONFIG_fontconfig

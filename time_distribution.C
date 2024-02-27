@@ -27,7 +27,7 @@ double myFunction(double x,int dim) {
 
 int main() {
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati.txt");
+    std::ifstream file("dati_10.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -109,8 +109,8 @@ int main() {
     graph->Draw("same");
   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum_1000.pdf");
-    canvasRealHist->SaveAs("time_distribution_real_1000.pdf");
+    canvasSumHist->SaveAs("time_distribution_sum_10.pdf");
+    canvasRealHist->SaveAs("time_distribution_real_10.pdf");
 
     return 0;
 }
