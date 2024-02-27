@@ -99,9 +99,9 @@ int main() {
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
-    sumHistogram->Draw("hist");
+    //sumHistogram->Draw("hist");
     //sumHistogram->GetXaxis()->SetLimits(0, 20);
-    graph->Draw("same");
+    graph->Draw();
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
