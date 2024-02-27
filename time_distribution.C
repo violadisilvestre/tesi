@@ -58,11 +58,11 @@ int main() {
     double sigma = 0.35;
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
-        double mean = time[i] - minTime;
+        double mean = time[i];
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
 
         for (int j = 0; j < 10000; ++j) {
-            histogram->Fill(generateGaussian(mean, sigma, g));
+            histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
         }
 
         histogram->Scale(1.0 / 10000); // Normalize the histogram
