@@ -18,8 +18,8 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 
 // Funzione da plottare sopra agli istogrammi
 double myFunction(double x) {
-    double tau=3.08;
-    double a =5.88;
+    double tau=0.308;
+    double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
     return num/den;
