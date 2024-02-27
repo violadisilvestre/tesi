@@ -20,7 +20,9 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 double myFunction(double x) {
   double tau=3.08;
   double a =0.588;
-  return (1/tau)*(std::pow(x/tau,(1/a)-1)/std::pow(1+std::pow(x/tau,1/a),2));
+  double num=std::pow(x/tau,(1/a)-1);
+  double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
+  return num/den;
 }
 
 int main() {
@@ -53,11 +55,9 @@ int main() {
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Voltage [V]");
 
-    // Seleziona i primi n eventi dal vettore time
-    int numEventsToSelect = std::min(500, static_cast<int>(time.size()));
     double sigma = 0.35;
-
-    for (int i = 0; i < numEventsToSelect; ++i) {
+    std::sort(time.begin(), time.end());
+    for (int i = 0; i < time.size(); ++i) {
         double mean = time[i] - minTime;
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 400, 0, 30);
 
@@ -84,14 +84,15 @@ int main() {
     for (int i = 0; i < time.size(); ++i) {
         F[i] = myFunction(time[i]-minTime);
 	x[i]=time[i]-minTime;
+	//	std::cout<<"time:"<<time[i]<<"x:"<<x[i]<<"F:"<<F[i]<<"i:"<<i<<std::endl;
     }
-
+    std::cout<<time.size()<<std::endl;
     TGraph *graph = new TGraph(time.size(), x, F);
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
     //sumHistogram->Draw("hist");
-    graph->Draw("AL");
+    graph->Draw();
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
     graph->Draw("C");
