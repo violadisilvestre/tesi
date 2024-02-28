@@ -29,7 +29,7 @@ double myFunction(double x,int dim) {
 
 int main() {
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati.txt");
+    std::ifstream file("dati_100.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -90,7 +90,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=1000;
+    int num=170;
     double F[num];
     double x[num];
     double x_gaus[num];
