@@ -76,7 +76,7 @@ int main() {
     TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", bin, 0, x_max);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
-    realHistogram->SetYTitle("Counts"); // Update the y-axis title
+    realHistogram->SetYTitle("Frequency"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
          realHistogram->Fill(time[i]-minTime);
@@ -120,14 +120,14 @@ int main() {
     
     legend->Draw(); 
 
-    TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
-    realHistogram->Draw();
+    //TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
+    // realHistogram->Draw();
     //realHistogram->GetXaxis()->SetLimits(0, 20);
-    graph->Draw("same"); 
+    // graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum.pdf");
-    canvasRealHist->SaveAs("time_distribution_real.pdf");
+    canvasSumHist->SaveAs("time_distribution_sum_1000.pdf");
+    //canvasRealHist->SaveAs("time_distribution_real.pdf");
 
     return 0;
 }
