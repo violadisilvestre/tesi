@@ -104,7 +104,7 @@ int main() {
     }
     
     TGraph *graph = new TGraph(100, x, F);
-    TLegend *legend = new TLegend(0.7, 0.6, 0.9, 0.8); 
+    TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
