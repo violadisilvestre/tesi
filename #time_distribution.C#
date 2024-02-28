@@ -114,7 +114,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
     graph->Draw("same");
-    s->GetYaxis()->SetLimits(0, 0.2);
+    sumHistogram->GetYaxis()->SetRangeUser(0, 0.2);
     
     legend->Draw(); 
 
