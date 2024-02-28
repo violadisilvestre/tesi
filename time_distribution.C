@@ -51,7 +51,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 20, 0, 20);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 20, 0, 20);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
@@ -104,7 +104,7 @@ int main() {
     }
     
     TGraph *graph = new TGraph(100, x, F);
-    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
+    TLegend *legend = new TLegend(0.7, 0.5, 0.9, 0.7); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
