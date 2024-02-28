@@ -98,12 +98,12 @@ int main() {
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
     for (int i = 0; i < num; ++i) {
-      x[i] =distribution(generator)*(time[i]-minTime);
+      x[i] =distribution(generator)*(time[i]-minTime)+rand.Gaus();
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      F[i] = myFunction(x[i], time.size())+rand.Gaus();
+      F[i] = myFunction(x[i], time.size());
     }
     
     TGraph *graph = new TGraph(num, x, F);
