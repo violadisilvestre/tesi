@@ -51,7 +51,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 20, 0, 30);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 20, 0, 20);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Counts"); // Update the y-axis title
@@ -60,7 +60,7 @@ int main() {
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 20);
 
         for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
@@ -72,7 +72,7 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 30);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 20);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
     realHistogram->SetYTitle("Counts"); // Update the y-axis title
@@ -89,21 +89,21 @@ int main() {
     // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     //sumHistogram->Scale(normalizationFactorSum);
 
-    double F[1000];
-    double x[1000];
+    double F[1500];
+    double x[1500];
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 1500; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
     }
-    std::sort(x, x + 1000); // Sorting x in ascending order
+    std::sort(x, x + 1500); // Sorting x in ascending order
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 1500; ++i) {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(1000, x, F);
+    TGraph *graph = new TGraph(1500, x, F);
     TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
