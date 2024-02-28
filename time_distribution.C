@@ -95,9 +95,13 @@ int main() {
     
     for (int i = 0; i < 100; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
-      F[i] = myFunction(x[i],time.size());
     }
+    std::sort(x, x + 100); // Sorting x in ascending order
 
+    for (int i = 0; i < 100; ++i) {
+      F[i] = myFunction(x[i], time.size());
+    }
+    
     TGraph *graph = new TGraph(time.size(), x, F);
 
     // Creazione dei canvas e disegno degli istogrammi
