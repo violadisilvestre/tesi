@@ -107,7 +107,7 @@ int main() {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(num, x_gaus, F);
+    TGraph *graph = new TGraph(num, x, F);
     TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
