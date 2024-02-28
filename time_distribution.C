@@ -98,7 +98,7 @@ int main() {
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
     for (int i = 0; i < num; ++i) {
-      x[i] =distribution(generator)*(time[i]-minTime)+rand.Gaus();
+      x[i] =distribution(generator)*(time[i]-minTime);
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
