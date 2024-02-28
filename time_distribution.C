@@ -89,7 +89,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=170;
+    int num=100;
     double F[num];
     double x[num];
     std::default_random_engine generator;
