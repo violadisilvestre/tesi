@@ -10,6 +10,7 @@
 #include "TF1.h"
 #include "TGraph.h"
 #include "TLegend.h"
+#include "TRandom3.h"
 
 // Funzione per generare numeri casuali distribuiti gaussianamente
 double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
@@ -23,17 +24,17 @@ double myFunction(double x,int dim) {
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return num/den;
+    return (num/den);
 }
 
 int main() {
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati_10.txt");
+    std::ifstream file("dati_100.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
     }
-
+    TRandom3 rand(0);
     std::vector<double> time;
     std::string lineString;
     while (std::getline(file, lineString)) {
@@ -49,8 +50,8 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-    int bin=10;
-    int x_max=10;
+    int bin=20;
+    int x_max=20;
     // Creazione dell'istogramma 'sumHistogram'
     TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
     sumHistogram->SetFillColor(kBlue);
@@ -89,14 +90,16 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=100;
+    int num=170;
     double F[num];
     double x[num];
+    double x_gaus[num];
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
     for (int i = 0; i < num; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
+      x_gaus[i]=x[i]+rand.Gaus();
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
@@ -104,7 +107,7 @@ int main() {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(num, x, F);
+    TGraph *graph = new TGraph(num, x_gaus, F);
     TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
