@@ -99,12 +99,11 @@ int main() {
     
     for (int i = 0; i < num; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
-      x_gaus[i]=x[i]+rand.Gaus();
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      F[i] = myFunction(x[i], time.size());
+      F[i] = myFunction(x[i], time.size())+rand.Gaus();
     }
     
     TGraph *graph = new TGraph(num, x, F);
