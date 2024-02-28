@@ -90,7 +90,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=170;
+    int num=110;
     double F[num];
     double x[num];
     double x_gaus[num];
