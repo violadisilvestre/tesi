@@ -23,7 +23,7 @@ double myFunction(double x,int dim) {
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return (num*dim)/den;
+    return num/den;
 }
 
 int main() {
@@ -86,8 +86,8 @@ int main() {
     //realHistogram->Scale(normalizationFactorReal);
 
     // Normalization factor for sumHistogram
-    // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
-    //sumHistogram->Scale(normalizationFactorSum);
+     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+     sumHistogram->Scale(normalizationFactorSum);
 
     double F[1100];
     double x[1100];
