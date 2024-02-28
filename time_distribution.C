@@ -86,24 +86,24 @@ int main() {
     //realHistogram->Scale(normalizationFactorReal);
 
     // Normalization factor for sumHistogram
-     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
-     sumHistogram->Scale(normalizationFactorSum);
-
-    double F[1100];
-    double x[1100];
+    double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+    sumHistogram->Scale(normalizationFactorSum);
+    int num=1200;
+    double F[num];
+    double x[num];
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
-    for (int i = 0; i < 1100; ++i) {
+    for (int i = 0; i < num; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
     }
-    std::sort(x, x + 1100); // Sorting x in ascending order
+    std::sort(x, x + num); // Sorting x in ascending order
 
-    for (int i = 0; i < 1100; ++i) {
+    for (int i = 0; i < num; ++i) {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(1100, x, F);
+    TGraph *graph = new TGraph(num, x, F);
     TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
