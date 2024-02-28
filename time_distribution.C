@@ -51,7 +51,7 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 20, 0, 20);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 20, 0, 30);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Counts"); // Update the y-axis title
@@ -60,7 +60,7 @@ int main() {
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 20);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
 
         for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
