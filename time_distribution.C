@@ -49,9 +49,10 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-
+    int bin=25;
+    int x_max=25;
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 30, 0, 30);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Counts"); // Update the y-axis title
@@ -60,7 +61,7 @@ int main() {
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 30, 0, 30);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", bin, 0, x_max);
 
         for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
@@ -72,7 +73,7 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 30, 0, 30);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", bin, 0, x_max);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
     realHistogram->SetYTitle("Counts"); // Update the y-axis title
@@ -88,7 +89,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=1150;
+    int num=1170;
     double F[num];
     double x[num];
     std::default_random_engine generator;
