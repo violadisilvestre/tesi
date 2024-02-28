@@ -27,7 +27,7 @@ double myFunction(double x,int dim) {
 
 int main() {
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati_10.txt");
+    std::ifstream file("dati_100.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -88,11 +88,14 @@ int main() {
     // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     //sumHistogram->Scale(normalizationFactorSum);
 
-    double F[time.size()];
-    double x[time.size()];
-    for (int i = 0; i < time.size(); ++i) {
-      F[i] = myFunction(time[i]-minTime,time.size());
-        x[i]=time[i]-minTime;
+    double F[100];
+    double x[100];
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distribution(0.0,1.0);
+    
+    for (int i = 0; i < 100; ++i) {
+      x[i] =distribution(generator)*(time[i]-minTime);
+      F[i] = myFunction(x[i],time.size());
     }
 
     TGraph *graph = new TGraph(time.size(), x, F);
