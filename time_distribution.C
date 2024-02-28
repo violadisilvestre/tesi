@@ -9,6 +9,7 @@
 #include "TCanvas.h"
 #include "TF1.h"
 #include "TGraph.h"
+#include "TLegend.h"
 
 // Funzione per generare numeri casuali distribuiti gaussianamente
 double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
@@ -74,7 +75,7 @@ int main() {
     TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 20);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
-    realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
+    realHistogram->SetYTitle("Counts"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
          realHistogram->Fill(time[i]-minTime);
@@ -102,18 +103,24 @@ int main() {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(time.size(), x, F);
+    TGraph *graph = new TGraph(100, x, F);
+    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
+    legend->AddEntry(sumHistogram, "Simulated distribution", "f");
+    legend->AddEntry(graph, "Expected distribution", "l");
+    graph->SetLineWidth(2);
+
 
     // Creazione dei canvas e disegno degli istogrammi
-    TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
+    TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
     //sumHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same");
+    legend->Draw(); 
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw();
     //realHistogram->GetXaxis()->SetLimits(0, 20);
-    graph->Draw("same");
+    graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
     canvasSumHist->SaveAs("time_distribution_sum_100.pdf");
