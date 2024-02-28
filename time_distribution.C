@@ -89,21 +89,21 @@ int main() {
     // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     //sumHistogram->Scale(normalizationFactorSum);
 
-    double F[1500];
-    double x[1500];
+    double F[1100];
+    double x[1100];
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     
-    for (int i = 0; i < 1500; ++i) {
+    for (int i = 0; i < 1100; ++i) {
       x[i] =distribution(generator)*(time[i]-minTime);
     }
-    std::sort(x, x + 1500); // Sorting x in ascending order
+    std::sort(x, x + 1100); // Sorting x in ascending order
 
-    for (int i = 0; i < 1500; ++i) {
+    for (int i = 0; i < 1100; ++i) {
       F[i] = myFunction(x[i], time.size());
     }
     
-    TGraph *graph = new TGraph(1500, x, F);
+    TGraph *graph = new TGraph(1100, x, F);
     TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
     legend->AddEntry(sumHistogram, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
