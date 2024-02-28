@@ -9,6 +9,7 @@
 #include "TCanvas.h"
 #include "TF1.h"
 #include "TGraph.h"
+#include "TLegend.h"
 
 // Funzione per generare numeri casuali distribuiti gaussianamente
 double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
@@ -22,7 +23,7 @@ double myFunction(double x,int dim) {
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return (num*dim)/den;
+    return num/den;
 }
 
 int main() {
@@ -50,16 +51,16 @@ int main() {
     std::shuffle(time.begin(), time.end(), g);
 
     // Creazione dell'istogramma 'sumHistogram'
-    TH1F* sumHistogram = new TH1F("sumHistogram", "Sum of Normalized Histograms", 20, 0, 30);
+    TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", 30, 0, 30);
     sumHistogram->SetFillColor(kBlue);
     sumHistogram->SetXTitle("time [ns]");
-    sumHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
+    sumHistogram->SetYTitle("Counts"); // Update the y-axis title
 
     double sigma = 0.35;
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i];
-        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 20, 0, 30);
+        TH1F* histogram = new TH1F("histogram", "Normalized Histogram", 30, 0, 30);
 
         for (int j = 0; j < 10000; ++j) {
             histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
@@ -71,10 +72,10 @@ int main() {
     }
 
     // Creazione dell'istogramma 'realHistogram'
-    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 20, 0, 20);
+    TH1F* realHistogram = new TH1F("realHistogram", "Time Distribution", 30, 0, 30);
     realHistogram->SetFillColor(kViolet);
     realHistogram->SetXTitle("time [ns]");
-    realHistogram->SetYTitle("Normalized Counts"); // Update the y-axis title
+    realHistogram->SetYTitle("Counts"); // Update the y-axis title
 
     for (int i = 0; i < time.size(); ++i) {
          realHistogram->Fill(time[i]-minTime);
@@ -85,28 +86,42 @@ int main() {
     //realHistogram->Scale(normalizationFactorReal);
 
     // Normalization factor for sumHistogram
-    // double normalizationFactorSum = 1.0 / sumHistogram->Integral();
-    //sumHistogram->Scale(normalizationFactorSum);
+     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
+     sumHistogram->Scale(normalizationFactorSum);
 
-    double F[time.size()];
-    double x[time.size()];
-    for (int i = 0; i < time.size(); ++i) {
-      F[i] = myFunction(time[i]-minTime,time.size());
-        x[i]=time[i]-minTime;
+    double F[1100];
+    double x[1100];
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distribution(0.0,1.0);
+    
+    for (int i = 0; i < 1100; ++i) {
+      x[i] =distribution(generator)*(time[i]-minTime);
     }
+    std::sort(x, x + 1100); // Sorting x in ascending order
 
-    TGraph *graph = new TGraph(time.size(), x, F);
+    for (int i = 0; i < 1100; ++i) {
+      F[i] = myFunction(x[i], time.size());
+    }
+    
+    TGraph *graph = new TGraph(1100, x, F);
+    TLegend *legend = new TLegend(0.7, 0.55, 0.9, 0.75); 
+    legend->AddEntry(sumHistogram, "Simulated distribution", "f");
+    legend->AddEntry(graph, "Expected distribution", "l");
+    graph->SetLineWidth(2);
+
 
     // Creazione dei canvas e disegno degli istogrammi
-    TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Sum of Normalized Histograms", 800, 600);
+    TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
-    //sumHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same");
+    s->GetYaxis()->SetLimits(0, 0.2);
+    
+    legend->Draw(); 
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw();
     //realHistogram->GetXaxis()->SetLimits(0, 20);
-    graph->Draw("same");
+    graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
     canvasSumHist->SaveAs("time_distribution_sum.pdf");
