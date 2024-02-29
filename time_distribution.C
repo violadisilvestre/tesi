@@ -51,8 +51,8 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-    int bin=14;
-    int x_max=7;
+    int bin=18;
+    int x_max=9;
     // Creazione dell'istogramma 'sumHistogram'
     TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
     sumHistogram->SetFillColor(kBlue);
@@ -91,7 +91,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=50;
+    int num=100;
     double F[num];
     double x[num];
     double x_gaus[num];
