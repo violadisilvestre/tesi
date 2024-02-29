@@ -50,7 +50,7 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-    int bin=10;
+    int bin=12;
     int x_max=6;
     // Creazione dell'istogramma 'sumHistogram'
     TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
@@ -116,7 +116,7 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
-    sumHistogram->GetYaxis()->SetRangeUser(0, 0.4);
+    sumHistogram->GetYaxis()->SetRangeUser(0, 0.2);
     graph->Draw("same");
    
     
