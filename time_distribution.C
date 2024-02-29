@@ -32,6 +32,7 @@ int main() {
    const int bin=20;
    const int x_max=9;
    const int num=500;
+   Color_t myColor = kBlue;
 
     // Apertura del file e lettura dei dati
     std::ifstream file("dati_10.txt");
@@ -59,7 +60,7 @@ int main() {
 
     // Creazione dell'istogramma 'sumHistogram'
     TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
-    sumHistogram->SetFillColor(kBlue);
+    sumHistogram->SetFillColor(myColor);
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Counts"); // Update the y-axis title
 
@@ -122,7 +123,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
     sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
-    sumHistogram->GetXaxis()->SetRangeUser(-0.4, x_max);
+    sumHistogram->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
     
