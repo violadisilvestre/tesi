@@ -32,11 +32,11 @@ int main() {
    const int bin=25;
    const int x_max=25;
    const int num=5000;
-   Color_t myColor = kViolet-6;
+   Color_t myColor = kOrange-3;
    double d=0;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati_1000_ev8.txt");
+    std::ifstream file("dati_1000_ev9.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -136,7 +136,7 @@ int main() {
     // graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum_1000_ev8.pdf");
+    canvasSumHist->SaveAs("time_distribution_sum_1000_ev9.pdf");
     //canvasRealHist->SaveAs("time_distribution_real.pdf");
 
     return 0;
