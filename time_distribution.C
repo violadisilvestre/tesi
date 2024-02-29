@@ -31,7 +31,7 @@ int main() {
 
    const int bin=25;
    const int x_max=25;
-   const int num=5000;
+   const int num=7000;
    Color_t myColor = kRed;
    double d=0;
 
