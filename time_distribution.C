@@ -45,6 +45,7 @@ int main() {
 
     // Trova il valore minimo per la traslazione
     double minTime = *std::min_element(time.begin(), time.end());
+    double maxTime = *std::max_element(time.begin(), time.end());
 
     // Mescola il vettore time in modo casuale
     std::random_device rd;
@@ -95,10 +96,10 @@ int main() {
     double x[num];
     double x_gaus[num];
     std::default_random_engine generator;
-    
+    std::uniform_real_distribution<double> distribution(0.0,maxTime-minTime);
     
     for (int i = 0; i < num; ++i) {
-      std::uniform_real_distribution<double> distribution(0.0,time[i]-minTime);
+      
       x[i] =distribution(generator);
     }
     std::sort(x, x + num); // Sorting x in ascending order
