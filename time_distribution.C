@@ -31,7 +31,7 @@ int main() {
 
    const int bin=25;
    const int x_max=25;
-   const int num=1000;
+   const int num=1500;
    Color_t myColor = kGreen;
 
     // Apertura del file e lettura dei dati
