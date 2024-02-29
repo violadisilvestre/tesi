@@ -71,7 +71,7 @@ int main() {
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", bin, 0, x_max);
 
         for (int j = 0; j < 10000; ++j) {
-            histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
+	  histogram->Fill(generateGaussian(mean-minTime, sigma, g)-rand.Gaus());
         }
 
         histogram->Scale(1.0 / 10000); // Normalize the histogram
