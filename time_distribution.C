@@ -28,6 +28,11 @@ double myFunction(double x,int dim) {
 }
 
 int main() {
+
+   const int bin=20;
+   const int x_max=9;
+   const int num=500;
+
     // Apertura del file e lettura dei dati
     std::ifstream file("dati_10.txt");
     if (!file.is_open()) {
@@ -51,8 +56,7 @@ int main() {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(time.begin(), time.end(), g);
-    int bin=20;
-    int x_max=9;
+
     // Creazione dell'istogramma 'sumHistogram'
     TH1F* sumHistogram = new TH1F("sumHistogram", "Photoelectron time distribution", bin, 0, x_max);
     sumHistogram->SetFillColor(kBlue);
@@ -91,7 +95,6 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=500;
     double F[num];
     double x[num];
     double x_gaus[num];
@@ -119,6 +122,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
     sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
+    sumHistogram->GetXaxis()->SetRangeUser(-0.1, x_max);
     graph->Draw("same");
    
     
