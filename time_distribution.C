@@ -30,12 +30,12 @@ double myFunction(double x,int dim) {
 int main() {
 
    const int bin=20;
-   const int x_max=9;
+   const int x_max=20;
    const int num=500;
-   Color_t myColor = kBlue;
+   Color_t myColor = kViolet;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati_10.txt");
+    std::ifstream file("dati_100.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -135,7 +135,7 @@ int main() {
     // graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum_10.pdf");
+    canvasSumHist->SaveAs("time_distribution_sum_100.pdf");
     //canvasRealHist->SaveAs("time_distribution_real.pdf");
 
     return 0;
