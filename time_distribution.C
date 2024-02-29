@@ -33,6 +33,7 @@ int main() {
    const int x_max=25;
    const int num=2000;
    Color_t myColor = kGreen;
+   double d=0;
 
     // Apertura del file e lettura dei dati
     std::ifstream file("dati.txt");
@@ -71,7 +72,7 @@ int main() {
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", bin, 0, x_max);
 
         for (int j = 0; j < 10000; ++j) {
-	  histogram->Fill(generateGaussian(mean-minTime, sigma, g)-rand.Gaus()-5);
+	  histogram->Fill(generateGaussian(mean-minTime, sigma, g)-rand.Gaus()-d);
         }
 
         histogram->Scale(1.0 / 10000); // Normalize the histogram
