@@ -90,7 +90,7 @@ int main() {
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
     sumHistogram->Scale(normalizationFactorSum);
-    int num=10;
+    int num=15;
     double F[num];
     double x[num];
     double x_gaus[num];
@@ -116,7 +116,7 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
-    sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
+    sumHistogram->GetYaxis()->SetRangeUser(0, 0.3);
     graph->Draw("same");
    
     
