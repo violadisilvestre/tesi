@@ -95,10 +95,11 @@ int main() {
     double x[num];
     double x_gaus[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(0.0,1.0);
+    
     
     for (int i = 0; i < num; ++i) {
-      x[i] =distribution(generator)*(time[i]-minTime);
+      std::uniform_real_distribution<double> distribution(0.0,time[i]-minTime);
+      x[i] =distribution(generator);
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
