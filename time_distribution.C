@@ -131,7 +131,7 @@ int main() {
     legend->Draw(); 
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
-    realHistogram->Draw();
+    realHistogram->Draw("hist");
     realHistogram->GetXaxis()->SetLimits(0, 20);
     graph->Draw("same"); 
   
