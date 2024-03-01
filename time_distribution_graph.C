@@ -20,7 +20,7 @@ double Gaussian_sum(double x,std::vector<double> t) {
   for (int i=0; i< t.size(); i++){
     G=G+ gaussian(x,t[i],0.35);
   }
-  return G/t.size();
+  return G;
 }
 
 
@@ -30,7 +30,7 @@ double myFunction(double x,int dim) {
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return (num/den);
+    return dim*(num/den);
 }
 
 int main() {
@@ -82,18 +82,28 @@ int main() {
     TGraph *gaussian = new TGraph(num, x, G);
     TGraph *graph = new TGraph(num, x, F);
     TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
-    legend->AddEntry(gaussian, "Simulated distribution", "f");
+    legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
     graph->SetLineColor(kRed);
     gaussian->SetLineColor(kBlue);
-
+    gaussian->SetLineWidth(2);
+    // Set the labels and title
+    gaussian->GetXaxis()->SetTitle("Time [ns]"); 
+    gaussian->GetYaxis()->SetTitle("# Photoelectrons"); 
+    gaussian->SetTitle("Time Distribution"); 
+    
+    // Adjust font and size if needed
+    gaussian->GetXaxis()->SetTitleFont(42);
+    gaussian->GetXaxis()->SetTitleSize(0.04);
+    gaussian->GetYaxis()->SetTitleFont(42);
+    gaussian->GetYaxis()->SetTitleSize(0.04);
 
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
-    gaussian->GetYaxis()->SetRangeUser(0, 0.25);
+    gaussian->GetYaxis()->SetRangeUser(0, 300);
     gaussian->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
