@@ -130,14 +130,14 @@ int main() {
     
     legend->Draw(); 
 
-    //TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
-    // realHistogram->Draw();
-    //realHistogram->GetXaxis()->SetLimits(0, 20);
-    // graph->Draw("same"); 
+    TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
+    realHistogram->Draw();
+    realHistogram->GetXaxis()->SetLimits(0, 20);
+    graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
     canvasSumHist->SaveAs("time_distribution_sum_1000_ev10.pdf");
-    //canvasRealHist->SaveAs("time_distribution_real.pdf");
+    canvasRealHist->SaveAs("time_distribution_real.pdf");
 
     return 0;
 }
