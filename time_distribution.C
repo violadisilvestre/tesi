@@ -29,7 +29,7 @@ double myFunction(double x,int dim) {
 
 int main() {
 
-   const int bin=200;
+   const int bin=100;
    const int x_max=25;
    const int num=5000;
    Color_t myColor = kTeal+7;
