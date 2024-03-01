@@ -65,7 +65,7 @@ int main() {
     sumHistogram->SetXTitle("time [ns]");
     sumHistogram->SetYTitle("Counts"); // Update the y-axis title
 
-    double sigma = 0.35;
+    double sigma = 0.00035;
     std::sort(time.begin(), time.end());
     for (int i = 0; i < time.size(); ++i) {
         double mean = time[i];
