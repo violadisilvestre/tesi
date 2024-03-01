@@ -125,7 +125,7 @@ int main() {
     sumHistogram->Draw("hist");
     sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
     sumHistogram->GetXaxis()->SetRangeUser(0, x_max);
-    graph->Draw("same");
+    //graph->Draw("same");
    
     
     legend->Draw(); 
