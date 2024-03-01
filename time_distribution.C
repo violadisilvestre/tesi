@@ -20,7 +20,7 @@ double generateGaussian(double mean, double sigma, std::mt19937 &gen) {
 
 // Funzione da plottare sopra agli istogrammi
 double myFunction(double x,int dim) {
-    double tau=2.05;
+    double tau=3.08;
     double a =0.588;
     double num=std::pow(x/tau,(1/a)-1);
     double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
@@ -72,7 +72,7 @@ int main() {
         TH1F* histogram = new TH1F("histogram", "Normalized Histogram", bin, 0, x_max);
 
         for (int j = 0; j < 10000; ++j) {
-	  histogram->Fill(generateGaussian(mean, sigma, g)-minTime);
+	  histogram->Fill(generateGaussian(mean-minTime, sigma, g));
         }
 
         histogram->Scale(1.0 / 10000); // Normalize the histogram
