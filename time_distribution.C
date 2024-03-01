@@ -132,7 +132,8 @@ int main() {
 
     TCanvas *canvasRealHist = new TCanvas("canvasRealHist", "Time Distribution", 800, 600);
     realHistogram->Draw("hist");
-    realHistogram->GetXaxis()->SetLimits(0, 20);
+    //realHistogram->GetXaxis()->SetLimits(0, 20);
+    sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
     graph->Draw("same"); 
   
     // Salva i canvas degli istogrammi su file
