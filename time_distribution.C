@@ -29,7 +29,7 @@ double myFunction(double x,int dim) {
 
 int main() {
 
-   const int bin=50;
+   const int bin=25;
    const int x_max=25;
    const int num=5000;
    Color_t myColor = kTeal+7;
@@ -124,7 +124,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
     sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
-    sumHistogram->GetXaxis()->SetRangeUser(0, 10);
+    sumHistogram->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
     
