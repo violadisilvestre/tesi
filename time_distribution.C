@@ -91,8 +91,8 @@ int main() {
     }
 
     // Normalization factor for realHistogram
-    // double normalizationFactorReal = 1.0 / realHistogram->Integral();
-    //realHistogram->Scale(normalizationFactorReal);
+     double normalizationFactorReal = 1.0 / realHistogram->Integral();
+     realHistogram->Scale(normalizationFactorReal);
 
     // Normalization factor for sumHistogram
     double normalizationFactorSum = 1.0 / sumHistogram->Integral();
