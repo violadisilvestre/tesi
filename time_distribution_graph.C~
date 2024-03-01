@@ -52,14 +52,6 @@ int main() {
         time.push_back(value);
     }
     file.close();
-    
-    // Trova il valore minimo per la traslazione
-    double minTime = *std::min_element(time.begin(), time.end());
-    double maxTime = *std::max_element(time.begin(), time.end());
-    for (int i = 0; i < time.size(); ++i) {
-      
-      time[i] =time[i]-minTime;
-    }
 
     double F[num];
     double G[num];
@@ -75,7 +67,7 @@ int main() {
 
     for (int i = 0; i < num; ++i) {
       F[i] = myFunction(x[i], time.size());
-      G[i]=Gaussian_sum(x[i], time);
+      G[i]=Gaussian_sum(x[i], time-minTime);
     }
       
     
@@ -85,8 +77,8 @@ int main() {
     legend->AddEntry(gaussian, "Simulated distribution", "f");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
-    graph->SetLineColor(kRed);
-    gaussian->SetLineColor(kBlue);
+    graph->SetColor(Red);
+    gaussian->SetColor(Blue)
 
 
 
