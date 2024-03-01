@@ -123,9 +123,9 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     sumHistogram->Draw("hist");
-    // sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
+    sumHistogram->GetYaxis()->SetRangeUser(0, 0.25);
     sumHistogram->GetXaxis()->SetRangeUser(0, 10);
-    //graph->Draw("same");
+    graph->Draw("same");
    
     
     legend->Draw(); 
