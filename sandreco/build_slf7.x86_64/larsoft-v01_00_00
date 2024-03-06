@@ -28,6 +28,12 @@ tdefined UPS_OVERRIDE_SAFE && setenv UPS_OVERRIDE "$UPS_OVERRIDE_SAFE"
 tdefined UPS_OVERRIDE_SAFE && unsetenv_ UPS_OVERRIDE_SAFE
 ##################
 
+setenv PATH `dropit -p "${PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined LD_LIBRARY_PATH && setenv LD_LIBRARY_PATH `dropit -p "${LD_LIBRARY_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined DYLD_LIBRARY_PATH setenv DYLD_LIBRARY_PATH `dropit -p "${DYLD_LIBRARY_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined CET_PLUGIN_PATH setenv CET_PLUGIN_PATH `dropit -p "${CET_PLUGIN_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+tdefined ROOT_INCLUDE_PATH setenv CET_PLUGIN_PATH `dropit -p "${CET_PLUGIN_PATH}" '/storage/gpfs_data/neutrino/users/disilves/sandreco/build_slf7.x86_64'`
+
 ##################
 # >> sandreco <<
 ##################
