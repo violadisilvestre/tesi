@@ -13,7 +13,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt == 267) {
+    if(TotEvt == 943) {
 	  IsGood = kTRUE;
     }
     return IsGood;
