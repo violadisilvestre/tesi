@@ -94,8 +94,8 @@ int main() {
     legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
-    graph->SetLineColor(kRed);
-    gaussian->SetLineColor(kBlue);
+    graph->SetLineColor(kViolet);
+    gaussian->SetLineColor(kGreen);
     gaussian->SetLineWidth(2);
     // Set the labels and title
     gaussian->GetXaxis()->SetTitle("Time [ns]"); 
@@ -112,7 +112,7 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
-    gaussian->GetYaxis()->SetRangeUser(0,2000);
+    gaussian->GetYaxis()->SetRangeUser(0,500);
     gaussian->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
@@ -121,7 +121,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_e_1000_ev4.pdf");
+    canvasSumHist->SaveAs("time_distribution__evt0.pdf");
     
 
     return 0;
