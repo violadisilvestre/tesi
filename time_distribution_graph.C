@@ -112,7 +112,7 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
-    gaussian->GetYaxis()->SetRangeUser(0, 1000);
+    gaussian->GetYaxis()->SetRangeUser(0, 200);
     gaussian->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
@@ -121,7 +121,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_e_200_ev3.pdf");
+    canvasSumHist->SaveAs("time_distribution_e_1000_ev3.pdf");
     
 
     return 0;
