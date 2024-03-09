@@ -39,7 +39,7 @@ double myFunction(double x,int dim) {
     double gaussian = 1 / (sigma * std::sqrt(2 * M_PI)) * std::exp(-0.5 * std::pow((x - mu) / sigma, 2));
 
     // Multiply the original function value with the Gaussian smearing factor
-    return dim * (num / den) * gaussian;
+    return dim * (num / den) + gaussian;
 }
 
 int main() {
