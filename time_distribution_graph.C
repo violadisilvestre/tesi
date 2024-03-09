@@ -26,11 +26,20 @@ double Gaussian_sum(double x,std::vector<double> t) {
 
 // Funzione da plottare sopra agli istogrammi
 double myFunction(double x,int dim) {
-    double tau=3.08;
-    double a =0.588;
-    double num=std::pow(x/tau,(1/a)-1);
-    double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	      
-    return dim*(num/den);
+    double tau = 3.08;
+    double a = 0.588;
+    double num = std::pow(x / tau, (1 / a) - 1);
+    double den = tau * a * std::pow(1 + std::pow(x / tau, 1 / a), 2);
+
+    // Gaussian parameters
+    double mu = 0.0;  // Center of the Gaussian
+    double sigma = 1.0;  // Standard deviation of the Gaussian
+
+    // Calculate the Gaussian smearing factor
+    double gaussian = 1 / (sigma * std::sqrt(2 * M_PI)) * std::exp(-0.5 * std::pow((x - mu) / sigma, 2));
+
+    // Multiply the original function value with the Gaussian smearing factor
+    return dim * (num / den) * gaussian;
 }
 
 int main() {
