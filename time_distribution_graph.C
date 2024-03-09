@@ -121,7 +121,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_evt1.pdf");
+    canvasSumHist->SaveAs("time_distribution_evt2.pdf");
     
 
     return 0;
