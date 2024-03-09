@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 #include "sandreco/srcs/sandreco/include/struct.h"
-
+#include <fstream>
 {
    ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.0.digi.root");
   // ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/");
@@ -13,7 +13,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt == 1) {
+    if(TotEvt == 0) {
 	  IsGood = kTRUE;
     }
     return IsGood;
@@ -82,93 +82,32 @@ std::vector<double> t_cell_max; // Vector to store times of pe for the cell with
 	    max_value = *std::max_element(t_cell_max.begin(), t_cell_max.end());
         }
     }
-std::random_device rd{};
-std::mt19937 gen{rd()};
 
-// Generate num random samples from the normal distribution for each time value in t_cell_max
-for(int j=0; j<t_cell_max.size(); j++) {
-  std::normal_distribution<double> d{t_cell_max[j]-min_value, stddev};
-    for (int i = 0; i < num; ++i) {
-      auto random_int = [&d, &gen]{ return std::round(d(gen)); };
-      t_max.push_back(random_int()); // Add random integer to the time value
-    }
-}
-return t_max;
- };
-  auto get_F = [](ROOT::VecOps::RVec<dg_cell>& cells) {
-    std::vector<double> t_cell_max; // Vector to store times of pe for the cell with the most pe
-    std::vector<double> F;
-    int max_pe_count = 0;
-    int max_pe_cell_index = -1;
-    const int num=1000;
-    const double tau=3.08;
-    const double a =0.588;
+	     std::ofstream outFile("T_max_data.txt");
 
-    // Find the cell with the maximum number of pe
-    for (size_t i = 0; i < cells.size(); ++i) {
-        int pe_count = 0;
-        for (const auto& p : cells[i].ps1) {
-	  pe_count += p.photo_el.size();
-        }
-        if (pe_count > max_pe_count) {
-            max_pe_count = pe_count;
-            max_pe_cell_index = i;
-        }
+    // Check if the file is opened successfully
+    if (!outFile.is_open()) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return t_max; // Return empty vector or handle the error as needed
     }
 
-    // Extract times of pe for the cell with the most pe DA SISTEMARE
-   
-    std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(0.0,25);
-    for (int i = 0; i < num; ++i) {
-      double x =distribution(generator);
-      double num=std::pow(x/tau,(1/a)-1);
-      double den=tau*a*std::pow(1+std::pow(x/tau,1/a),2);	  
-      F.push_back(num/den);
- }
-    return F;
+    // Write t_max data to the file
+    for (const auto& value : t_cell_max) {
+        outFile << value << std::endl;
+    }
 
+    // Close the file
+    outFile.close();
+
+return t_cell_max;
  };
+
+
+
  
 auto df_ext = df.Filter(select_events)
     .Define("n_pe", get_n_pe, {"dg_cell"})
    .Define("Time", get_time_pe, {"dg_cell"})
-   .Define("Time_max", get_time_pe_max_cell, {"dg_cell"})
-   .Define("F",get_F,{"dg_cell"});
-
- auto h_T_pe = df_ext.Histo1D({" Time distribution","Time distribution;Time [ns];# of photoelectrons",25, 0.0,25}, "Time_max");
- auto h_F= df_ext.Histo1D({" Time distribution","Time distribution;Time [ns];# of photoelectrons",200, 0.0,25}, "F");
- 
- 
- auto c1 = new TCanvas();
- c1->SetGridx();
- c1->SetGridy();
- double integral=h_T_pe->Integral();
- double integral2=h_F->Integral();
- // Normalize the histogram area to 1
- /*if (integral != 0) {
-  h_T_pe->Scale(1.0 / integral);
-  h_F->Scale(1.0/integral2);
-  }*/
- h_T_pe->Scale(1.0/1000);
- // h_F->Scale(1.0/1000);
-
- /*TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
- legend->SetBorderSize(2);
- legend->AddEntry(h_T_pe, "Simulated distribution", "l");
- legend->AddEntry(h_F "Expected distribution", "l");*/
-
- h_T_pe->SetStats(0);
- // h_F->SetStats(0);
- //h_F->Draw("HIST");
- h_T_pe->Draw("HIST");
- h_T_pe->SetLineWidth(2);
- //h_F->SetLineWidth(1);
- //h_F->SetLineColor(kBlack);
- h_T_pe->SetLineColor(kMagenta);
- //legend->Draw(); 
- 
- gROOT->GetListOfCanvases()->Draw();
- 
+  .Define("Time_max", get_time_pe_max_cell, {"dg_cell"});
 
 }

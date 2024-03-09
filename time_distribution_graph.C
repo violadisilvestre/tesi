@@ -39,7 +39,7 @@ int main() {
    const int num=5000;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("dati.txt");
+    std::ifstream file("T_max_data.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -112,7 +112,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_sum_1000_func.pdf");
+    canvasSumHist->SaveAs("time_distribution.pdf");
     
 
     return 0;
