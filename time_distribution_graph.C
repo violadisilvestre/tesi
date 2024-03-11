@@ -83,9 +83,12 @@ int main() {
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      if (Gaussian_sum(x[i], time)<240){
-	G[i]=Gaussian_sum(x[i], time);
+      if (Gaussian_sum(x[i], time)>240){
+	G[i]=240;
       }
+      else{
+	G[i]=Gaussian_sum(x[i], time);
+}
       F[i] = myFunction(x[i], time.size());
       
     }
