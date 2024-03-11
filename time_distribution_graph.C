@@ -83,10 +83,12 @@ int main() {
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      F[i] = myFunction(x[i], time.size());
+      if (myFunction(x[i], time.size())<240){
+	F[i] = myFunction(x[i], time.size());
+      }
       G[i]=Gaussian_sum(x[i], time);
     }
-      
+    
     
     TGraph *gaussian = new TGraph(num, x, G);
     TGraph *graph = new TGraph(num, x, F);
@@ -121,7 +123,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_evt4.pdf");
+    canvasSumHist->SaveAs("time_distribution_evt0_sat.pdf");
     
 
     return 0;
