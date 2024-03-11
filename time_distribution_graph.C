@@ -45,8 +45,8 @@ double myFunction(double x,int dim) {
 int main() {
 
    const int x_max=25;
-   const int num=5000;
-
+   const int num=10000;
+   const double sat=240;
     // Apertura del file e lettura dei dati
     std::ifstream file("T_max_data.txt");
     if (!file.is_open()) {
@@ -83,8 +83,8 @@ int main() {
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      if (Gaussian_sum(x[i], time)>240){
-	G[i]=240;
+      if (Gaussian_sum(x[i], time)>sat){
+	G[i]=sat;
       }
       else{
 	G[i]=Gaussian_sum(x[i], time);
