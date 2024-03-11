@@ -83,10 +83,11 @@ int main() {
     std::sort(x, x + num); // Sorting x in ascending order
 
     for (int i = 0; i < num; ++i) {
-      if (myFunction(x[i], time.size())<240){
-	F[i] = myFunction(x[i], time.size());
+      if (Gaussian_sum(x[i], time)<240){
+	G[i]=Gaussian_sum(x[i], time);
       }
-      G[i]=Gaussian_sum(x[i], time);
+      F[i] = myFunction(x[i], time.size());
+      
     }
     
     
@@ -114,7 +115,7 @@ int main() {
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
-    gaussian->GetYaxis()->SetRangeUser(0,80);
+    gaussian->GetYaxis()->SetRangeUser(0,500);
     gaussian->GetXaxis()->SetRangeUser(0, x_max);
     graph->Draw("same");
    
