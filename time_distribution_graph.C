@@ -117,9 +117,9 @@ int main() {
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
+    gaussian->GetYaxis()->SetRange(0,10);
+    gaussian->GetXaxis()->SetRange(-2, 16);
     gaussian->Draw();
-    gaussian->GetYaxis()->SetRangeUser(0,10);
-    gaussian->GetXaxis()->SetRange(-10, x_max);
     graph->Draw("same");
    
     
