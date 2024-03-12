@@ -119,7 +119,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
     gaussian->GetYaxis()->SetRangeUser(0,10);
-    gaussian->GetXaxis()->SetRangeUser(-10, x_max);
+    gaussian->GetXaxis()->SetRange(-10, x_max);
     graph->Draw("same");
    
     
