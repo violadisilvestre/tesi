@@ -45,7 +45,7 @@ double myFunction(double x,int dim) {
 int main() {
 
    const int x_max=25;
-   const int num=1000;
+   const int num=10000;
    const double sat=240;
     // Apertura del file e lettura dei dati
     std::ifstream file("T_max_data.txt");
