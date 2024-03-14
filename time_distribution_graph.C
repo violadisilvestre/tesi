@@ -45,7 +45,7 @@ double myFunction(double x,int dim) {
 int main() {
 
    const int x_max=25;
-   const int num=10000;
+   const int num=100000;
    const double sat=240;
     // Apertura del file e lettura dei dati
     std::ifstream file("T_max_data.txt");
@@ -65,26 +65,21 @@ int main() {
     // Trova il valore minimo per la traslazione
     double minTime = *std::min_element(time.begin(), time.end());
     double maxTime = *std::max_element(time.begin(), time.end());
-    for (int i = 0; i < time.size(); ++i) {
-      
-      time[i] =time[i]-minTime;
-    }
-
     double F[num];
     double G[num];
     double x[num];
-    double y[num];
+    //double y[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-1,25);
-    std::uniform_real_distribution<double> d(0,25);
+    std::uniform_real_distribution<double> distribution(0,200);
+    //std::uniform_real_distribution<double> d(0,25);
     
     for (int i = 0; i < num; ++i) {
       
       x[i] =distribution(generator);
-      y[i] =d(generator);
+      // y[i] =d(generator);
     }
     std::sort(x, x + num); // Sorting x in ascending order
-    std::sort(y, y + num);
+    //std::sort(y, y + num);
     for (int i = 0; i < num; ++i) {
       if (Gaussian_sum(x[i], time)>sat){
 	G[i]=sat;
@@ -92,7 +87,7 @@ int main() {
       else{
 	G[i]=Gaussian_sum(x[i], time);
 }
-      F[i] = myFunction(y[i], time.size());
+      F[i] = myFunction(x[i], time.size());
       
     }
     
