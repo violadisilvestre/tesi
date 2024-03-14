@@ -84,7 +84,7 @@ int main() {
       y[i] =d(generator);
     }
     std::sort(x, x + num); // Sorting x in ascending order
-
+    std::sort(y, y + num);
     for (int i = 0; i < num; ++i) {
       if (Gaussian_sum(x[i], time)>sat){
 	G[i]=sat;
