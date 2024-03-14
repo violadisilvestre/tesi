@@ -76,7 +76,7 @@ int main() {
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0.0,maxTime-minTime);
     
-    for (int i = 0; i < num; ++i) {
+    for (int i = -10; i < num; ++i) {
       
       x[i] =distribution(generator);
     }
