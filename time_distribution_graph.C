@@ -121,7 +121,7 @@ int main() {
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
     graph->Draw("same");
-    //gaussian->GetYaxis()->SetRangeUser(0,500);
+    gaussian->GetYaxis()->SetRangeUser(0,8);
     //gaussian->GetXaxis()->SetRange(-2, 100);
    
     
