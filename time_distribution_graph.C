@@ -46,7 +46,7 @@ int main() {
 
    const int x_max=25;
    const int num=10000;
-   const double sat=240;
+   const double sat=2700;
     // Apertura del file e lettura dei dati
     std::ifstream file("T_max_data.txt");
     if (!file.is_open()) {
@@ -98,7 +98,7 @@ int main() {
     
     
     TGraph *gaussian = new TGraph(num, x, G);
-    TGraph *graph = new TGraph(num, x, F);
+    TGraph *graph = new TGraph(num, y, F);
     TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
     legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
