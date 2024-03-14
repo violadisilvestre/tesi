@@ -114,7 +114,7 @@ int main() {
     gaussian->GetYaxis()->SetTitleFont(42);
     gaussian->GetYaxis()->SetTitleSize(0.04);
     gaussian->GetYaxis()->SetRange(0,10);
-    gaussian->GetXaxis()->SetRange(-2, 16);
+    gaussian->GetXaxis()->SetRange(-2, 100);
 
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
