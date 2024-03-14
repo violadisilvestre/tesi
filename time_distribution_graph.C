@@ -70,7 +70,7 @@ int main() {
     double x[num];
     //double y[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(0,200);
+    std::uniform_real_distribution<double> distribution(100,140);
     //std::uniform_real_distribution<double> d(0,25);
     
     for (int i = 0; i < num; ++i) {
