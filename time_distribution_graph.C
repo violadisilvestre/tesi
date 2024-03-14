@@ -75,7 +75,7 @@ int main() {
     double x[num];
     double y[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-0.5,25);
+    std::uniform_real_distribution<double> distribution(-1,25);
     std::uniform_real_distribution<double> d(0,25);
     
     for (int i = 0; i < num; ++i) {
