@@ -73,12 +73,15 @@ int main() {
     double F[num];
     double G[num];
     double x[num];
+    double y[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-5,maxTime-minTime);
+    std::uniform_real_distribution<double> distribution(-1,maxTime-minTime);
+    std::uniform_real_distribution<double> d(0,maxTime-minTime);
     
     for (int i = 0; i < num; ++i) {
       
       x[i] =distribution(generator);
+      y[i] =d(generator);
     }
     std::sort(x, x + num); // Sorting x in ascending order
 
@@ -89,7 +92,7 @@ int main() {
       else{
 	G[i]=Gaussian_sum(x[i], time);
 }
-      F[i] = myFunction(x[i], time.size());
+      F[i] = myFunction(y[i], time.size());
       
     }
     
