@@ -103,8 +103,8 @@ int main() {
     legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
-    graph->SetLineColor(kViolet);
-    gaussian->SetLineColor(kGreen);
+    graph->SetLineColor(kYellow);
+    gaussian->SetLineColor(kMagenta);
     gaussian->SetLineWidth(2);
     // Set the labels and title
     gaussian->GetXaxis()->SetTitle("Time [ns]"); 
