@@ -20,7 +20,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, std::vector<double> t) {
     double G = 0;
     for (int i = 0; i < t.size(); i++) {
-      G =G+ gaussian(x, t[i], 0.35)* exp(-0.4 * x);
+      G =G+ gaussian(x, t[i], 0.35)* exp(-0.35 * x);
     }
     return G;
 }
