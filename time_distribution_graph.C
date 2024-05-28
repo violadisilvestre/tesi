@@ -20,7 +20,8 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, std::vector<double> t) {
     double G = 0;
     for (int i = 0; i < t.size(); i++) {
-        G += gaussian(x, t[i], 0.35) + exp(-0.25 * x);
+      G += gaussian(x, t[i], 0.35);
+      // + exp(-0.25 * x);
     }
     return G;
 }
@@ -84,7 +85,7 @@ int main() {
     double F[num];
     double G[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-10, 20);
+    std::uniform_real_distribution<double> distribution(-1, 20);
     std::uniform_real_distribution<double> d(0, 20);
     
     for (int i = 0; i < num; ++i) {
