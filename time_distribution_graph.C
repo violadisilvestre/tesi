@@ -109,13 +109,13 @@ int main() {
     for (int i = 0; i < num; ++i) {
         G[i]= G[i]*scaleG;
         F[i]= F[i]*scaleF;
-	if (G[i]<sat){
+	/*	if (G[i]<sat){
 	  G[i]=G[i];
 
 	}
 	else {
 	  G[i]=sat;
-	  }
+	  }*/
 	x[i]=x[i]-x[0];
     }
 
