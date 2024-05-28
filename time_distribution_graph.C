@@ -18,7 +18,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x,std::vector<double> t) {
   double G=0;
   for (int i=0; i< t.size(); i++){
-    G=G+ gaussian(x,t[i],0.35);
+    G=G+ gaussian(x,t[i],0.5)+ exp(-0.3*x);
   }
   return G;
 }
@@ -129,7 +129,7 @@ int main() {
 
    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_evt4_mu.pdf");
+    canvasSumHist->SaveAs("time_distribution_smeread.pdf");
     
 
     return 0;

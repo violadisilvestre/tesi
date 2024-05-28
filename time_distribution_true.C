@@ -3,9 +3,10 @@
 #include "sandreco/srcs/sandreco/include/struct.h"
 #include <fstream>
 {
-  //   ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.0.digi.root");
+ 
+  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.1.digi.root");
   //  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/e_pos2_iso_1000.digi.root");
-  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/mu_pos2_user_1000.digit.root");
+  //ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/mu_pos2_user_1000.digit.root");
   std::cout << "Total events " << df.Count().GetValue() << std::endl;
 
    Int_t TotEvt = -1;
@@ -13,7 +14,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt==827) {
+    if(TotEvt==0) {
 	  IsGood = kTRUE;
     }
     return IsGood;
