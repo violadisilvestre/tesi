@@ -84,7 +84,7 @@ int main() {
     double F[num];
     double G[num];
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-1, 20);
+    std::uniform_real_distribution<double> distribution(-10, 20);
     std::uniform_real_distribution<double> d(0, 20);
     
     for (int i = 0; i < num; ++i) {
