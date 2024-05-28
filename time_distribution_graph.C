@@ -82,7 +82,7 @@ int main() {
 
     std::vector<double> x(num), y(num), F(num), G(num);
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-5, 25);
+    std::uniform_real_distribution<double> distribution(-10, 25);
     std::uniform_real_distribution<double> d(0, 25);
     
     for (int i = 0; i < num; ++i) {
@@ -97,7 +97,15 @@ int main() {
         G[i] = (gaussian_sum > sat) ? sat : gaussian_sum;
         F[i] = myFunction(y[i], time.size());
     }
-    
+
+    // Find the minimum value of x
+    double minX = *std::min_element(x.begin(), x.end());
+
+    // Translate x to start at 0
+    for (double& val : x) {
+        val -= minX;
+    }
+
     // Normalizzazione delle aree
     double areaG = integrate(x, G);
     double areaF = integrate(y, F);
@@ -142,5 +150,3 @@ int main() {
 
     return 0;
 }
-
-     
