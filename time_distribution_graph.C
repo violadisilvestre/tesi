@@ -93,8 +93,9 @@ int main() {
     std::sort(y.begin(), y.end());
 
     for (int i = 0; i < num; ++i) {
-        double gaussian_sum = Gaussian_sum(x[i], time);
-        G[i] = (gaussian_sum > sat) ? sat : gaussian_sum;
+      // double gaussian_sum
+      G[i] = Gaussian_sum(x[i], time);
+	// G[i] = (gaussian_sum > sat) ? sat : gaussian_sum;
         F[i] = myFunction(y[i], time.size());
     }
 
