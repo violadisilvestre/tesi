@@ -94,18 +94,14 @@ int main() {
 
     for (int i = 0; i < num; ++i) {
       // double gaussian_sum
-      G[i] = Gaussian_sum(x[i], time);
-	// G[i] = (gaussian_sum > sat) ? sat : gaussian_sum;
-        F[i] = myFunction(y[i], time.size());
+	   G[i] = Gaussian_sum(x[i], time);
+	   F[i] = myFunction(y[i], time.size());
     }
 
     // Find the minimum value of x
     double minX = *std::min_element(x.begin(), x.end());
 
-    // Translate x to start at 0
-    for (double& val : x) {
-        val -= minX;
-    }
+   
 
     // Normalizzazione delle aree
     double areaG = integrate(x, G);
@@ -117,7 +113,16 @@ int main() {
     for (int i = 0; i < num; ++i) {
         G[i] *= scaleG;
         F[i] *= scaleF;
+	if (G[i]<sat){
+	  G[i]=G[i];
+
+	}
+	else {
+	  G[i]=sat;
+	  }
+	x[i]=x[i]- minX;
     }
+
 
     TGraph* gaussian = new TGraph(num, x.data(), G.data());
     TGraph* graph = new TGraph(num, y.data(), F.data());
