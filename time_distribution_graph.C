@@ -82,7 +82,7 @@ int main() {
 
     std::vector<double> x(num), y(num), F(num), G(num);
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-10, 25);
+    std::uniform_real_distribution<double> distribution(-5, 25);
     std::uniform_real_distribution<double> d(0, 25);
     
     for (int i = 0; i < num; ++i) {
@@ -127,6 +127,7 @@ int main() {
     graph->SetLineColor(kYellow);
     gaussian->SetLineColor(kMagenta);
     gaussian->SetLineWidth(2);
+
     // Set the labels and title
     gaussian->GetXaxis()->SetTitle("Time [ns]"); 
     gaussian->GetYaxis()->SetTitle("# Photoelectrons"); 
@@ -138,10 +139,15 @@ int main() {
     gaussian->GetYaxis()->SetTitleFont(42);
     gaussian->GetYaxis()->SetTitleSize(0.04);
 
+    // Set the x-axis range for both graphs
+    gaussian->GetXaxis()->SetLimits(-1, 35);
+    graph->GetXaxis()->SetLimits(-1, 35);
+
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas* canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
-    gaussian->Draw();
-    graph->Draw("same");
+    canvasSumHist->SetGrid();
+    gaussian->Draw("AL");
+    graph->Draw("L same");
     
     legend->Draw(); 
 
