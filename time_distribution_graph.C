@@ -82,7 +82,7 @@ int main() {
 
     std::vector<double> x(num), y(num), F(num), G(num);
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-10, 25);
+    std::uniform_real_distribution<double> distribution(-30, 25);
     std::uniform_real_distribution<double> d(0, 25);
     
     for (int i = 0; i < num; ++i) {
