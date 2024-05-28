@@ -4,28 +4,28 @@
 #include <vector>
 #include <random>
 #include <cmath>
-#include <map>
+#include <algorithm>
+#include <numeric>
 #include "TH1F.h"
 #include "TCanvas.h"
 #include "TF1.h"
 #include "TGraph.h"
 #include "TLegend.h"
 #include "TRandom3.h"
+
 double gaussian(double x, double mean, double stddev) {
     return (1.0 / (stddev * sqrt(2.0 * M_PI))) * exp(-0.5 * pow((x - mean) / stddev, 2));
 }
 
-double Gaussian_sum(double x,std::vector<double> t) {
-  double G=0;
-  for (int i=0; i< t.size(); i++){
-    G=G+ gaussian(x,t[i],0.5)+ exp(-0.3*x);
-  }
-  return G;
+double Gaussian_sum(double x, std::vector<double> t) {
+    double G = 0;
+    for (int i = 0; i < t.size(); i++) {
+        G += gaussian(x, t[i], 0.5) + exp(-0.3 * x);
+    }
+    return G;
 }
 
-
-// Funzione da plottare sopra agli istogrammi
-double myFunction(double x,int dim) {
+double myFunction(double x, int dim) {
     double tau = 3.08;
     double a = 0.588;
     double num = std::pow(x / tau, (1 / a) - 1);
@@ -42,11 +42,23 @@ double myFunction(double x,int dim) {
     return dim * (num / den) + gaussian;
 }
 
+template <typename T>
+double integrate(const std::vector<T>& x, const std::vector<T>& y) {
+    double area = 0.0;
+    for (size_t i = 1; i < x.size(); ++i) {
+        double dx = x[i] - x[i - 1];
+        double avg_height = (y[i] + y[i - 1]) / 2.0;
+        area += dx * avg_height;
+    }
+    return area;
+}
+
 int main() {
 
-   const int x_max=25;
-   const int num=10000;
-   const double sat=2700;
+    const int x_max = 25;
+    const int num = 10000;
+    const double sat = 2700;
+
     // Apertura del file e lettura dei dati
     std::ifstream file("T_max_data.txt");
     if (!file.is_open()) {
@@ -64,42 +76,43 @@ int main() {
     
     // Trova il valore minimo per la traslazione
     double minTime = *std::min_element(time.begin(), time.end());
-    double maxTime = *std::max_element(time.begin(), time.end());
-    for (int i = 0; i < time.size(); ++i) {
-      
-      time[i] =time[i]-minTime;
+    for (double& t : time) {
+        t -= minTime;
     }
 
-    double F[num];
-    double G[num];
-    double x[num];
-    double y[num];
+    std::vector<double> x(num), y(num), F(num), G(num);
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-1,25);
-    std::uniform_real_distribution<double> d(0,25);
+    std::uniform_real_distribution<double> distribution(-1, 25);
+    std::uniform_real_distribution<double> d(0, 25);
     
     for (int i = 0; i < num; ++i) {
-      
-      x[i] =distribution(generator);
-      y[i] =d(generator);
+        x[i] = distribution(generator);
+        y[i] = d(generator);
     }
-    std::sort(x, x + num); // Sorting x in ascending order
-    std::sort(y, y + num);
+    std::sort(x.begin(), x.end());
+    std::sort(y.begin(), y.end());
+
     for (int i = 0; i < num; ++i) {
-      if (Gaussian_sum(x[i], time)>sat){
-	G[i]=sat;
-      }
-      else{
-	G[i]=Gaussian_sum(x[i], time);
-}
-      F[i] = myFunction(y[i], time.size());
-      
+        double gaussian_sum = Gaussian_sum(x[i], time);
+        G[i] = (gaussian_sum > sat) ? sat : gaussian_sum;
+        F[i] = myFunction(y[i], time.size());
     }
     
-    
-    TGraph *gaussian = new TGraph(num, x, G);
-    TGraph *graph = new TGraph(num, y, F);
-    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
+    // Normalizzazione delle aree
+    double areaG = integrate(x, G);
+    double areaF = integrate(y, F);
+
+    double scaleG = time.size() / areaG;
+    double scaleF = time.size() / areaF;
+
+    for (int i = 0; i < num; ++i) {
+        G[i] *= scaleG;
+        F[i] *= scaleF;
+    }
+
+    TGraph* gaussian = new TGraph(num, x.data(), G.data());
+    TGraph* graph = new TGraph(num, y.data(), F.data());
+    TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
     legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
     graph->SetLineWidth(2);
@@ -118,19 +131,14 @@ int main() {
     gaussian->GetYaxis()->SetTitleSize(0.04);
 
     // Creazione dei canvas e disegno degli istogrammi
-    TCanvas *canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
+    TCanvas* canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     gaussian->Draw();
     graph->Draw("same");
-    //gaussian->GetYaxis()->SetRangeUser(0,8);
-    //gaussian->GetXaxis()->SetRange(-2, 100);
-   
     
     legend->Draw(); 
 
-   
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_smeread.pdf");
-    
+    canvasSumHist->SaveAs("time_distribution_smeared.pdf");
 
     return 0;
 }
