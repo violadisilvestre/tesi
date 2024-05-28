@@ -42,10 +42,9 @@ double myFunction(double x, int dim) {
     return dim * (num / den) + gaussian;
 }
 
-template <typename T>
-double integrate(const std::vector<T>& x, const std::vector<T>& y) {
+double integrate(double x[], double y[],int num) {
     double area = 0.0;
-    for (size_t i = 1; i < x.size(); ++i) {
+    for (size_t i = 1; i <num; ++i) {
         double dx = x[i] - x[i - 1];
         double avg_height = (y[i] + y[i - 1]) / 2.0;
         area += dx * avg_height;
@@ -80,7 +79,10 @@ int main() {
         t -= minTime;
     }
 
-    std::vector<double> x(num), y(num), F(num), G(num);
+    double x[num];
+    double y[num];
+    double F[num];
+    double G[num];
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(-30, 25);
     std::uniform_real_distribution<double> d(0, 25);
@@ -89,30 +91,24 @@ int main() {
         x[i] = distribution(generator);
         y[i] = d(generator);
     }
-    std::sort(x.begin(), x.end());
-    std::sort(y.begin(), y.end());
-
+    std::sort(x, x + num); // Sorting x in ascending order
+    std::sort(y, y + num);
     for (int i = 0; i < num; ++i) {
       // double gaussian_sum
 	   G[i] = Gaussian_sum(x[i], time);
 	   F[i] = myFunction(y[i], time.size());
     }
 
-    // Find the minimum value of x
-    double minX = *std::min_element(x.begin(), x.end());
-
-   
-
-    // Normalizzazione delle aree
-    double areaG = integrate(x, G);
-    double areaF = integrate(y, F);
+     // Normalizzazione delle aree
+    double areaG = integrate(x, G,num);
+    double areaF = integrate(y, F,num);
 
     double scaleG = time.size() / areaG;
     double scaleF = time.size() / areaF;
 
     for (int i = 0; i < num; ++i) {
-        G[i] *= scaleG;
-        F[i] *= scaleF;
+        G[i]= G[i]*scaleG;
+        F[i]= F[i]*scaleF;
 	if (G[i]<sat){
 	  G[i]=G[i];
 
@@ -120,12 +116,12 @@ int main() {
 	else {
 	  G[i]=sat;
 	  }
-	x[i]=x[i]- minX;
+	x[i]=x[i]-x[0];
     }
 
 
-    TGraph* gaussian = new TGraph(num, x.data(), G.data());
-    TGraph* graph = new TGraph(num, y.data(), F.data());
+    TGraph *gaussian = new TGraph(num, x, G);
+    TGraph *graph = new TGraph(num, y, F);
     TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
     legend->AddEntry(gaussian, "Simulated distribution", "l");
     legend->AddEntry(graph, "Expected distribution", "l");
