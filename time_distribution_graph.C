@@ -59,7 +59,7 @@ int main() {
     const double sat = 2700;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("T_smear_57_63.txt");
+    std::ifstream file("T_smear_67_150.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -154,7 +154,7 @@ int main() {
     legend->Draw(); 
 
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_63_pe.pdf");
+    canvasSumHist->SaveAs("time_distribution_150_pe.pdf");
 
     return 0;
 }
