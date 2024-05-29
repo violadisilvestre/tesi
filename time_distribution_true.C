@@ -4,7 +4,7 @@
 #include <fstream>
 {
  
-  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.1.digi.root");
+  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.*.digi.root");
   //  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/e_pos2_iso_1000.digi.root");
   //ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/mu_pos2_user_1000.digit.root");
   std::cout << "Total events " << df.Count().GetValue() << std::endl;
@@ -14,7 +14,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt==0) {
+    if(TotEvt==26539) {
 	  IsGood = kTRUE;
     }
     return IsGood;
@@ -70,7 +70,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
   }
     std::cout<<"max:"<<max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_max_data.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_26539_2000.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
