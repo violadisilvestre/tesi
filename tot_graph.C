@@ -49,8 +49,9 @@ int main() {
     gr1->SetTitle("ToT as function of photoelectron ;# pe;ToT (ns)");
     gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr1->SetMarkerColor(1);
-    gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
     gr1->GetYaxis()->SetRange(0,13);
+    gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
+    gr2->GetYaxis()->SetRange(0,13);
     gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr2->SetMarkerColor(8);
     gr2->Draw("same"); // "AP" indica che devono essere disegnati sia i punti che gli assi
