@@ -46,7 +46,7 @@ int main() {
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
     // Disegna il grafico
-    gr1->SetTitle("ToT as function of photoelectron ;# pe;ToT (ns)");
+    gr1->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
     gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr1->SetMarkerColor(1);
     gr1->GetYaxis()->SetRange(0,13);
@@ -54,7 +54,7 @@ int main() {
     gr2->GetYaxis()->SetRange(0,13);
     gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr2->SetMarkerColor(8);
-    gr2->Draw("same"); // "AP" indica che devono essere disegnati sia i punti che gli assi
+    gr2->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
     // Mostra la tela
     c1->Update();
     c1->SaveAs("N_vs_ToT.png"); // Salva il grafico come immagine
