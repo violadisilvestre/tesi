@@ -21,33 +21,39 @@ int main() {
         return 1;
     }
     std::vector<double> N;
-    std::vector<double> tot;
+    std::vector<double> tot_l;
+    std::vector<double> tot_h;
     std::string lineString;
     while (std::getline(file, lineString)) {
         std::istringstream iss(lineString);
-        double nValue, totValue;
+        double nValue, totValue_l,totValue_h;
 
-        if (!(iss >> nValue >> totValue)) {
+        if (!(iss >> nValue >> totValue_l>>totValue_h )) {
             std::cerr << "Error reading line: " << lineString << std::endl;
             continue; // skip the invalid line
         }
 
         N.push_back(nValue);
-        tot.push_back(totValue);
+        tot_l.push_back(totValue_l);
+	tot_h.push_back(totValue_h);
     }
     file.close();
 
     // Creazione del grafico usando ROOT
-    TGraph *gr1 = new TGraph(N.size(), N.data(), tot.data());
-
+    TGraph *gr1 = new TGraph(N.size(), N.data(), tot_l.data());
+    TGraph *gr2 = new TGraph(N.size(), N.data(), tot_h.data());
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
     // Disegna il grafico
-    gr1->SetTitle("Scatter Plot of N vs ToT;N;ToT");
+    gr1->SetTitle("ToT as function of photoelectron ;# pe;ToT (ns)");
     gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr1->SetMarkerColor(1);
     gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
-
+    gr1->GetYaxis()->SetRange(0,13);
+    gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr2->SetMarkerColor(8);
+    gr2->Draw("same"); // "AP" indica che devono essere disegnati sia i punti che gli assi
     // Mostra la tela
     c1->Update();
     c1->SaveAs("N_vs_ToT.png"); // Salva il grafico come immagine
