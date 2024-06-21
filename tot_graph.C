@@ -44,13 +44,13 @@ int main() {
     // Disegna il primo grafico
     gr1->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
     gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr1->SetMarkerColor(1);
+    gr1->SetMarkerColor(4);
     gr1->GetYaxis()->SetRangeUser(0, 13);
     gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
 
     // Disegna il secondo grafico
     gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr2->SetMarkerColor(8);
+    gr2->SetMarkerColor(800);
     gr2->Draw("P SAME"); // "P SAME" indica che devono essere disegnati i punti sullo stesso canvas
 
     // Aggiungi una legenda
