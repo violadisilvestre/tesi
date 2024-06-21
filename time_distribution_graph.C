@@ -20,7 +20,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, std::vector<double> t) {
     double G = 0;
     for (int i = 0; i < t.size(); i++) {
-      G =G+ gaussian(x, t[i], 0.35);
+      G =G+ gaussian(x, t[i], 0.6)* exp(-0.25 * x);
     }
     return G;
 }
@@ -59,7 +59,7 @@ int main() {
     const double sat = 2700;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("T_smear_44519_2000.txt");
+    std::ifstream file("T_smear_4000.txt");
     if (!file.is_open()) {
         std::cerr << "Impossibile aprire il file!" << std::endl;
         return 1;
@@ -154,7 +154,7 @@ int main() {
     legend->Draw(); 
 
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_2000_pe_before.pdf");
+    canvasSumHist->SaveAs("time_distribution_6000.pdf");
 
     return 0;
 }
