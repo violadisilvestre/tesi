@@ -57,7 +57,7 @@ int main() {
     std::vector<std::string> filenames = {
         "T_smear_0_800.txt", "T_smear_23_1400.txt", "T_smear_24044_1000.txt",
         "T_smear_26539_2000.txt", "T_smear_2922_1000.txt", "T_smear_41806_4000.txt",  "T_smear_44519_2000.txt", "T_smear_5275_2800.txt",
-        "T_smear_57_63.txt", "T_smear_67_150.txt", "T_smear_86_22.txt"
+        "T_smear_57_63.txt", "T_smear_67_150.txt", "T_smear_86_22.txt", "T_smear_4000.txt"
     };
 
     std::ofstream outfile("ToT_results.txt");
