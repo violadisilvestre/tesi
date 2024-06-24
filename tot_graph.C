@@ -61,7 +61,7 @@ int main() {
 
     // Mostra la tela
     c1->Update();
-    c1->SaveAs("N_vs_ToT.png"); // Salva il grafico come immagine
+    c1->SaveAs("N_vs_ToT.pdf"); // Salva il grafico come immagine
 
     return 0;
 }
