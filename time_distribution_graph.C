@@ -16,7 +16,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.6;
+const double GAUSSIAN_STDDEV = 0.65;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -27,7 +27,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.3 * x);
+        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.25 * x);
     }
     return G;
 }
