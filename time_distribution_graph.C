@@ -27,7 +27,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.25 * x);
+        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-1 * x);
     }
     return G;
 }
