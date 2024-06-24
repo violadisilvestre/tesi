@@ -13,36 +13,36 @@
 #include "TLegend.h"
 #include "TRandom3.h"
 
+// Definizione delle costanti
+const double SATURATION_LIMIT = 2700;
+const int NUM_POINTS = 10000;
+const double GAUSSIAN_STDDEV = 0.6;
+
+// Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
     return (1.0 / (stddev * sqrt(2.0 * M_PI))) * exp(-0.5 * pow((x - mean) / stddev, 2));
 }
 
-double Gaussian_sum(double x, std::vector<double> t) {
+// Somma di gaussiane
+double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
-    for (int i = 0; i < t.size(); i++) {
-        G += gaussian(x, t[i], 0.6) * exp(-0.25 * x);
+    for (double t : times) {
+        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.25 * x);
     }
     return G;
 }
 
+// Funzione definita dall'utente
 double myFunction(double x, int dim) {
-    double tau = 3.08;
-    double a = 0.588;
+    const double tau = 3.08;
+    const double a = 0.588;
     double num = std::pow(x / tau, (1 / a) - 1);
     double den = tau * a * std::pow(1 + std::pow(x / tau, 1 / a), 2);
-    
-    // Gaussian parameters
-    double mu = 0.0;  // Center of the Gaussian
-    double sigma = 1.0;  // Standard deviation of the Gaussian
-
-    // Calculate the Gaussian smearing factor
-    double gaussian = 1 / (sigma * std::sqrt(2 * M_PI)) * std::exp(-0.5 * std::pow((x - mu) / sigma, 2));
-    
-    // Multiply the original function value with the Gaussian smearing factor
-    return dim * (num / den) + gaussian;
+    return dim * (num / den);
 }
 
-double integrate(double x[], double y[], int num) {
+// Funzione di integrazione
+double integrate(const double x[], const double y[], int num) {
     double area = 0.0;
     for (size_t i = 1; i < num; ++i) {
         double dx = x[i] - x[i - 1];
@@ -52,11 +52,8 @@ double integrate(double x[], double y[], int num) {
     return area;
 }
 
+// Funzione per processare un file e generare i grafici
 void processFile(const std::string& filename) {
-    const int x_max = 25;
-    const int num = 10000;
-    const double sat = 2700;
-
     // Apertura del file e lettura dei dati
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -64,91 +61,95 @@ void processFile(const std::string& filename) {
         return;
     }
 
-    TRandom3 rand(0);
-    std::vector<double> time;
-    std::string lineString;
-    while (std::getline(file, lineString)) {
-        double value = std::stod(lineString);
-        time.push_back(value);
+    std::vector<double> times;
+    std::string line;
+    while (std::getline(file, line)) {
+        double value = std::stod(line);
+        times.push_back(value);
     }
     file.close();
-    
-    // Trova il valore minimo per la traslazione
-    double minTime = *std::min_element(time.begin(), time.end());
-    for (double& t : time) {
+
+    // Traslazione dei tempi al valore minimo
+    double minTime = *std::min_element(times.begin(), times.end());
+    for (double& t : times) {
         t -= minTime;
     }
-    
-    double x[num];
-    double y[num];
-    double F[num];
-    double G[num];
+
+    // Generazione dei dati x e y
+    std::vector<double> x(NUM_POINTS), y(NUM_POINTS);
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(-1, 20);
-    std::uniform_real_distribution<double> d(0, 20);
-    
-    for (int i = 0; i < num; ++i) {
-        x[i] = distribution(generator);
-        y[i] = d(generator);
+    std::uniform_real_distribution<double> distributionX(-1, 20);
+    std::uniform_real_distribution<double> distributionY(0, 20);
+
+    for (int i = 0; i < NUM_POINTS; ++i) {
+        x[i] = distributionX(generator);
+        y[i] = distributionY(generator);
     }
-    std::sort(x, x + num); // Sorting x in ascending order
-    std::sort(y, y + num);
-    for (int i = 0; i < num; ++i) {
-        G[i] = Gaussian_sum(x[i], time);
-        F[i] = myFunction(y[i], time.size());
+
+    // Ordinamento dei dati x e y
+    std::sort(x.begin(), x.end());
+    std::sort(y.begin(), y.end());
+
+    // Calcolo delle funzioni G e F
+    std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
+    for (int i = 0; i < NUM_POINTS; ++i) {
+        G[i] = Gaussian_sum(x[i], times);
+        F[i] = myFunction(y[i], times.size());
     }
-    
-    // Normalizzazione delle funzioni al numero massimo di photoelettroni
-    double maxG = *std::max_element(G, G + num);
-    double maxF = *std::max_element(F, F + num);
-    
-    double scaleG = time.size() / maxG;
-    double scaleF = time.size() / maxF;
-    
-    for (int i = 0; i < num; ++i) {
-        G[i] = G[i] * scaleG;
-        F[i] = F[i] * scaleF;
-        if (G[i] > sat) {
-            G[i] = sat;
+
+    // Normalizzazione delle funzioni
+    double maxG = *std::max_element(G.begin(), G.end());
+    double maxF = *std::max_element(F.begin(), F.end());
+
+    double scaleG = times.size() / maxG;
+    double scaleF = times.size() / maxF;
+
+    for (int i = 0; i < NUM_POINTS; ++i) {
+        G[i] *= scaleG;
+        F[i] *= scaleF;
+        if (G[i] > SATURATION_LIMIT) {
+            G[i] = SATURATION_LIMIT;
         }
     }
 
-    TGraph *gaussian = new TGraph(num, x, G);
-    TGraph *graph = new TGraph(num, y, F);
-    TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9); 
-    legend->AddEntry(gaussian, "Simulated distribution", "l");
-    legend->AddEntry(graph, "Expected distribution", "l");
-    graph->SetLineWidth(2);
-    graph->SetLineColor(kYellow);
-    gaussian->SetLineColor(kMagenta);
-    gaussian->SetLineWidth(2);
-    
-    // Set the labels and title
-    gaussian->GetXaxis()->SetTitle("Time [ns]"); 
-    gaussian->GetYaxis()->SetTitle("# Photoelectrons"); 
-    gaussian->SetTitle("Time Distribution"); 
-    
-    // Adjust font and size if needed
-    gaussian->GetXaxis()->SetTitleFont(42);
-    gaussian->GetXaxis()->SetTitleSize(0.04);
-    gaussian->GetYaxis()->SetTitleFont(42);
-    gaussian->GetYaxis()->SetTitleSize(0.04);
-    
-    // Creazione dei canvas e disegno degli istogrammi
-    TCanvas* canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
-    canvasSumHist->SetGrid();
-    gaussian->Draw("AL");
-    graph->Draw("L same");
-    
-    legend->Draw(); 
-    
-    // Salva i canvas degli istogrammi su file
-    std::string outputFilename = "time_distribution_" + filename + ".pdf";
-    canvasSumHist->SaveAs(outputFilename.c_str());
+    // Creazione dei grafici
+    TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
+    TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
 
-    delete gaussian;
-    delete graph;
-    delete canvasSumHist;
+    gaussianGraph->SetLineColor(kMagenta);
+    gaussianGraph->SetLineWidth(2);
+    expectedGraph->SetLineColor(kYellow);
+    expectedGraph->SetLineWidth(2);
+
+    TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+    legend->AddEntry(gaussianGraph, "Simulated distribution", "l");
+    legend->AddEntry(expectedGraph, "Expected distribution", "l");
+
+    // Creazione del canvas e disegno dei grafici
+    TCanvas* canvas = new TCanvas("canvas", "Photoelectron Time Distribution", 800, 600);
+    canvas->SetGrid();
+    gaussianGraph->GetXaxis()->SetTitle("Time [ns]");
+    gaussianGraph->GetYaxis()->SetTitle("# Photoelectrons");
+    gaussianGraph->SetTitle("Time Distribution");
+    gaussianGraph->GetXaxis()->SetTitleFont(42);
+    gaussianGraph->GetXaxis()->SetTitleSize(0.04);
+    gaussianGraph->GetYaxis()->SetTitleFont(42);
+    gaussianGraph->GetYaxis()->SetTitleSize(0.04);
+    
+     expectedGraph->Draw("AL");
+    gaussianGraph->Draw("L same");
+   
+    legend->Draw();
+
+    // Salvataggio del canvas su file
+    std::string outputFilename = "time_distribution_" + filename + ".pdf";
+    canvas->SaveAs(outputFilename.c_str());
+
+    // Pulizia della memoria
+    delete gaussianGraph;
+    delete expectedGraph;
+    delete legend;
+    delete canvas;
 }
 
 int main() {
@@ -167,3 +168,5 @@ int main() {
 
     return 0;
 }
+
+
