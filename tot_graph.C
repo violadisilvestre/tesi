@@ -17,26 +17,26 @@ int main() {
     }
     std::vector<double> N;
     std::vector<double> tot_l;
-    std::vector<double> tot_h;
+    // std::vector<double> tot_h;
     std::string lineString;
     while (std::getline(file, lineString)) {
         std::istringstream iss(lineString);
-        double nValue, totValue_l, totValue_h;
+        double nValue, totValue_l;
 
-        if (!(iss >> nValue >> totValue_l >> totValue_h)) {
+        if (!(iss >> nValue >> totValue_l)) {
             std::cerr << "Error reading line: " << lineString << std::endl;
             continue; // skip the invalid line
         }
 
         N.push_back(nValue);
         tot_l.push_back(totValue_l);
-        tot_h.push_back(totValue_h);
+        //tot_h.push_back(totValue_h);
     }
     file.close();
 
     // Creazione del grafico usando ROOT
     TGraph *gr1 = new TGraph(N.size(), N.data(), tot_l.data());
-    TGraph *gr2 = new TGraph(N.size(), N.data(), tot_h.data());
+    // TGraph *gr2 = new TGraph(N.size(), N.data(), tot_h.data());
 
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
@@ -49,15 +49,15 @@ int main() {
     gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
 
     // Disegna il secondo grafico
-    gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
+    /* gr2->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr2->SetMarkerColor(800);
     gr2->Draw("P SAME"); // "P SAME" indica che devono essere disegnati i punti sullo stesso canvas
-
+    
     // Aggiungi una legenda
     TLegend *legend = new TLegend(0.7, 0.8, 0.9, 0.9); // Imposta la posizione della legenda
     legend->AddEntry(gr1, "tot_l", "p");
     legend->AddEntry(gr2, "tot_h", "p");
-    legend->Draw();
+    legend->Draw();*/
 
     // Mostra la tela
     c1->Update();

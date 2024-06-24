@@ -112,6 +112,43 @@ void processFile(const std::string& filename) {
         }
     }
 
+    // Calcolo ToT
+    int start = -1;
+    double time_start = 0;
+    double time_stop = 0;
+    const double thr = 5.0;
+
+    // Find the start time
+    for (int i = 0; i < NUM_POINTS; ++i) {
+        if (G[i] > thr) {
+            start = i;
+            time_start = x[i];
+            break;
+        }
+    }
+
+    if (start != -1) {
+        // Find the stop time
+        for (int i = start + 1; i < NUM_POINTS; ++i) {
+            if (G[i] < thr) {
+                time_stop = x[i - 1];
+                break;
+            }
+        }
+    } else {
+        std::cout << "No signal" << std::endl;
+        return;
+    }
+
+    double ToT = time_stop - time_start;
+    std::ofstream outfile("ToT_results.txt", std::ios::app);
+    if (!outfile.is_open()) {
+        std::cerr << "Unable to open output file!" << std::endl;
+        return;
+    }
+    outfile << times.size() << " " << ToT << std::endl;
+    outfile.close();
+
     // Creazione dei grafici
     TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
     TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
@@ -135,10 +172,9 @@ void processFile(const std::string& filename) {
     gaussianGraph->GetXaxis()->SetTitleSize(0.04);
     gaussianGraph->GetYaxis()->SetTitleFont(42);
     gaussianGraph->GetYaxis()->SetTitleSize(0.04);
-    
-     expectedGraph->Draw("AL");
+
+    expectedGraph->Draw("AL");
     gaussianGraph->Draw("L same");
-   
     legend->Draw();
 
     // Salvataggio del canvas su file
@@ -158,7 +194,7 @@ int main() {
         "T_smear_26539_2000.txt", "T_smear_2922_1000.txt",
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt", "T_smear_57_63.txt",
-        "T_smear_67_150.txt", "T_smear_86_22.txt", 
+        "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt"
     };
 
@@ -168,5 +204,3 @@ int main() {
 
     return 0;
 }
-
-
