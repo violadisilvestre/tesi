@@ -20,7 +20,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, std::vector<double> t) {
     double G = 0;
     for (int i = 0; i < t.size(); i++) {
-      G =G+ gaussian(x, t[i], 0.6)* exp(-0.25 * x);
+        G += gaussian(x, t[i], 0.6) * exp(-0.25 * x);
     }
     return G;
 }
@@ -30,21 +30,21 @@ double myFunction(double x, int dim) {
     double a = 0.588;
     double num = std::pow(x / tau, (1 / a) - 1);
     double den = tau * a * std::pow(1 + std::pow(x / tau, 1 / a), 2);
-
+    
     // Gaussian parameters
     double mu = 0.0;  // Center of the Gaussian
     double sigma = 1.0;  // Standard deviation of the Gaussian
 
     // Calculate the Gaussian smearing factor
     double gaussian = 1 / (sigma * std::sqrt(2 * M_PI)) * std::exp(-0.5 * std::pow((x - mu) / sigma, 2));
-
+    
     // Multiply the original function value with the Gaussian smearing factor
     return dim * (num / den) + gaussian;
 }
 
-double integrate(double x[], double y[],int num) {
+double integrate(double x[], double y[], int num) {
     double area = 0.0;
-    for (size_t i = 1; i <num; ++i) {
+    for (size_t i = 1; i < num; ++i) {
         double dx = x[i] - x[i - 1];
         double avg_height = (y[i] + y[i - 1]) / 2.0;
         area += dx * avg_height;
@@ -52,18 +52,18 @@ double integrate(double x[], double y[],int num) {
     return area;
 }
 
-int main() {
-
+void processFile(const std::string& filename) {
     const int x_max = 25;
     const int num = 10000;
     const double sat = 2700;
 
     // Apertura del file e lettura dei dati
-    std::ifstream file("T_smear_4000.txt");
+    std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Impossibile aprire il file!" << std::endl;
-        return 1;
+        std::cerr << "Impossibile aprire il file " << filename << "!" << std::endl;
+        return;
     }
+
     TRandom3 rand(0);
     std::vector<double> time;
     std::string lineString;
@@ -78,7 +78,7 @@ int main() {
     for (double& t : time) {
         t -= minTime;
     }
-
+    
     double x[num];
     double y[num];
     double F[num];
@@ -94,31 +94,24 @@ int main() {
     std::sort(x, x + num); // Sorting x in ascending order
     std::sort(y, y + num);
     for (int i = 0; i < num; ++i) {
-      // double gaussian_sum
-	   G[i] = Gaussian_sum(x[i], time);
-	   F[i] = myFunction(y[i], time.size());
+        G[i] = Gaussian_sum(x[i], time);
+        F[i] = myFunction(y[i], time.size());
     }
-
-     // Normalizzazione delle aree
-    double areaG = integrate(x, G,num);
-    double areaF = integrate(y, F,num);
-
-    double scaleG = time.size() / areaG;
-    double scaleF = time.size() / areaF;
-
+    
+    // Normalizzazione delle funzioni al numero massimo di photoelettroni
+    double maxG = *std::max_element(G, G + num);
+    double maxF = *std::max_element(F, F + num);
+    
+    double scaleG = time.size() / maxG;
+    double scaleF = time.size() / maxF;
+    
     for (int i = 0; i < num; ++i) {
-        G[i]= G[i]*scaleG;
-        F[i]= F[i]*scaleF;
-	if (G[i]<sat){
-	  G[i]=G[i];
-
-	}
-	else {
-	  G[i]=sat;
-	  }
-	//	x[i]=x[i]-x[0];
+        G[i] = G[i] * scaleG;
+        F[i] = F[i] * scaleF;
+        if (G[i] > sat) {
+            G[i] = sat;
+        }
     }
-
 
     TGraph *gaussian = new TGraph(num, x, G);
     TGraph *graph = new TGraph(num, y, F);
@@ -129,7 +122,7 @@ int main() {
     graph->SetLineColor(kYellow);
     gaussian->SetLineColor(kMagenta);
     gaussian->SetLineWidth(2);
-
+    
     // Set the labels and title
     gaussian->GetXaxis()->SetTitle("Time [ns]"); 
     gaussian->GetYaxis()->SetTitle("# Photoelectrons"); 
@@ -140,11 +133,7 @@ int main() {
     gaussian->GetXaxis()->SetTitleSize(0.04);
     gaussian->GetYaxis()->SetTitleFont(42);
     gaussian->GetYaxis()->SetTitleSize(0.04);
-
-    // Set the x-axis range for both graphs
-    //gaussian->GetXaxis()->SetLimits(-1, 35);
-    //graph->GetXaxis()->SetLimits(-1, 35);
-
+    
     // Creazione dei canvas e disegno degli istogrammi
     TCanvas* canvasSumHist = new TCanvas("canvasSumHist", "Photoelectron time distribution", 800, 600);
     canvasSumHist->SetGrid();
@@ -152,9 +141,29 @@ int main() {
     graph->Draw("L same");
     
     legend->Draw(); 
-
+    
     // Salva i canvas degli istogrammi su file
-    canvasSumHist->SaveAs("time_distribution_6000.pdf");
+    std::string outputFilename = "time_distribution_" + filename + ".pdf";
+    canvasSumHist->SaveAs(outputFilename.c_str());
+
+    delete gaussian;
+    delete graph;
+    delete canvasSumHist;
+}
+
+int main() {
+    std::vector<std::string> filenames = {
+        "T_smear_0_800.txt", "T_smear_24044_1000.txt",
+        "T_smear_26539_2000.txt", "T_smear_2922_1000.txt",
+        "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
+        "T_smear_5275_2800.txt", "T_smear_57_63.txt",
+        "T_smear_67_150.txt", "T_smear_86_22.txt", 
+        "T_smear_4000.txt"
+    };
+
+    for (const std::string& filename : filenames) {
+        processFile(filename);
+    }
 
     return 0;
 }
