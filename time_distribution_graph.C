@@ -53,7 +53,7 @@ double integrate(const double x[], const double y[], int num) {
 }
 
 // Funzione per processare un file e generare i grafici
-void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l) {
+void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l, std::vector<double>& tot_h) {
     // Apertura del file e lettura dei dati
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -112,37 +112,69 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
         }
     }
 
-    // Calcolo ToT
-    int start = -1;
-    double time_start = 0;
-    double time_stop = 0;
-    const double thr = 5.0;
+    // Calcolo ToT per soglia bassa
+    int start_low = -1;
+    double time_start_low = 0;
+    double time_stop_low = 0;
+    const double low_thr = 5.0;
 
-    // Find the start time
+    // Trova il tempo di inizio (prima volta che il segnale supera la soglia bassa)
     for (int i = 0; i < NUM_POINTS; ++i) {
-        if (G[i] > thr) {
-            start = i;
-            time_start = x[i];
+        if (G[i] > low_thr) {
+            start_low = i;
+            time_start_low = x[i];
             break;
         }
     }
 
-    if (start != -1) {
-        // Find the stop time
-        for (int i = start + 1; i < NUM_POINTS; ++i) {
-            if (G[i] < thr) {
-                time_stop = x[i - 1];
+    if (start_low != -1) {
+        // Trova il tempo di fine (prima volta che il segnale scende sotto la soglia bassa dopo aver superato la soglia bassa)
+        for (int i = start_low + 1; i < NUM_POINTS; ++i) {
+            if (G[i] < low_thr) {
+                time_stop_low = x[i - 1];
                 break;
             }
         }
     } else {
-        std::cout << "No signal" << std::endl;
-        return;
+        std::cout << "No signal for low threshold" << std::endl;
     }
 
-    double ToT = time_stop - time_start;
+    double ToT_low = time_stop_low - time_start_low;
+    if (ToT_low < 0) ToT_low = -1;
+    tot_l.push_back(ToT_low);
+
+    // Calcolo ToT per soglia alta
+    int start_high = -1;
+    double time_start_high = 0;
+    double time_stop_high = 0;
+    const double high_thr = 100.0;
+
+    // Trova il tempo di inizio (prima volta che il segnale supera la soglia alta)
+    for (int i = 0; i < NUM_POINTS; ++i) {
+        if (G[i] > high_thr) {
+            start_high = i;
+            time_start_high = x[i];
+            break;
+        }
+    }
+
+    if (start_high != -1) {
+        // Trova il tempo di fine (prima volta che il segnale scende sotto la soglia alta dopo aver superato la soglia alta)
+        for (int i = start_high + 1; i < NUM_POINTS; ++i) {
+            if (G[i] < high_thr) {
+                time_stop_high = x[i - 1];
+                break;
+            }
+        }
+    } else {
+        std::cout << "No signal for high threshold" << std::endl;
+    }
+
+    double ToT_high = time_stop_high - time_start_high;
+    if (ToT_high < 0) ToT_high = -1;
+    tot_h.push_back(ToT_high);
+
     N.push_back(times.size());
-    tot_l.push_back(ToT);
 
     // Creazione dei grafici
     TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
@@ -195,28 +227,45 @@ int main() {
 
     std::vector<double> N;
     std::vector<double> tot_l;
+    std::vector<double> tot_h;
 
     for (const std::string& filename : filenames) {
-        processFile(filename, N, tot_l);
+        processFile(filename, N, tot_l, tot_h);
     }
 
     // Creazione del grafico usando ROOT
-    TGraph *gr1 = new TGraph(N.size(), N.data(), tot_l.data());
+    TGraph *gr_low = new TGraph(N.size(), N.data(), tot_l.data());
+    TGraph *gr_high = new TGraph(N.size(), N.data(), tot_h.data());
 
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
     // Disegna il primo grafico
-    gr1->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
-    gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr1->SetMarkerColor(4);
-    gr1->GetYaxis()->SetRangeUser(0,20);
-    gr1->GetXaxis()->SetRangeUser(0,2500);
-    gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
+    gr_low->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
+    gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr_low->SetMarkerColor(kBlue);
+    gr_low->GetYaxis()->SetRangeUser(0,20);
+    gr_low->GetXaxis()->SetRangeUser(0, *std::max_element(N.begin(), N.end()));
+    gr_low->Draw("AP");
 
-    // Mostra la tela
-    c1->Update();
-    c1->SaveAs("N_vs_ToT.pdf"); // Salva il grafico come immagine
+    // Disegna il secondo grafico sullo stesso canvas
+    gr_high->SetMarkerStyle(21); // Imposta lo stile dei punti
+    gr_high->SetMarkerColor(kOrange);
+    gr_high->Draw("P same");
+
+    // Aggiungi legenda
+    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+    legend->AddEntry(gr_low, "Low Threshold ToT", "p");
+    legend->AddEntry(gr_high, "High Threshold ToT", "p");
+    legend->Draw();
+
+    // Salva il grafico in un file
+    c1->SaveAs("N_vs_ToT.pdf");
+
+    // Pulizia della memoria
+    delete gr_low;
+    delete gr_high;
+    delete c1;
 
     return 0;
 }
