@@ -171,7 +171,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     }
 
     double ToT_high = time_stop_high - time_start_high;
-    if (ToT_high < 0) ToT_high = -1;
+    if (ToT_high <= 0)ToT_high = -1;
     tot_h.push_back(ToT_high);
 
     N.push_back(times.size());
