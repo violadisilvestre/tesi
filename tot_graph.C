@@ -45,7 +45,8 @@ int main() {
     gr1->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
     gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr1->SetMarkerColor(4);
-    gr1->GetYaxis()->SetRangeUser(0,20 );
+    gr1->GetYaxis()->SetRangeUser(0,20);
+    gr1->GetXaxis()->SetRangeUser(0,2500);
     gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
 
     // Disegna il secondo grafico
