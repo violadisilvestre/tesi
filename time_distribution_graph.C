@@ -6,11 +6,11 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
-#include "TH1F.h"
+#include <sstream>
 #include "TCanvas.h"
-#include "TF1.h"
 #include "TGraph.h"
 #include "TLegend.h"
+#include "TAxis.h"
 #include "TRandom3.h"
 
 // Definizione delle costanti
@@ -53,7 +53,7 @@ double integrate(const double x[], const double y[], int num) {
 }
 
 // Funzione per processare un file e generare i grafici
-void processFile(const std::string& filename) {
+void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l) {
     // Apertura del file e lettura dei dati
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -141,13 +141,8 @@ void processFile(const std::string& filename) {
     }
 
     double ToT = time_stop - time_start;
-    std::ofstream outfile("ToT_results.txt", std::ios::app);
-    if (!outfile.is_open()) {
-        std::cerr << "Unable to open output file!" << std::endl;
-        return;
-    }
-    outfile << times.size() << " " << ToT << std::endl;
-    outfile.close();
+    N.push_back(times.size());
+    tot_l.push_back(ToT);
 
     // Creazione dei grafici
     TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
@@ -198,9 +193,30 @@ int main() {
         "T_smear_4000.txt"
     };
 
+    std::vector<double> N;
+    std::vector<double> tot_l;
+
     for (const std::string& filename : filenames) {
-        processFile(filename);
+        processFile(filename, N, tot_l);
     }
+
+    // Creazione del grafico usando ROOT
+    TGraph *gr1 = new TGraph(N.size(), N.data(), tot_l.data());
+
+    // Creazione di una tela per il disegno del grafico
+    TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
+
+    // Disegna il primo grafico
+    gr1->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
+    gr1->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr1->SetMarkerColor(4);
+    gr1->GetYaxis()->SetRangeUser(0,20);
+    gr1->GetXaxis()->SetRangeUser(0,2500);
+    gr1->Draw("AP"); // "AP" indica che devono essere disegnati sia i punti che gli assi
+
+    // Mostra la tela
+    c1->Update();
+    c1->SaveAs("N_vs_ToT.pdf"); // Salva il grafico come immagine
 
     return 0;
 }
