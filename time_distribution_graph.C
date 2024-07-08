@@ -220,10 +220,10 @@ int main() {
     std::vector<std::string> filenames = {
         "T_smear_0_800.txt", "T_smear_24044_1000.txt",
         "T_smear_26539_2000.txt",
-        "T_smear_41806_4000.txt",
+        "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt", "T_smear_57_63.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_2922.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_853.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
+        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
     };
 
     std::vector<double> N;
@@ -233,11 +233,10 @@ int main() {
     for (const std::string& filename : filenames) {
         processFile(filename, N, tot_l, tot_h);
     }
-
+   
     // Creazione del grafico usando ROOT
     TGraph *gr_low = new TGraph(N.size(), N.data(), tot_l.data());
     TGraph *gr_high = new TGraph(N.size(), N.data(), tot_h.data());
-
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
@@ -246,7 +245,7 @@ int main() {
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetRangeUser(0,20);
-    gr_low->GetXaxis()->SetRangeUser(0, 2000);
+    gr_low->GetXaxis()->SetRangeUser(0, 1800);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
