@@ -223,7 +223,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt", "T_smear_57_63.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_2922.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_853.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
+        "T_smear_4000.txt","T_smear_2922.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
     };
 
     std::vector<double> N;
@@ -246,7 +246,7 @@ int main() {
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetRangeUser(0,20);
-    gr_low->GetXaxis()->SetRangeUser(0, 2500);
+    gr_low->GetXaxis()->SetRangeUser(0, 200);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
@@ -261,8 +261,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 2500); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 2500);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 1700); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 1700);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
