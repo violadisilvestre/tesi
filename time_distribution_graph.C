@@ -223,9 +223,9 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt", "T_smear_57_63.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_2922.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
+        "T_smear_4000.txt","T_smear_2922.txt","T_smear_325.txt","T_smear_723.txt","T_smear_853.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
     };
-
+    //"T_smear_119.txt"
     std::vector<double> N;
     std::vector<double> tot_l;
     std::vector<double> tot_h;
@@ -246,7 +246,7 @@ int main() {
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetRangeUser(0,20);
-    gr_low->GetXaxis()->SetRangeUser(0, 200);
+    gr_low->GetXaxis()->SetRangeUser(0, 2000);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
