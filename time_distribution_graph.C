@@ -11,6 +11,7 @@
 #include "TGraph.h"
 #include "TLegend.h"
 #include "TAxis.h"
+#include "TF1.h"
 #include "TRandom3.h"
 
 // Definizione delle costanti
@@ -140,7 +141,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     }
 
     double ToT_low = time_stop_low - time_start_low;
-    if (ToT_low < 0) ToT_low = -1;
+    if (ToT_low <= 0) ToT_low = -1;
     tot_l.push_back(ToT_low);
 
     // Calcolo ToT per soglia alta
@@ -205,7 +206,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     legend->Draw();
 
     // Salvataggio del canvas su file
-    std::string outputFilename = "time_distribution_" + filename + ".pdf";
+    std::string outputFilename = "time_distribution_" + filename + ".png";
     canvas->SaveAs(outputFilename.c_str());
 
     // Pulizia della memoria
@@ -259,13 +260,32 @@ int main() {
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
     legend->Draw();
 
+    // Esegui il fitting dei dati
+    TF1 *fit_low = new TF1("fit_low", "pol2", 0, 2500); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol2", 0, 2500);
+
+    gr_low->Fit(fit_low, "R");
+    gr_high->Fit(fit_high, "R");
+
+    // Aggiungi le funzioni di fit al grafico
+    fit_low->SetLineColor(kRed);
+    fit_low->SetLineWidth(2);
+    fit_low->Draw("same");
+
+    fit_high->SetLineColor(kGreen);
+    fit_high->SetLineWidth(2);
+    fit_high->Draw("same");
+
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT.pdf");
+    c1->SaveAs("N_vs_ToT_with_fit.png");
 
     // Pulizia della memoria
     delete gr_low;
     delete gr_high;
+    delete fit_low;
+    delete fit_high;
     delete c1;
 
     return 0;
 }
+
