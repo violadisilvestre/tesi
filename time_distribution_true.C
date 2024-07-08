@@ -14,10 +14,11 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt==105319) {
+    if(TotEvt==16573) {
 	  IsGood = kTRUE;
     }
     return IsGood;
+    
   };
 
   auto get_n_pe = [](ROOT::VecOps::RVec<dg_cell>& cells){
@@ -70,7 +71,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
   }
     std::cout<<"max:"<<max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_4000.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_16573.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
