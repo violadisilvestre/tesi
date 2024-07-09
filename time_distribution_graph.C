@@ -255,7 +255,7 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,2000);
+    gr_low->GetYaxis()->SetRangeUser(0,1800);
     gr_low->GetXaxis()->SetRangeUser(0, 20);
     gr_low->Draw("AP");
 
@@ -271,8 +271,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "[0]+[1]*x**2", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high"," [0]+[1]*x**2", 0, 20);
+    TF1 *fit_low = new TF1("fit_low", "[0]+[1]*x**2+[3]*x**3", 0, 20); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high"," [0]+[1]*x**2+[3]*x**3", 0, 20);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
