@@ -245,7 +245,7 @@ int main() {
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetRangeUser(0,2000);
-    gr_low->GetXaxis()->SetRangeUser(0.01, 20);
+    gr_low->GetXaxis()->SetRangeUser(-3, 20);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
