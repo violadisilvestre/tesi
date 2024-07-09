@@ -271,8 +271,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol2", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol2", 0, 20);
+    TF1 *fit_low = new TF1("fit_low", "[0]+[1]*x**2", 0, 20); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high"," [0]+[1]*x**2", 0, 20);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
