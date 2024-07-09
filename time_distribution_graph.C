@@ -274,8 +274,8 @@ int main() {
     TF1 *fit_low = new TF1("fit_low", "[0]+[1]*x**2+[3]*x**3", 0, 20); // Fitting con un polinomio di secondo grado
     TF1 *fit_high = new TF1("fit_high"," [0]+[1]*x**2+[3]*x**3", 0, 20);
 
-    gr_low->Fit(fit_low, "F");
-    gr_high->Fit(fit_high, "F");
+    gr_low->Fit(fit_low);
+    gr_high->Fit(fit_high);
 
     // Aggiungi le funzioni di fit al grafico
     fit_low->SetLineColor(kBlue);
