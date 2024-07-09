@@ -241,15 +241,15 @@ int main() {
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
     // Disegna il primo grafico
-    gr_low->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
+    gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetRangeUser(0,1500);
-    gr_low->GetXaxis()->SetRangeUser(0, 20);
+    gr_low->GetXaxis()->SetRangeUser(0.01, 20);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
-    gr_high->SetMarkerStyle(21); // Imposta lo stile dei punti
+    gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
     gr_high->Draw("P same");
 
@@ -260,18 +260,18 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", -0.01, 1470); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol3", -0.01, 1470);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0.01, 20); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0.01, 200);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
 
     // Aggiungi le funzioni di fit al grafico
-    fit_low->SetLineColor(kRed);
+    fit_low->SetLineColor(kBlue);
     fit_low->SetLineWidth(2);
     fit_low->Draw("same");
 
-    fit_high->SetLineColor(kGreen);
+    fit_high->SetLineColor(kOrange);
     fit_high->SetLineWidth(2);
     fit_high->Draw("same");
 
