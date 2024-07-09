@@ -244,7 +244,7 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,2000);
+    gr_low->GetYaxis()->SetRangeUser(-5,2000);
     gr_low->GetXaxis()->SetRangeUser(-3, 20);
     gr_low->Draw("AP");
 
