@@ -216,6 +216,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     delete canvas;
 }
 
+
 int main() {
     std::vector<std::string> filenames = {
         "T_smear_0_800.txt", "T_smear_24044_1000.txt",
@@ -233,10 +234,20 @@ int main() {
     for (const std::string& filename : filenames) {
         processFile(filename, N, tot_l, tot_h);
     }
-   
+
+    // Filtraggio dei valori negativi
+    std::vector<double> N_filtered, tot_l_filtered, tot_h_filtered;
+    for (size_t i = 0; i < N.size(); ++i) {
+        if (tot_l[i] >= 0 && tot_h[i] >= 0) {
+            N_filtered.push_back(N[i]);
+            tot_l_filtered.push_back(tot_l[i]);
+            tot_h_filtered.push_back(tot_h[i]);
+        }
+    }
+
     // Creazione del grafico usando ROOT
-    TGraph *gr_low = new TGraph(N.size(), tot_l.data(),N.data());
-    TGraph *gr_high = new TGraph(N.size(), tot_h.data(),N.data());
+    TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
+    TGraph *gr_high = new TGraph(N_filtered.size(), tot_h_filtered.data(), N_filtered.data());
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
@@ -244,8 +255,8 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(-200,2000);
-    gr_low->GetXaxis()->SetRangeUser(-10, 20);
+    gr_low->GetYaxis()->SetRangeUser(0,2000);
+    gr_low->GetXaxis()->SetRangeUser(0, 20);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
@@ -260,8 +271,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", -10, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol3", -10, 20);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 20); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 20);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
@@ -287,4 +298,7 @@ int main() {
 
     return 0;
 }
+    
+
+
 
