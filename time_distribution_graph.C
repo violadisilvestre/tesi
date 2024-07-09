@@ -235,8 +235,8 @@ int main() {
     }
    
     // Creazione del grafico usando ROOT
-    TGraph *gr_low = new TGraph(N.size(), N.data(), tot_l.data());
-    TGraph *gr_high = new TGraph(N.size(), N.data(), tot_h.data());
+    TGraph *gr_low = new TGraph(N.size(), tot_l.data(),N.data());
+    TGraph *gr_high = new TGraph(N.size(), tot_h.data(),N.data());
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
@@ -244,8 +244,8 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;# pe;ToT (ns)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,20);
-    gr_low->GetXaxis()->SetRangeUser(0, 1470);
+    gr_low->GetYaxis()->SetRangeUser(0,1500);
+    gr_low->GetXaxis()->SetRangeUser(0, 20);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
@@ -260,8 +260,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol5", -0.01, 1470); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol5", -0.01, 1470);
+    TF1 *fit_low = new TF1("fit_low", "pol3", -0.01, 1470); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", -0.01, 1470);
 
     gr_low->Fit(fit_low, "R");
     gr_high->Fit(fit_high, "R");
