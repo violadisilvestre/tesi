@@ -18,6 +18,7 @@
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
 const double GAUSSIAN_STDDEV = 0.8;
+const int MAX_ELEMENTS = 100; // Numero massimo di elementi nei nostri array
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -54,7 +55,7 @@ double integrate(const double x[], const double y[], int num) {
 }
 
 // Funzione per processare un file e generare i grafici
-void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l, std::vector<double>& tot_h) {
+void processFile(const std::string& filename, double N[], double tot_l[], double tot_h[], int& count) {
     // Apertura del file e lettura dei dati
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -142,7 +143,6 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
     double ToT_low = time_stop_low - time_start_low;
     if (ToT_low <= 0) ToT_low = -1;
-    tot_l.push_back(ToT_low);
 
     // Calcolo ToT per soglia alta
     int start_high = -1;
@@ -172,10 +172,15 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     }
 
     double ToT_high = time_stop_high - time_start_high;
-    if (ToT_high <= 0)ToT_high = -1;
-    tot_h.push_back(ToT_high);
+    if (ToT_high <= 0) ToT_high = -1;
 
-    N.push_back(times.size());
+    // Aggiungi i valori agli array solo se ci sono meno di MAX_ELEMENTS elementi
+    if (count < MAX_ELEMENTS) {
+        N[count] = times.size();
+        tot_l[count] = ToT_low;
+        tot_h[count] = ToT_high;
+        ++count;
+    }
 
     // Creazione dei grafici
     TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
@@ -216,7 +221,6 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     delete canvas;
 }
 
-
 int main() {
     std::vector<std::string> filenames = {
         "T_smear_0_800.txt", "T_smear_24044_1000.txt",
@@ -227,30 +231,40 @@ int main() {
         "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_12392.txt","T_smear_325.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_71004.txt","T_smear_89031.txt"
     };
 
-    std::vector<double> N;
-    std::vector<double> tot_l;
-    std::vector<double> tot_h;
+    double N[MAX_ELEMENTS] = {0};
+    double tot_l[MAX_ELEMENTS] = {0};
+    double tot_h[MAX_ELEMENTS] = {0};
 
+    int count = 0;
     for (const std::string& filename : filenames) {
-        processFile(filename, N, tot_l, tot_h);
+        processFile(filename, N, tot_l, tot_h, count);
     }
 
     // Filtraggio dei valori negativi
-    std::vector<double> N_filtered, N_filtered_h, tot_l_filtered, tot_h_filtered;
-    for (size_t i = 0; i < N.size(); ++i) {
-      if (tot_l[i] >= 0) {
-            N_filtered.push_back(N[i]);
-            tot_l_filtered.push_back(tot_l[i]);
+    double N_filtered[MAX_ELEMENTS] = {0};
+    double tot_l_filtered[MAX_ELEMENTS] = {0};
+    double tot_h_filtered[MAX_ELEMENTS] = {0};
+
+    int count_filtered_l = 0;
+    int count_filtered_h = 0;
+
+    for (int i = 0; i < count; ++i) {
+        if (tot_l[i] >= 0) {
+            N_filtered[count_filtered_l] = N[i];
+            tot_l_filtered[count_filtered_l] = tot_l[i];
+            ++count_filtered_l;
         }
-       if (tot_h[i] >= 0) {
-            N_filtered_h.push_back(N[i]);
-            tot_h_filtered.push_back(tot_h[i]);
+        if (tot_h[i] >= 0) {
+            N_filtered[count_filtered_h] = N[i];
+            tot_h_filtered[count_filtered_h] = tot_h[i];
+            ++count_filtered_h;
         }
     }
 
     // Creazione del grafico usando ROOT
-    TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
-    TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
+    TGraph *gr_low = new TGraph(count_filtered_l, tot_l_filtered, N_filtered);
+    TGraph *gr_high = new TGraph(count_filtered_h, tot_h_filtered, N_filtered);
+
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
@@ -258,7 +272,7 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,1800);
+    gr_low->GetYaxis()->SetRangeUser(0,2000);
     gr_low->GetXaxis()->SetRangeUser(0, 20);
     gr_low->Draw("AP");
 
@@ -275,10 +289,10 @@ int main() {
 
     // Esegui il fitting dei dati
     TF1 *fit_low = new TF1("fit_low", "pol3", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high","pol3", 0, 20);
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 20);
 
-    gr_low->Fit(fit_low);
-    gr_high->Fit(fit_high);
+    gr_low->Fit(fit_low, "R");
+    gr_high->Fit(fit_high, "R");
 
     // Aggiungi le funzioni di fit al grafico
     fit_low->SetLineColor(kBlue);
@@ -301,7 +315,3 @@ int main() {
 
     return 0;
 }
-    
-
-
-
