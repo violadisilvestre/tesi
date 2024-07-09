@@ -223,7 +223,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_1122.txt","T_smear_29824.txt","T_smear_12392.txt"
+        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_12392.txt","T_smear_325.txt","T_smear_207.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_71004.txt","T_smear_89031.txt"
     };
 
     std::vector<double> N;
@@ -244,7 +244,7 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,1500);
+    gr_low->GetYaxis()->SetRangeUser(0,2000);
     gr_low->GetXaxis()->SetRangeUser(0.01, 20);
     gr_low->Draw("AP");
 
@@ -254,7 +254,7 @@ int main() {
     gr_high->Draw("P same");
 
     // Aggiungi legenda
-    TLegend *legend = new TLegend(0.8, 0.8, 0.9, 0.9);
+    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
     legend->Draw();
