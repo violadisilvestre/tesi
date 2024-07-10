@@ -296,8 +296,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 30);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 30); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 30);
 
     gr_low->Fit(fit_low,"R");
     gr_high->Fit(fit_high, "R");
@@ -312,7 +312,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit7.png");
+    c1->SaveAs("N_vs_ToT_fit8.png");
 
     // Pulizia della memoria
     delete gr_low;
