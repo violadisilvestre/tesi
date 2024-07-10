@@ -223,7 +223,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt"
-        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt"  };
+        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt"  };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -293,7 +293,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True5.png");
+    c1->SaveAs("N_vs_ToT_fit_True6.png");
 
     // Pulizia della memoria
     delete gr_low;
