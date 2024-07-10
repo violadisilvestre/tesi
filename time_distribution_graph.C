@@ -172,7 +172,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     }
 
     double ToT_high = time_stop_high - time_start_high;
-    if (ToT_high <= 0)ToT_high = -1;
+    if (ToT_high <= 0) ToT_high = -1;
     tot_h.push_back(ToT_high);
 
     N.push_back(times.size());
@@ -215,6 +215,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     delete legend;
     delete canvas;
 }
+
 int main() {
     std::vector<std::string> filenames = {
         "T_smear_26539_2000.txt",
@@ -222,7 +223,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt"
-	"T_smear_135",	"T_smear_150.txt" ,"T_smear_800.txt"  };
+        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt"  };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -235,52 +236,29 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
-      std::cout<<N[i]<<std::endl;
-      std::cout<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
         }
-	if (tot_h[i] >= 0 && N[i]<=2700) {
+        if (tot_h[i] >= 0 && N[i]<=2700) {
             N_filtered_h.push_back(N[i]);
             tot_h_filtered.push_back(tot_h[i]);
         }
     }
-      // Stampa i valori filtrati
-    /* std::cout << "N_filtered (low): ";
-    for (const auto& n : N_filtered) {
-        std::cout << n << " ";
-    }
-    std::cout << std::endl;
 
-    std::cout << "tot_l_filtered: ";
-    for (const auto& tl : tot_l_filtered) {
-        std::cout << tl << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "N_filtered (high): ";
-    for (const auto& n : N_filtered_h) {
-        std::cout << n << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "tot_h_filtered: ";
-    for (const auto& th : tot_h_filtered) {
-        std::cout << th << " ";
-    }
-    std::cout << std::endl;*/
     // Creazione del grafico usando ROOT
     TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
     TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
+
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
+    c1->SetGrid();
 
     // Disegna il primo grafico
     gr_high->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
-    gr_high->GetYaxis()->SetRangeUser(0,2000);
+    gr_high->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
     gr_high->GetXaxis()->SetRangeUser(0, 30);
     gr_high->Draw("AP");
 
@@ -313,7 +291,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True3.png");
+    c1->SaveAs("N_vs_ToT_fit_True4.png");
 
     // Pulizia della memoria
     delete gr_low;
