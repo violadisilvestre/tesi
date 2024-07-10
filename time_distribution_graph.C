@@ -223,7 +223,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt"
-        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt"  };
+        "T_smear_135" ,"T_smear_800.txt","T_smear_10.txt"  };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -236,6 +236,8 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
+      std::cout<<N[i]<<std::endl;
+      std::cout<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
@@ -269,7 +271,7 @@ int main() {
     gr_high->Draw("P same");
 
     // Aggiungi legenda
-    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+    TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
     legend->Draw();
@@ -293,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True6.png");
+    c1->SaveAs("N_vs_ToT_fit_True7.png");
 
     // Pulizia della memoria
     delete gr_low;
