@@ -271,7 +271,7 @@ int main() {
     gr_high->Draw("AP");
 
     // Aggiungi legenda
-    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+    TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
     //legend->Draw();
@@ -295,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True8.png");
+    c1->SaveAs("N_vs_ToT_fit_True9.png");
 
     // Pulizia della memoria
     delete gr_low;
