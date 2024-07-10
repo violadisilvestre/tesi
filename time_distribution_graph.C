@@ -280,8 +280,8 @@ int main() {
     gr_low->SetTitle("ToT as function of photoelectrons ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,2000);
-    gr_low->GetXaxis()->SetRangeUser(0, 20);
+    gr_low->GetYaxis()->SetRangeUser(0,2700);
+    gr_low->GetXaxis()->SetRangeUser(0, 30);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
@@ -296,8 +296,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 20);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 20); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 30);
 
     gr_low->Fit(fit_low,"R");
     gr_high->Fit(fit_high, "R");
@@ -312,7 +312,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit6.png");
+    c1->SaveAs("N_vs_ToT_fit7.png");
 
     // Pulizia della memoria
     delete gr_low;
