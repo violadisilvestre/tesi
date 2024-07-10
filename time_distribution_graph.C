@@ -277,17 +277,17 @@ int main() {
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
     // Disegna il primo grafico
-    gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
-    gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,2000);
-    gr_low->GetXaxis()->SetRangeUser(0, 30);
-    gr_low->Draw("AP");
-
-    // Disegna il secondo grafico sullo stesso canvas
+    gr_high->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
-    gr_high->Draw("P same");
+    gr_high->GetYaxis()->SetRangeUser(0,2000);
+    gr_high->GetXaxis()->SetRangeUser(0, 30);
+    gr_high->Draw("AP");
+
+    // Disegna il secondo grafico sullo stesso canvas
+    gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr_low->SetMarkerColor(kBlue);
+    gr_low->Draw("P same");
 
     // Aggiungi legenda
     TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
@@ -312,7 +312,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True1.png");
+    c1->SaveAs("N_vs_ToT_fit_True2.png");
 
     // Pulizia della memoria
     delete gr_low;
