@@ -222,7 +222,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_325.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_132.txt"
+        "T_smear_4000.txt","T_smear_119.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_132.txt"
     };
 
     std::vector<double> N;
@@ -240,7 +240,6 @@ int main() {
             N_filtered.push_back(N[i]);
 	    std::cout<<N[i]<<std::endl;
             tot_l_filtered.push_back(tot_l[i]);
-	    std::cout<<tot_l[i]<<std::endl;
         }
 	if (tot_h[i] >= 0) {
             N_filtered_h.push_back(N[i]);
@@ -248,7 +247,7 @@ int main() {
         }
     }
       // Stampa i valori filtrati
-    std::cout << "N_filtered (low): ";
+    /* std::cout << "N_filtered (low): ";
     for (const auto& n : N_filtered) {
         std::cout << n << " ";
     }
@@ -270,7 +269,7 @@ int main() {
     for (const auto& th : tot_h_filtered) {
         std::cout << th << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl;*/
     // Creazione del grafico usando ROOT
     TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
     TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
