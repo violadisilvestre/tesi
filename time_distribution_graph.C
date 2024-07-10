@@ -223,7 +223,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt"
-        "T_smear_135" ,"T_smear_800.txt","T_smear_10.txt"  };
+        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt"  };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -236,7 +236,7 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
-      std::cout<<N[i]<<std::endl;
+       std::cout<<N[i]<<std::endl;
       std::cout<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
@@ -257,21 +257,21 @@ int main() {
     c1->SetGrid();
 
     // Disegna il primo grafico
-    gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
+    /*gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
     gr_high->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
     gr_low->GetXaxis()->SetRangeUser(0, 30);
-    gr_low->Draw("AP");
+    gr_low->Draw("AP");*/
 
     // Disegna il secondo grafico sullo stesso canvas
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
     gr_high->GetXaxis()->SetRangeUser(0, 30);
-    gr_high->Draw("P same");
+    gr_high->Draw("AP");
 
     // Aggiungi legenda
-    TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
+    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
     legend->Draw();
@@ -280,7 +280,7 @@ int main() {
     TF1 *fit_low = new TF1("fit_low", "pol3", 0, 30); // Fitting con un polinomio di secondo grado
     TF1 *fit_high = new TF1("fit_high", "pol3", 0, 30);
 
-    gr_low->Fit(fit_low);
+    //gr_low->Fit(fit_low);
     gr_high->Fit(fit_high);
 
     // Aggiungi le funzioni di fit al grafico
@@ -295,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True7.png");
+    c1->SaveAs("N_vs_ToT_fit_True6.png");
 
     // Pulizia della memoria
     delete gr_low;
