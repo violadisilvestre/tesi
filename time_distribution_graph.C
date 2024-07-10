@@ -217,7 +217,6 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 }
 int main() {
     std::vector<std::string> filenames = {
-        "T_smear_0_800.txt",
         "T_smear_26539_2000.txt",
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
@@ -237,6 +236,7 @@ int main() {
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
       std::cout<<N[i]<<std::endl;
+      std::cout<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2000) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
