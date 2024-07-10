@@ -235,18 +235,42 @@ int main() {
 
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
-    for (size_t i = 0; i < N.size(); ++i) {
+    for (int i = 0; i < N.size(); ++i) {
         if (tot_l[i] >= 0) {
             N_filtered.push_back(N[i]);
+	    std::cout<<N[i]<<std::endl;
             tot_l_filtered.push_back(tot_l[i]);
-            tot_h_filtered.push_back(tot_h[i]);
+	    std::cout<<tot_l[i]<<std::endl;
         }
 	if (tot_h[i] >= 0) {
             N_filtered_h.push_back(N[i]);
             tot_h_filtered.push_back(tot_h[i]);
         }
     }
+      // Stampa i valori filtrati
+    std::cout << "N_filtered (low): ";
+    for (const auto& n : N_filtered) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
 
+    std::cout << "tot_l_filtered: ";
+    for (const auto& tl : tot_l_filtered) {
+        std::cout << tl << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "N_filtered (high): ";
+    for (const auto& n : N_filtered_h) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "tot_h_filtered: ";
+    for (const auto& th : tot_h_filtered) {
+        std::cout << th << " ";
+    }
+    std::cout << std::endl;
     // Creazione del grafico usando ROOT
     TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
     TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
