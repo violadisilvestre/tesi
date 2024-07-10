@@ -287,6 +287,7 @@ int main() {
     // Disegna il secondo grafico sullo stesso canvas
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
+    gr_low->GetXaxis()->SetRangeUser(0, 30);
     gr_low->Draw("P same");
 
     // Aggiungi legenda
@@ -312,7 +313,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True2.png");
+    c1->SaveAs("N_vs_ToT_fit_True3.png");
 
     // Pulizia della memoria
     delete gr_low;
