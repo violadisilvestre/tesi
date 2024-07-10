@@ -255,18 +255,18 @@ int main() {
     c1->SetGrid();
 
     // Disegna il primo grafico
-    gr_high->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
-    gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_high->SetMarkerColor(kOrange);
-    gr_high->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
-    gr_high->GetXaxis()->SetRangeUser(0, 30);
-    gr_high->Draw("AP");
-
-    // Disegna il secondo grafico sullo stesso canvas
+    gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
+    gr_high->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
     gr_low->GetXaxis()->SetRangeUser(0, 30);
-    gr_low->Draw("P same");
+    gr_low->Draw("AP");
+
+    // Disegna il secondo grafico sullo stesso canvas
+    gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr_high->SetMarkerColor(kOrange);
+    gr_high->GetXaxis()->SetRangeUser(0, 30);
+    gr_high->Draw("P same");
 
     // Aggiungi legenda
     TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
@@ -284,14 +284,16 @@ int main() {
     // Aggiungi le funzioni di fit al grafico
     fit_low->SetLineColor(kBlue);
     fit_low->SetLineWidth(2);
+    fit_low->GetXaxis()->SetRangeUser(0, 30);
     fit_low->Draw("same");
 
     fit_high->SetLineColor(kOrange);
     fit_high->SetLineWidth(2);
+    fit_high->GetXaxis()->SetRangeUser(0, 30);
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True4.png");
+    c1->SaveAs("N_vs_ToT_fit_True5.png");
 
     // Pulizia della memoria
     delete gr_low;
