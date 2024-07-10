@@ -222,7 +222,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_325.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_89031.txt","T_smear_132.txt"
+        "T_smear_4000.txt","T_smear_119.txt","T_smear_325.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_325.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt","T_smear_132.txt"
     };
 
     std::vector<double> N;
