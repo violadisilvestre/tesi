@@ -237,11 +237,11 @@ int main() {
     for (int i = 0; i < N.size(); ++i) {
       std::cout<<N[i]<<std::endl;
       std::cout<<tot_l[i]<<std::endl;
-        if (tot_l[i] >= 0 && N[i]<=2000) {
+        if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
         }
-	if (tot_h[i] >= 0 && N[i]<=2000) {
+	if (tot_h[i] >= 0 && N[i]<=2700) {
             N_filtered_h.push_back(N[i]);
             tot_h_filtered.push_back(tot_h[i]);
         }
@@ -312,7 +312,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit8.png");
+    c1->SaveAs("N_vs_ToT_fit9.png");
 
     // Pulizia della memoria
     delete gr_low;
