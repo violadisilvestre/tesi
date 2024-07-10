@@ -234,18 +234,22 @@ int main() {
     }
 
     // Filtraggio dei valori negativi
-    std::vector<double> N_filtered, tot_l_filtered, tot_h_filtered;
+    std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (size_t i = 0; i < N.size(); ++i) {
-        if (tot_l[i] >= 0 && tot_h[i] >= 0) {
+        if (tot_l[i] >= 0) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
+            tot_h_filtered.push_back(tot_h[i]);
+        }
+	if (tot_h[i] >= 0) {
+            N_filtered_h.push_back(N[i]);
             tot_h_filtered.push_back(tot_h[i]);
         }
     }
 
     // Creazione del grafico usando ROOT
     TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
-    TGraph *gr_high = new TGraph(N_filtered.size(), tot_h_filtered.data(), N_filtered.data());
+    TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 
