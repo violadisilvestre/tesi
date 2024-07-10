@@ -236,12 +236,12 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
-        if (tot_l[i] >= 0) {
+      std::cout<<N[i]<<std::endl;
+        if (tot_l[i] >= 0 && N[i]<=2000) {
             N_filtered.push_back(N[i]);
-	    std::cout<<N[i]<<std::endl;
             tot_l_filtered.push_back(tot_l[i]);
         }
-	if (tot_h[i] >= 0) {
+	if (tot_h[i] >= 0 && N[i]<=2000) {
             N_filtered_h.push_back(N[i]);
             tot_h_filtered.push_back(tot_h[i]);
         }
