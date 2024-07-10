@@ -274,7 +274,7 @@ int main() {
     TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
-    legend->Draw();
+    //legend->Draw();
 
     // Esegui il fitting dei dati
     TF1 *fit_low = new TF1("fit_low", "pol3", 0, 30); // Fitting con un polinomio di secondo grado
