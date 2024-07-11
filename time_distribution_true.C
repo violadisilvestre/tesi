@@ -14,7 +14,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt==89) {
+    if(TotEvt==24945) {
 	  IsGood = kTRUE;
     }
     return IsGood;
@@ -63,7 +63,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
         for (const auto& p : c.ps1) {
 	  pe_count = p.photo_el.size();
 	  std::cout<<pe_count<<std::endl;
-	  if (pe_count > 100 and pe_count <150 ) {
+	  if (pe_count > 1200 and pe_count <1350 ) {
             max_pe_count = pe_count;
             max_pe_cell_index = c.id;
 	  }
@@ -71,7 +71,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
   }
     std::cout<<"max:"<<max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_100.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_1200.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;

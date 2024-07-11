@@ -222,8 +222,8 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_29824.txt","T_smear_528.txt","T_smear_648.txt","T_smear_26539.txt"
-        "T_smear_135",    "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt"  };
+        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt"
+        "T_smear_135", "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt", "T_smear_500","T_smear_1000","T_smear_1200" };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -268,7 +268,7 @@ int main() {
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
     gr_high->GetXaxis()->SetRangeUser(0, 30);
-    gr_high->Draw("AP");
+    gr_high->Draw("AP same");
 
     // Aggiungi legenda
     TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
@@ -288,15 +288,15 @@ int main() {
     fit_low->SetLineColor(kBlue);
     fit_low->SetLineWidth(2);
     fit_low->GetXaxis()->SetRangeUser(0, 30);
-    fit_low->Draw();
+    fit_low->Draw("same");
 
     fit_high->SetLineColor(kOrange);
     fit_high->SetLineWidth(2);
     fit_high->GetXaxis()->SetRangeUser(0, 30);
-    fit_high->Draw();
+    fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True10.png");
+    c1->SaveAs("N_vs_ToT_fit_True11.png");
 
     // Pulizia della memoria
     delete gr_low;
