@@ -216,7 +216,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt" , "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};
+        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -229,7 +229,7 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
-      std::cout<<"file:"<<filenames[i]<<" N:"<<N[i]<<" ToT_l:"<<tot_l[i]<<std::endl;
+      std::cout<<"file:"<<i+1<<" N:"<<N[i]<<" ToT_l:"<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
@@ -268,8 +268,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 16); // Fitting con un polinomio di terzo grado
-    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 16);
+    TF1 *fit_low = new TF1("fit_low", "pol5", 0, 16); // Fitting con un polinomio di terzo grado
+    TF1 *fit_high = new TF1("fit_high", "pol5", 0, 16);
 
     gr_low->Fit(fit_low);
     gr_high->Fit(fit_high);
@@ -284,7 +284,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True20.png");
+    c1->SaveAs("N_vs_ToT_fit_True21.png");
 
     // Pulizia della memoria
     delete gr_low;
