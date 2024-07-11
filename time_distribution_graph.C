@@ -284,7 +284,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True22.png");
+    c1->SaveAs("N_vs_ToT_fit_True23.png");
 
     // Pulizia della memoria
     delete gr_low;
