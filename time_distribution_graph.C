@@ -222,8 +222,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt"
-        "T_smear_135", "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt", "T_smear_500","T_smear_1000","T_smear_1200" };
+        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt",  "T_smear_135", "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt", "T_smear_500.txt","T_smear_1000.txt","T_smear_1200.txt" };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -274,7 +273,7 @@ int main() {
     TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
-    //legend->Draw();
+    legend->Draw();
 
     // Esegui il fitting dei dati
     TF1 *fit_low = new TF1("fit_low", "pol3", 0, 30); // Fitting con un polinomio di secondo grado
@@ -296,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True11.png");
+    c1->SaveAs("N_vs_ToT_fit_True14.png");
 
     // Pulizia della memoria
     delete gr_low;
