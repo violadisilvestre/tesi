@@ -283,7 +283,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True18.png");
+    c1->SaveAs("N_vs_ToT_fit_True19.png");
 
     // Pulizia della memoria
     delete gr_low;
