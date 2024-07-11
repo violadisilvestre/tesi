@@ -268,8 +268,8 @@ int main() {
     legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol4", 0, 16); // Fitting con un polinomio di terzo grado
-    TF1 *fit_high = new TF1("fit_high", "pol4", 0, 16);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 16); // Fitting con un polinomio di terzo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 16);
 
     gr_low->Fit(fit_low);
     gr_high->Fit(fit_high);
