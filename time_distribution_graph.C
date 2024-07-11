@@ -6,6 +6,8 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
+#include <TH1F.h> 
+#include <TText.h>
 #include "TCanvas.h"
 #include "TGraph.h"
 #include "TLegend.h"
@@ -53,7 +55,7 @@ double integrate(const double x[], const double y[], int num) {
 }
 
 // Funzione per processare un file e generare i grafici
-void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l, std::vector<double>& tot_h) {
+void processFile(const std::string& filename, std::vector<double>& N, std::vector<double>& tot_l, std::vector<double>& tot_h,int graph) {
     // Apertura del file e lettura dei dati
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -170,44 +172,45 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     tot_h.push_back(ToT_high);
 
     N.push_back(times.size());
-
-    // Creazione dei grafici
-    TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
-    TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
-
-    gaussianGraph->SetLineColor(kMagenta);
-    gaussianGraph->SetLineWidth(2);
-    expectedGraph->SetLineColor(kYellow);
-    expectedGraph->SetLineWidth(2);
-
-    TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9);
-    legend->AddEntry(gaussianGraph, "Simulated distribution", "l");
-    legend->AddEntry(expectedGraph, "Expected distribution", "l");
-
-    // Creazione del canvas e disegno dei grafici
-    TCanvas* canvas = new TCanvas("canvas", "Photoelectron Time Distribution", 800, 600);
-    canvas->SetGrid();
-    gaussianGraph->GetXaxis()->SetTitle("Time [ns]");
-    gaussianGraph->GetYaxis()->SetTitle("# Photoelectrons");
-    gaussianGraph->SetTitle("Time Distribution");
-    gaussianGraph->GetXaxis()->SetTitleFont(42);
-    gaussianGraph->GetXaxis()->SetTitleSize(0.04);
-    gaussianGraph->GetYaxis()->SetTitleFont(42);
-    gaussianGraph->GetYaxis()->SetTitleSize(0.04);
-
-    expectedGraph->Draw("AL");
-    gaussianGraph->Draw("L same");
-    legend->Draw();
-
-    // Salvataggio del canvas su file
-    std::string outputFilename = "time_distribution_" + filename + ".png";
-    canvas->SaveAs(outputFilename.c_str());
-
-    // Pulizia della memoria
-    delete gaussianGraph;
-    delete expectedGraph;
-    delete legend;
-    delete canvas;
+    if (graph==1){
+      // Creazione dei grafici
+      TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
+      TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
+      
+      gaussianGraph->SetLineColor(kMagenta);
+      gaussianGraph->SetLineWidth(2);
+      expectedGraph->SetLineColor(kYellow);
+      expectedGraph->SetLineWidth(2);
+      
+      TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+      legend->AddEntry(gaussianGraph, "Simulated distribution", "l");
+      legend->AddEntry(expectedGraph, "Expected distribution", "l");
+      
+      // Creazione del canvas e disegno dei grafici
+      TCanvas* canvas = new TCanvas("canvas", "Photoelectron Time Distribution", 800, 600);
+      canvas->SetGrid();
+      gaussianGraph->GetXaxis()->SetTitle("Time [ns]");
+      gaussianGraph->GetYaxis()->SetTitle("# Photoelectrons");
+      gaussianGraph->SetTitle("Time Distribution");
+      gaussianGraph->GetXaxis()->SetTitleFont(42);
+      gaussianGraph->GetXaxis()->SetTitleSize(0.04);
+      gaussianGraph->GetYaxis()->SetTitleFont(42);
+      gaussianGraph->GetYaxis()->SetTitleSize(0.04);
+    
+      expectedGraph->Draw("AL");
+      gaussianGraph->Draw("L same");
+      legend->Draw();
+      
+      // Salvataggio del canvas su file
+      std::string outputFilename = "time_distribution_" + filename + ".png";
+      canvas->SaveAs(outputFilename.c_str());
+      
+      // Pulizia della memoria
+      delete gaussianGraph;
+      delete expectedGraph;
+      delete legend;
+      delete canvas;
+    }
 }
 
 int main() {
@@ -223,7 +226,7 @@ int main() {
     std::vector<double> tot_h;
 
     for (const std::string& filename : filenames) {
-        processFile(filename, N, tot_l, tot_h);
+      processFile(filename, N, tot_l, tot_h,1);
     }
 
     // Filtraggio dei valori negativi
@@ -289,9 +292,74 @@ int main() {
     // Pulizia della memoria
     delete gr_low;
     delete gr_high;
-    delete fit_low;
-    delete fit_high;
     delete c1;
+
+    //GENERO GLI EVENTI PER LA RISOLUZIONE
+    std::vector<double> N_evt;
+    std::vector<double> tot_l_evt;
+    std::vector<double> tot_h_evt;
+    for (int i=0; i<1000;i++) {
+      processFile("T_smear_1200.txt", N_evt, tot_l_evt, tot_h_evt,0);
+    }
+    // Ottieni i parametri dal fit
+    double par0 = fit_low->GetParameter(0);
+    double par1 = fit_low->GetParameter(1);
+    double par2 = fit_low->GetParameter(2);
+    double par3 = fit_low->GetParameter(3);
+    std::vector<double> A_l, A_h;
+    for (int i = 0; i < N_evt.size(); ++i) {
+      std::cout<<N_evt[i]<< " "<<tot_l_evt[i]<<std::endl;
+      double A=par0+par1*tot_l_evt[i]+par2*pow(tot_l_evt[i],2)+par3*pow(tot_l_evt[i],3);
+      std::cout<<A<<std::endl;
+      A_l.push_back(A);
+      std::cout<<A_l[i]<<std::endl;
+    }
+    // Crea un canvas
+    TCanvas *c2 = new TCanvas("c2", "Amplitude histogram", 800, 600);
+    
+    // Crea un istogramma
+    TH1F *hist = new TH1F("hist", "Amplitude histogram", 80, 700, 1000);
+    
+    // Riempie l'istogramma con i dati
+    for(double value : A_l) {
+        hist->Fill(value);
+    }
+    
+    // Definisce la funzione di fit Gaussiano
+    TF1 *gaus = new TF1("gaus", "gaus", 700, 1000);
+    
+    // Esegue il fit Gaussiano
+    hist->Fit("gaus");
+    
+    // Ottiene i parametri del fit
+    double A = gaus->GetParameter(0);
+    double mu = gaus->GetParameter(1);
+    double sigma = gaus->GetParameter(2);
+    
+    // Disegna l'istogramma
+    hist->Draw();
+    std::cout<<mu<< " "<< sigma<< " "<< N_evt[0]<<std::endl;
+    // Aggiunge il numero di eventi e i parametri del fit sul grafico
+    /*TText *text = new TText();
+    text->SetNDC();
+    text->SetTextSize(0.03);
+    text->DrawText(0.1, 0.85, Form("N_evt = %d", static_cast<int>(N_evt[0])));
+    text->DrawText(0.1, 0.80, Form("A = %.2f", A));
+    text->DrawText(0.1, 0.75, Form("mu = %.2f", mu));
+    text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));*/
+    
+    // Aggiunge una legenda
+    TLegend *legend2 = new TLegend(0.7, 0.7, 0.9, 0.9);
+    legend2->AddEntry(hist, "Dati", "l");
+    legend2->AddEntry(gaus, "Fit Gaussiano", "l");
+    legend2->Draw();
+    
+    // Salva il canvas come immagine
+    c2->SaveAs("histogram_fit.png");
+     // Cleanup
+   
+    delete hist;
+    
 
     return 0;
 }
