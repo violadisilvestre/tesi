@@ -6,7 +6,6 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
-#include <sstream>
 #include "TCanvas.h"
 #include "TGraph.h"
 #include "TLegend.h"
@@ -87,9 +86,8 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
         y[i] = distributionY(generator);
     }
 
-    // Ordinamento dei dati x e y
+    // Ordinamento dei dati x
     std::sort(x.begin(), x.end());
-    std::sort(y.begin(), y.end());
 
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
@@ -136,8 +134,6 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
                 break;
             }
         }
-    } else {
-        std::cout << "No signal for low threshold" << std::endl;
     }
 
     double ToT_low = time_stop_low - time_start_low;
@@ -167,8 +163,6 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
                 break;
             }
         }
-    } else {
-        std::cout << "No signal for high threshold" << std::endl;
     }
 
     double ToT_high = time_stop_high - time_start_high;
@@ -235,8 +229,6 @@ int main() {
     // Filtraggio dei valori negativi
     std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
     for (int i = 0; i < N.size(); ++i) {
-       std::cout<<N[i]<<std::endl;
-      std::cout<<tot_l[i]<<std::endl;
         if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
@@ -248,8 +240,8 @@ int main() {
     }
 
     // Creazione del grafico usando ROOT
-    TGraph *gr_low = new TGraph(N_filtered.size(), tot_l_filtered.data(), N_filtered.data());
-    TGraph *gr_high = new TGraph(N_filtered_h.size(), tot_h_filtered.data(), N_filtered_h.data());
+    TGraph *gr_low = new TGraph(tot_l_filtered.size(), tot_l_filtered.data(), N_filtered.data());
+    TGraph *gr_high = new TGraph(tot_h_filtered.size(), tot_h_filtered.data(), N_filtered_h.data());
 
     // Creazione di una tela per il disegno del grafico
     TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
@@ -259,43 +251,39 @@ int main() {
     gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetLimits(0.0,1600);; // Aumenta l'intervallo dell'asse y
-    gr_low->GetXaxis()->SetLimits(0.0,16.0);
+    gr_low->GetYaxis()->SetLimits(0.0, 1600); // Aumenta l'intervallo dell'asse y
+    gr_low->GetXaxis()->SetLimits(0.0, 16.0);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
-    gr_high->GetXaxis()->SetLimits(0.0,16.0);
-    gr_high->Draw("AP same");
+    gr_high->Draw("P same");
 
     // Aggiungi legenda
     TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
     legend->AddEntry(gr_low, "Low Threshold ToT", "p");
     legend->AddEntry(gr_high, "High Threshold ToT", "p");
-    //legend->Draw();
+    legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 16); // Fitting con un polinomio di secondo grado
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 16); // Fitting con un polinomio di terzo grado
     TF1 *fit_high = new TF1("fit_high", "pol3", 0, 16);
 
-    //gr_low->Fit(fit_low);
-    gr_high->Fit(fit_high);
     gr_low->Fit(fit_low);
+    gr_high->Fit(fit_high);
 
     // Aggiungi le funzioni di fit al grafico
     fit_low->SetLineColor(kBlue);
     fit_low->SetLineWidth(2);
-    fit_low->GetXaxis()->SetRangeUser(0, 16);
     fit_low->Draw("same");
 
     fit_high->SetLineColor(kOrange);
     fit_high->SetLineWidth(2);
-    fit_high->GetXaxis()->SetRangeUser(0, 16);
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True17.png");
+    c1->SaveAs("N_vs_ToT_fit_True18.png");
 
     // Pulizia della memoria
     delete gr_low;
@@ -306,3 +294,4 @@ int main() {
 
     return 0;
 }
+
