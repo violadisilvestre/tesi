@@ -222,7 +222,7 @@ int main() {
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt",  "T_smear_135", "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt", "T_smear_500.txt","T_smear_1000.txt","T_smear_1200.txt" };
+        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt",  "T_smear_135", "T_smear_150.txt" ,"T_smear_800.txt","T_smear_10.txt","T_smear_1000.txt"};
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -259,7 +259,7 @@ int main() {
     gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_high->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
+    gr_low->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
     gr_low->GetXaxis()->SetRangeUser(0, 30);
     gr_low->Draw("AP");
 
@@ -295,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True14.png");
+    c1->SaveAs("N_vs_ToT_fit_True15.png");
 
     // Pulizia della memoria
     delete gr_low;
