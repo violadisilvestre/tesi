@@ -259,14 +259,14 @@ int main() {
     gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetRangeUser(0,2000); // Aumenta l'intervallo dell'asse y
-    gr_low->GetXaxis()->SetLimits(0.0,20.0);
+    gr_low->GetYaxis()->SetLimits(0.0,1600);; // Aumenta l'intervallo dell'asse y
+    gr_low->GetXaxis()->SetLimits(0.0,18.0);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_high->SetMarkerColor(kOrange);
-    gr_high->GetXaxis()->SetLimits(0.0,20.0);
+    gr_high->GetXaxis()->SetLimits(0.0,18.0);
     gr_high->Draw("AP same");
 
     // Aggiungi legenda
@@ -276,8 +276,8 @@ int main() {
     //legend->Draw();
 
     // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 20); // Fitting con un polinomio di secondo grado
-    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 20);
+    TF1 *fit_low = new TF1("fit_low", "pol3", 0, 18); // Fitting con un polinomio di secondo grado
+    TF1 *fit_high = new TF1("fit_high", "pol3", 0, 18);
 
     //gr_low->Fit(fit_low);
     gr_high->Fit(fit_high);
@@ -295,7 +295,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True15.png");
+    c1->SaveAs("N_vs_ToT_fit_True16.png");
 
     // Pulizia della memoria
     delete gr_low;
