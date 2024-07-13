@@ -221,7 +221,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt"
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt", "T_smear_16.txt"
         };
 
     std::vector<double> N;
@@ -290,7 +290,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_file13.png");
+    c1->SaveAs("N_vs_ToT_fit_file14.png");
 
     // Pulizia della memoria
     delete gr_low;
