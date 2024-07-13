@@ -257,13 +257,15 @@ int main() {
     // Disegna il primo grafico
     gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr_low->SetMarkerSize(1.5);
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetLimits(0.0, 1600); // Aumenta l'intervallo dell'asse y
-    gr_low->GetXaxis()->SetLimits(0.0, 16.0);
+    gr_low->GetXaxis()->SetLimits(1.5, 20.0);
     gr_low->Draw("AP");
 
     // Disegna il secondo grafico sullo stesso canvas
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
+    gr_high->SetMarkerSize(1.5);
     gr_high->SetMarkerColor(kOrange);
     gr_high->Draw("P same");
 
@@ -290,7 +292,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_file17.png");
+    c1->SaveAs("N_vs_ToT_fit_DEFINITIVO.png");
 
     // Pulizia della memoria
     delete gr_low;
