@@ -259,7 +259,7 @@ int main() {
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
     gr_low->SetMarkerSize(1.1);
     gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetLimits(0.0, 1600); // Aumenta l'intervallo dell'asse y
+    gr_low->GetYaxis()->SetLimits(0.0, 1800); // Aumenta l'intervallo dell'asse y
     gr_low->GetXaxis()->SetLimits(1.5, 20.0);
     gr_low->Draw("AP");
 
@@ -279,8 +279,8 @@ int main() {
     TF1 *fit_low = new TF1("fit_low", "pol3", 0, 16); // Fitting con un polinomio di terzo grado
     TF1 *fit_high = new TF1("fit_high", "pol3", 0, 16);
 
-    gr_low->Fit(fit_low);
-    gr_high->Fit(fit_high);
+    gr_low->Fit(fit_low, "R");
+    gr_high->Fit(fit_high, "R");
 
     // Aggiungi le funzioni di fit al grafico
     fit_low->SetLineColor(kBlue);
@@ -292,7 +292,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_cell3.png");
+    c1->SaveAs("N_vs_ToT_fit_cell4.png");
 
     // Pulizia della memoria
     delete gr_low;
