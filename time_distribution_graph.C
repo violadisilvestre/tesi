@@ -14,7 +14,8 @@
 #include "TAxis.h"
 #include "TF1.h"
 #include "TRandom3.h"
-
+//PROVA A PREDNERE I DATI DEL PRIMO EVENTO E BASTA O COMUNQUE DI UNO IN CUI CI SONO TANTI PE PER CURVE DI CALIBRAZIONE. 
+//DA TUTTI GLI ALTRI FILE CERCA VALORI CON UGUAL NUMERO DI PE PERÒ PRIMA CHIEDI A TONY
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
@@ -214,12 +215,14 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 }
 
 int main() {
-    std::vector<std::string> filenames = {
+  /*  std::vector<std::string> filenames = {
         "T_smear_26539_2000.txt",
         "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};
+        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
+  std::vector<std::string> filenames = { "T_smear_1.txt", "T_smear_2.txt", "T_smear_3.txt", "T_smear_4.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_7.txt", "T_smear_8.txt","T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt"
+        };
 
     std::vector<double> N;
     std::vector<double> tot_l;
@@ -287,13 +290,13 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_True23.png");
+    c1->SaveAs("N_vs_ToT_fit_file1.png");
 
     // Pulizia della memoria
     delete gr_low;
     delete gr_high;
     delete c1;
-
+    /*
     //GENERO GLI EVENTI PER LA RISOLUZIONE
     std::vector<double> N_evt;
     std::vector<double> tot_l_evt;
@@ -340,13 +343,13 @@ int main() {
     hist->Draw();
     std::cout<<mu<< " "<< sigma<< " "<< N_evt[0]<<std::endl;
     // Aggiunge il numero di eventi e i parametri del fit sul grafico
-    /*TText *text = new TText();
+    TText *text = new TText();
     text->SetNDC();
     text->SetTextSize(0.03);
     text->DrawText(0.1, 0.85, Form("N_evt = %d", static_cast<int>(N_evt[0])));
     text->DrawText(0.1, 0.80, Form("A = %.2f", A));
     text->DrawText(0.1, 0.75, Form("mu = %.2f", mu));
-    text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));*/
+    text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));
     
     // Aggiunge una legenda
     TLegend *legend2 = new TLegend(0.7, 0.7, 0.9, 0.9);
@@ -358,7 +361,7 @@ int main() {
     c2->SaveAs("histogram_fit.png");
      // Cleanup
    
-    delete hist;
+    delete hist;*/
     
 
     return 0;
