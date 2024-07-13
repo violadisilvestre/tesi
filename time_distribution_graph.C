@@ -91,7 +91,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
     // Ordinamento dei dati x
     std::sort(x.begin(), x.end());
-
+    std::sort(y.begin(),y.end());
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_" + filename + ".png";
+      std::string outputFilename = "time_distribution_final" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -221,7 +221,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_8.txt","T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt"
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_8.txt", "T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt"
         };
 
     std::vector<double> N;
@@ -290,7 +290,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_file11.png");
+    c1->SaveAs("N_vs_ToT_fit_file12.png");
 
     // Pulizia della memoria
     delete gr_low;
