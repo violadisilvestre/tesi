@@ -118,7 +118,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     int start_low = -1;
     double time_start_low = 0;
     double time_stop_low = 0;
-    const double low_thr = 5.0;
+    const double low_thr = 10.0;
 
     // Trova il tempo di inizio (prima volta che il segnale supera la soglia bassa)
     for (int i = 0; i < NUM_POINTS; ++i) {
@@ -290,7 +290,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_file16.png");
+    c1->SaveAs("N_vs_ToT_fit_file17.png");
 
     // Pulizia della memoria
     delete gr_low;
