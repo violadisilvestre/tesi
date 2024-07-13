@@ -14,7 +14,7 @@
   auto select_events = [&](){
     ++TotEvt;
     Bool_t IsGood = kFALSE;
-    if(TotEvt==29) {
+    if(TotEvt==10) {
 	  IsGood = kTRUE;
     }
     return IsGood;
@@ -63,7 +63,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
         for (const auto& p : c.ps1) {
 	  pe_count = p.photo_el.size();
 	  std::cout<<pe_count<<std::endl;
-	  if (pe_count>50 and pe_count<60) {
+	  if (pe_count>30 and pe_count<60) {
             max_pe_count = pe_count;
 	    max_pe_cell_index = c.id;
 	  }
