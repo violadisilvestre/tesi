@@ -63,15 +63,15 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
         for (const auto& p : c.ps1) {
 	  pe_count = p.photo_el.size();
 	  std::cout<<pe_count<<std::endl;
-	  if (pe_count > 140 and pe_count<155) {
+	  if (pe_count>max_pe_count) {
             max_pe_count = pe_count;
-            max_pe_cell_index = c.id;
+	    max_pe_cell_index = c.id;
 	  }
 	}   //std::cout<< p.photo_el.size()<<std::endl;
   }
     std::cout<<"max:"<<max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_12.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_1.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
@@ -79,7 +79,7 @@ auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
     }
 
     // Extract times of pe for the cell with the most pe
-     if (max_pe_cell_index != -1) {
+     if (  max_pe_cell_index!= -1) {
       //std::cout<<max_pe_cell_index<<std::endl;
        for(auto &c: cells){
 	 for (const auto& p : c.ps1) {
