@@ -221,7 +221,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_4.txt","T_smear_5.txt", "T_smear_6.txt","T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt","T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt","T_smear_17.txt","T_smear_18.txt"
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt","T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt","T_smear_10.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt","T_smear_18.txt"
         };
 
     std::vector<double> N;
@@ -292,7 +292,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_cell.png");
+    c1->SaveAs("N_vs_ToT_fit_cell1.png");
 
     // Pulizia della memoria
     delete gr_low;
@@ -303,9 +303,9 @@ int main() {
     std::vector<double> N_evt;
     std::vector<double> tot_l_evt;
     std::vector<double> tot_h_evt;
-    for (int i=0; i<100;i++) {
+    /* for (int i=0; i<100;i++) {
       processFile("T_smear_test.txt", N_evt, tot_l_evt, tot_h_evt,0);
-    }
+    }*/
     // Ottieni i parametri dal fit
     double par0 = fit_low->GetParameter(0);
     double par1 = fit_low->GetParameter(1);
