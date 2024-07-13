@@ -342,7 +342,7 @@ int main() {
     double sigma = gaus->GetParameter(2);*/
     
     // Disegna l'istogramma
-    hist->Draw();
+    // hist->Draw();
     //std::cout<<mu<< " "<< sigma<< " "<< N_evt[0]<<std::endl;
     // Aggiunge il numero di eventi e i parametri del fit sul grafico
     /* TText *text = new TText();
