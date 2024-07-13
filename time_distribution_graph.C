@@ -221,7 +221,7 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt"
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_4.txt","T_smear_5.txt", "T_smear_6.txt","T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt","T_smear_10.txt", "T_smear_11.txt", "T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt","T_smear_17.txt","T_smear_18.txt"
         };
 
     std::vector<double> N;
@@ -257,7 +257,7 @@ int main() {
     // Disegna il primo grafico
     gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
     gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_low->SetMarkerSize(1.5);
+    gr_low->SetMarkerSize(1.1);
     gr_low->SetMarkerColor(kBlue);
     gr_low->GetYaxis()->SetLimits(0.0, 1600); // Aumenta l'intervallo dell'asse y
     gr_low->GetXaxis()->SetLimits(1.5, 20.0);
@@ -265,7 +265,7 @@ int main() {
 
     // Disegna il secondo grafico sullo stesso canvas
     gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_high->SetMarkerSize(1.5);
+    gr_high->SetMarkerSize(1.1);
     gr_high->SetMarkerColor(kOrange);
     gr_high->Draw("P same");
 
@@ -292,7 +292,7 @@ int main() {
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_DEFINITIVO.png");
+    c1->SaveAs("N_vs_ToT_fit_cell.png");
 
     // Pulizia della memoria
     delete gr_low;
@@ -312,15 +312,15 @@ int main() {
     double par2 = fit_low->GetParameter(2);
     double par3 = fit_low->GetParameter(3);
     std::vector<double> A_l, A_h;
-    for (int i = 0; i < N_evt.size(); ++i) {
+    /*  for (int i = 0; i < N_evt.size(); ++i) {
       //std::cout<<N_evt[i]<< " "<<tot_l_evt[i]<<std::endl;
       double A=par0+par1*tot_l_evt[i]+par2*pow(tot_l_evt[i],2)+par3*pow(tot_l_evt[i],3);
       // std::cout<<A<<std::endl;
       A_l.push_back(A);
-      // std::cout<<A_l[i]<<std::endl;
+      std::cout<<A_l[i]<<std::endl;
     }
     // Crea un canvas
-    TCanvas *c2 = new TCanvas("c2", "Amplitude histogram", 140, 170);
+    TCanvas *c2 = new TCanvas("c2", "Amplitude histogram", 800, 600);
     
     // Crea un istogramma
     TH1F *hist = new TH1F("hist", "Amplitude histogram", 30, 140, 170);
@@ -328,7 +328,7 @@ int main() {
     // Riempie l'istogramma con i dati
     for(double value : A_l) {
         hist->Fill(value);
-    }
+	}*/
     
     /* // Definisce la funzione di fit Gaussiano
     TF1 *gaus = new TF1("gaus", "gaus", 700, 1000);
@@ -353,7 +353,7 @@ int main() {
     text->DrawText(0.1, 0.75, Form("mu = %.2f", mu));
     text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));*/
     
-    // Aggiunge una legenda
+    /*   // Aggiunge una legenda
     TLegend *legend2 = new TLegend(0.7, 0.7, 0.9, 0.9);
     legend2->AddEntry(hist, "Dati", "l");
     //legend2->AddEntry(gaus, "Fit Gaussiano", "l");
@@ -363,7 +363,7 @@ int main() {
     c2->SaveAs("histogram_fit_test.png");
      // Cleanup
    
-    delete hist;
+     delete hist;*/
     
 
     return 0;
