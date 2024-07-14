@@ -201,7 +201,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_test8" + filename + ".png";
+      std::string outputFilename = "time_distribution_definitivo_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -210,34 +210,27 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       delete legend;
       delete canvas;
     }
-}
+};
 
 
 
 int main() {
-  /*  std::vector<std::string> filenames = {
-        "T_smear_26539_2000.txt",
-        "T_smear_41806_4000.txt", "T_smear_44519_2000.txt",
-        "T_smear_5275_2800.txt",
-        "T_smear_67_150.txt", "T_smear_86_22.txt",
-        "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt"
-};
-  ///*"T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt"*
+std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt" };
+
 
     std::vector<double> N;
-    std::vector<double> tot_l;
-    std::vector<double> tot_h;
+std::vector<double> tot_l;
+std::vector<double> tot_h;
 
-    for (const std::string& filename : filenames) {
+for (const std::string& filename : filenames) {
       processFile(filename, N, tot_l, tot_h,1);
-    }
+}
 
-    // Filtraggio dei valori negativi
-    std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
-    for (int i = 0; i < N.size(); ++i) {
+// Filtraggio dei valori negativi
+std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
+for (int i = 0; i < N.size(); ++i) {
       std::cout<<"file:"<<i+1<<" N:"<<N[i]<<" ToT_l:"<<tot_l[i]<<std::endl;
-        if (tot_l[i] >= 0 && N[i]<=2700) {
+if (tot_l[i] >= 0 && N[i]<=2700) {
             N_filtered.push_back(N[i]);
             tot_l_filtered.push_back(tot_l[i]);
         }
@@ -293,7 +286,7 @@ std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt"
     fit_high->Draw("same");
 
     // Salva il grafico in un file
-    c1->SaveAs("N_vs_ToT_fit_cell5.png");
+    c1->SaveAs("voglio_morire.png");
 
     // Pulizia della memoria
     delete gr_low;
