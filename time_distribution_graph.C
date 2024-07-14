@@ -19,7 +19,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.5;
+const double GAUSSIAN_STDDEV = 0.6;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_test4" + filename + ".png";
+      std::string outputFilename = "time_distribution_test6" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
