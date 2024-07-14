@@ -216,7 +216,8 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
 
 int main() {
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt" ,"T_smear_12392.txt","T_smear_119.txt", "T_smear_16573.txt","T_smear_31027.txt","T_smear_54376.txt","T_smear_71004.txt"};
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt" ,"T_smear_12392.txt","T_smear_119.txt", "T_smear_16573.txt","T_smear_31027.txt","T_smear_54376.txt","T_smear_71004.txt","T_smear_24044_1000.txt","T_smear_26539_2000.txt","T_smear_1000.txt","T_smear_100.txt"
+};
 
 
     std::vector<double> N;
@@ -281,8 +282,8 @@ legend->AddEntry(gr_high, "High Threshold ToT", "p");
 legend->Draw();
 
 // Esegui il fitting dei dati
-TF1 *fit_low = new TF1("fit_low","pol5", 0, 16); // Fitting con un polinomio di terzo grado
-TF1 *fit_high = new TF1("fit_high", "pol5", 0, 16);
+TF1 *fit_low = new TF1("fit_low","pol3", 0, 16); // Fitting con un polinomio di terzo grado
+TF1 *fit_high = new TF1("fit_high", "pol3", 0, 16);
 
 gr_low->Fit(fit_low, "R");
 gr_high->Fit(fit_high, "R");
