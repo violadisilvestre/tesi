@@ -298,7 +298,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("voglio_morire4.png");
+c1->SaveAs("voglio_morire5.png");
 
 // Pulizia della memoria
 delete gr_low;
