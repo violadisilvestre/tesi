@@ -14,8 +14,6 @@
 #include "TAxis.h"
 #include "TF1.h"
 #include "TRandom3.h"
-//PROVA A PREDNERE I DATI DEL PRIMO EVENTO E BASTA O COMUNQUE DI UNO IN CUI CI SONO TANTI PE PER CURVE DI CALIBRAZIONE. 
-//DA TUTTI GLI ALTRI FILE CERCA VALORI CON UGUAL NUMERO DI PE PERÒ PRIMA CHIEDI A TONY
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
@@ -30,7 +28,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.6 * x);
+        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.65 * x);
     }
     return G;
 }
@@ -203,7 +201,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_test7" + filename + ".png";
+      std::string outputFilename = "time_distribution_test8" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -214,6 +212,8 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     }
 }
 
+
+
 int main() {
   /*  std::vector<std::string> filenames = {
         "T_smear_26539_2000.txt",
@@ -221,8 +221,8 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt"
-        };
+std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt"
+};
   ///*"T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt"*
 
     std::vector<double> N;
@@ -308,11 +308,11 @@ int main() {
       processFile("T_smear_test.txt", N_evt, tot_l_evt, tot_h_evt,0);
     }*/
     // Ottieni i parametri dal fit
-    double par0 = fit_low->GetParameter(0);
+/* double par0 = fit_low->GetParameter(0);
     double par1 = fit_low->GetParameter(1);
     double par2 = fit_low->GetParameter(2);
     double par3 = fit_low->GetParameter(3);
-    std::vector<double> A_l, A_h;
+    std::vector<double> A_l, A_h;*/
     /*  for (int i = 0; i < N_evt.size(); ++i) {
       //std::cout<<N_evt[i]<< " "<<tot_l_evt[i]<<std::endl;
       double A=par0+par1*tot_l_evt[i]+par2*pow(tot_l_evt[i],2)+par3*pow(tot_l_evt[i],3);
@@ -367,5 +367,5 @@ int main() {
      delete hist;*/
     
 
-    return 0;
+  return 0;
 }
