@@ -19,7 +19,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.8;
+const double GAUSSIAN_STDDEV = 0.6;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -30,7 +30,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.3 * x);
+        G += gaussian(x, t, GAUSSIAN_STDDEV) * exp(-0.25 * x);
     }
     return G;
 }
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_final" + filename + ".png";
+      std::string outputFilename = "time_distribution_test" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -221,8 +221,9 @@ int main() {
         "T_smear_5275_2800.txt",
         "T_smear_67_150.txt", "T_smear_86_22.txt",
         "T_smear_4000.txt","T_smear_723.txt","T_smear_528.txt","T_smear_26539.txt", "T_smear_150.txt", "T_smear_12392.txt","T_smear_1000.txt", "T_smear_1457.txt","T_smear_16573.txt","T_smear_29824.txt", "T_smear_31027.txt","T_smear_34741.txt"};*/
-  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt","T_smear_10.txt"
+  std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt"
         };
+  ///*"T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt"*
 
     std::vector<double> N;
     std::vector<double> tot_l;
