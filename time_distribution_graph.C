@@ -14,9 +14,10 @@
 #include "TAxis.h"
 #include "TF1.h"
 #include "TRandom3.h"
+#include <TGraphErrors.h>
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
-const int NUM_POINTS = 10000;
+const int NUM_POINTS = 100000;
 const double GAUSSIAN_STDDEV = 0.8;
 
 // Funzione gaussiana
@@ -240,58 +241,68 @@ if (tot_l[i] >= 0 && N[i]<=2700) {
         }
     }
 
-    // Creazione del grafico usando ROOT
-    TGraph *gr_low = new TGraph(tot_l_filtered.size(), tot_l_filtered.data(), N_filtered.data());
-    TGraph *gr_high = new TGraph(tot_h_filtered.size(), tot_h_filtered.data(), N_filtered_h.data());
+  // Definire la risoluzione del picotdc in secondi (convertito da ps)
+const double resolution = 0.003125; // 3.125 ps in secondi
 
-    // Creazione di una tela per il disegno del grafico
-    TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
-    c1->SetGrid();
+// Creazione dei vettori per le incertezze
+std::vector<double> tot_l_errors(tot_l_filtered.size(), resolution);
+std::vector<double> N_errors(tot_l_filtered.size(), 0); // Supponiamo che le incertezze su N siano nulle per semplicità
 
-    // Disegna il primo grafico
-    gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
-    gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_low->SetMarkerSize(1.1);
-    gr_low->SetMarkerColor(kBlue);
-    gr_low->GetYaxis()->SetLimits(0.0, 1800); // Aumenta l'intervallo dell'asse y
-    gr_low->GetXaxis()->SetLimits(1.5, 20.0);
-    gr_low->Draw("AP");
+std::vector<double> tot_h_errors(tot_h_filtered.size(), resolution);
+std::vector<double> N_errors_h(tot_h_filtered.size(), 0); // Supponiamo che le incertezze su N siano nulle per semplicità
 
-    // Disegna il secondo grafico sullo stesso canvas
-    gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
-    gr_high->SetMarkerSize(1.1);
-    gr_high->SetMarkerColor(kOrange);
-    gr_high->Draw("P same");
+// Creazione del grafico usando TGraphErrors
+TGraphErrors *gr_low = new TGraphErrors(tot_l_filtered.size(), tot_l_filtered.data(), N_filtered.data(), tot_l_errors.data(), N_errors.data());
+TGraphErrors *gr_high = new TGraphErrors(tot_h_filtered.size(), tot_h_filtered.data(), N_filtered_h.data(), tot_h_errors.data(), N_errors_h.data());
 
-    // Aggiungi legenda
-    TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
-    legend->AddEntry(gr_low, "Low Threshold ToT", "p");
-    legend->AddEntry(gr_high, "High Threshold ToT", "p");
-    legend->Draw();
+// Creazione di una tela per il disegno del grafico
+TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
+c1->SetGrid();
 
-    // Esegui il fitting dei dati
-    TF1 *fit_low = new TF1("fit_low","[0] + [1]*x + [2]*x*x+[3]*x*x*x", 0, 16); // Fitting con un polinomio di terzo grado
-    TF1 *fit_high = new TF1("fit_high", "[0] + [1]*x + [2]*x*x+[3]*x*x*x", 0, 16);
+// Disegna il primo grafico
+gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
+gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
+gr_low->SetMarkerSize(1.1);
+gr_low->SetMarkerColor(kBlue);
+gr_low->GetYaxis()->SetLimits(0.0, 1800); // Aumenta l'intervallo dell'asse y
+gr_low->GetXaxis()->SetLimits(1.5, 20.0);
+gr_low->Draw("AP");
 
-    gr_low->Fit(fit_low, "R");
-    gr_high->Fit(fit_high, "R");
+// Disegna il secondo grafico sullo stesso canvas
+gr_high->SetMarkerStyle(20); // Imposta lo stile dei punti
+gr_high->SetMarkerSize(1.1);
+gr_high->SetMarkerColor(kOrange);
+gr_high->Draw("P same");
 
-    // Aggiungi le funzioni di fit al grafico
-    fit_low->SetLineColor(kBlue);
-    fit_low->SetLineWidth(2);
-    fit_low->Draw("same");
+// Aggiungi legenda
+TLegend *legend = new TLegend(0.1, 0.7, 0.3, 0.9);
+legend->AddEntry(gr_low, "Low Threshold ToT", "p");
+legend->AddEntry(gr_high, "High Threshold ToT", "p");
+legend->Draw();
 
-    fit_high->SetLineColor(kOrange);
-    fit_high->SetLineWidth(2);
-    fit_high->Draw("same");
+// Esegui il fitting dei dati
+TF1 *fit_low = new TF1("fit_low","pol5", 0, 16); // Fitting con un polinomio di terzo grado
+TF1 *fit_high = new TF1("fit_high", "pol5", 0, 16);
 
-    // Salva il grafico in un file
-    c1->SaveAs("voglio_morire.png");
+gr_low->Fit(fit_low, "R");
+gr_high->Fit(fit_high, "R");
 
-    // Pulizia della memoria
-    delete gr_low;
-    delete gr_high;
-    delete c1;
+// Aggiungi le funzioni di fit al grafico
+fit_low->SetLineColor(kBlue);
+fit_low->SetLineWidth(2);
+fit_low->Draw("same");
+
+fit_high->SetLineColor(kOrange);
+fit_high->SetLineWidth(2);
+fit_high->Draw("same");
+
+// Salva il grafico in un file
+c1->SaveAs("voglio_morire2.png");
+
+// Pulizia della memoria
+delete gr_low;
+delete gr_high;
+delete c1;
     
     //GENERO GLI EVENTI PER LA RISOLUZIONE
     std::vector<double> N_evt;
