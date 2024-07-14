@@ -249,11 +249,11 @@ std::vector<double> tot_l_errors(tot_l_filtered.size(), resolution);
 std::vector<double> N_errors(tot_l_filtered.size(), 0); // Supponiamo che le incertezze su N siano nulle per semplicità
 
 std::vector<double> tot_h_errors(tot_h_filtered.size(), resolution);
-std::vector<double> N_errors_h(tot_h_filtered.size(), 0); // Supponiamo che le incertezze su N siano nulle per semplicità
+//std::vector<double> N_errors_h(tot_h_filtered.size(), 0); // Supponiamo che le incertezze su N siano nulle per semplicità
 
 // Creazione del grafico usando TGraphErrors
-TGraphErrors *gr_low = new TGraphErrors(tot_l_filtered.size(), tot_l_filtered.data(), N_filtered.data(), tot_l_errors.data(), N_errors.data());
-TGraphErrors *gr_high = new TGraphErrors(tot_h_filtered.size(), tot_h_filtered.data(), N_filtered_h.data(), tot_h_errors.data(), N_errors_h.data());
+TGraph *gr_low = new TGraph(tot_l_filtered.size(), tot_l_filtered.data(), N_filtered.data());
+TGraph *gr_high = new TGraph(tot_h_filtered.size(), tot_h_filtered.data(), N_filtered_h.data());
 
 // Creazione di una tela per il disegno del grafico
 TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
@@ -265,7 +265,7 @@ gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
 gr_low->SetMarkerSize(1.1);
 gr_low->SetMarkerColor(kBlue);
 gr_low->GetYaxis()->SetLimits(0.0, 1800); // Aumenta l'intervallo dell'asse y
-gr_low->GetXaxis()->SetLimits(1.5, 20.0);
+gr_low->GetXaxis()->SetLimits(1.5, 18.0);
 gr_low->Draw("AP");
 
 // Disegna il secondo grafico sullo stesso canvas
@@ -297,7 +297,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("voglio_morire2.png");
+c1->SaveAs("voglio_morire3.png");
 
 // Pulizia della memoria
 delete gr_low;
