@@ -41,7 +41,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
     TCanvas *canvas = new TCanvas("c2", "Pe histogram", 800, 600);
     
     // Crea un istogramma
-    TH1F *hist = new TH1F("hist", "Pe histogram", 20, 0, 20);
+    TH1F *hist = new TH1F("hist", "Pe histogram", 20, -2, 20);
     
     // Riempie l'istogramma con i dati
     for(double value :times) {
@@ -54,7 +54,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
     hist->GetYaxis()->SetTitle("# pe");
 
     // Imposta il colore di riempimento a rosa e lo stile di riempimento
-    hist->SetFillColor(kPink);
+    hist->SetFillColor(6);
     hist->SetFillStyle(1001); // Stile pieno
 
       
@@ -66,7 +66,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
       delete canvas;
     }
 int main() {
-  std::vector<std::string> filenames = { "T_smear_1.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt"
+  std::vector<std::string> filenames = {"T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt"
 };
   
   std::vector<double> N;
