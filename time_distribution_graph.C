@@ -179,7 +179,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       
       gaussianGraph->SetLineColor(kMagenta);
       gaussianGraph->SetLineWidth(2);
-      gaussianGraph->GetXaxis()->SetLimits(-8, 20); 
+      gaussianGraph->GetXaxis()->SetLimits(-4, 10); 
       /*expectedGraph->SetLineColor(kYellow);
 	expectedGraph->SetLineWidth(2);
       
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_exp0.65_TTS0.8_" + filename + ".png";
+      std::string outputFilename = "time_distribution_exp0.65_TTS0.8_final_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
