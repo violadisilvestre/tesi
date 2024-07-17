@@ -175,17 +175,17 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     if (graph==1){
       // Creazione dei grafici
       TGraph* gaussianGraph = new TGraph(NUM_POINTS, x.data(), G.data());
-      TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
+      // TGraph* expectedGraph = new TGraph(NUM_POINTS, y.data(), F.data());
       
       gaussianGraph->SetLineColor(kMagenta);
       gaussianGraph->SetLineWidth(2);
       gaussianGraph->GetXaxis()->SetLimits(-8, 20); 
-      expectedGraph->SetLineColor(kYellow);
-      expectedGraph->SetLineWidth(2);
+      /*expectedGraph->SetLineColor(kYellow);
+	expectedGraph->SetLineWidth(2);
       
       TLegend* legend = new TLegend(0.7, 0.7, 0.9, 0.9);
       legend->AddEntry(gaussianGraph, "Simulated distribution", "l");
-      legend->AddEntry(expectedGraph, "Expected distribution", "l");
+      legend->AddEntry(expectedGraph, "Expected distribution", "l");*/
       
       // Creazione del canvas e disegno dei grafici
       TCanvas* canvas = new TCanvas("canvas", "Photoelectron Time Distribution", 800, 600);
@@ -198,18 +198,18 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       gaussianGraph->GetYaxis()->SetTitleFont(42);
       gaussianGraph->GetYaxis()->SetTitleSize(0.04);
     
-      expectedGraph->Draw("AL");
-      gaussianGraph->Draw("L same");
-      legend->Draw();
+      gaussianGraph->Draw("AL");
+      //expectedGraph->Draw("L same");
+      //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_exp0.65_0.8_" + filename + ".png";
+      std::string outputFilename = "time_distribution_exp0.65_TTS0.8_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
       delete gaussianGraph;
-      delete expectedGraph;
-      delete legend;
+      //delete expectedGraph;
+      // delete legend;
       delete canvas;
     }
 };
