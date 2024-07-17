@@ -59,7 +59,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
 
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "histo_pe_true" + filename + ".png";
+      std::string outputFilename = "histo_pe_final" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       delete hist;
