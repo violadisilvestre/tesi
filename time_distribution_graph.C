@@ -18,7 +18,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.35;
+const double GAUSSIAN_STDDEV = 0.8;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -29,8 +29,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-      G += gaussian(x, t, GAUSSIAN_STDDEV);
-	  //exp(-0.65 * x);
+      G += gaussian(x, t, GAUSSIAN_STDDEV)*exp(-0.65 * x);
     }
     return G;
 }
@@ -180,6 +179,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       
       gaussianGraph->SetLineColor(kMagenta);
       gaussianGraph->SetLineWidth(2);
+      gaussianGraph->GetXaxis()->SetLimits(-8, 20); 
       expectedGraph->SetLineColor(kYellow);
       expectedGraph->SetLineWidth(2);
       
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_noexp_TTS_" + filename + ".png";
+      std::string outputFilename = "time_distribution_exp0.65_0.8_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
