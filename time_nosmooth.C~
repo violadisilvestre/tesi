@@ -41,7 +41,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
     TCanvas *canvas = new TCanvas("c2", "Pe histogram", 800, 600);
     
     // Crea un istogramma
-    TH1F *hist = new TH1F("hist", "Pe histogram", 20, 0, 20);
+    TH1F *hist = new TH1F("hist", "Pe histogram", 30, 0, 20);
     
     // Riempie l'istogramma con i dati
     for(double value :times) {
@@ -49,17 +49,9 @@ void processFile(const std::string& filename, std::vector<double>& N) {
 	}
     
     hist->Draw();
-     // Imposta i titoli degli assi
-    hist->GetXaxis()->SetTitle("time(ns)");
-    hist->GetYaxis()->SetTitle("# pe");
-
-    // Imposta il colore di riempimento a rosa e lo stile di riempimento
-    hist->SetFillColor(kPink);
-    hist->SetFillStyle(1001); // Stile pieno
-
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "histo_pe_true" + filename + ".png";
+      std::string outputFilename = "histo_pe" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       delete hist;
