@@ -26,14 +26,15 @@ double gaussian(double x, double mean, double stddev) {
 }
 
 // Somma di gaussiane
-double Gaussian_sum(double x, const std::vector<double>& times) {
+double Gaussian_sum(double x, const std::vector<double>& times, double exp_scale1, double exp_scale2) {
     double G = 0;
     for (double t : times) {
-      G += gaussian(x, t, GAUSSIAN_STDDEV)*(exp(-0.65 * x)-exp(0.5*x));
+        double gaussian_value = gaussian(x, t, GAUSSIAN_STDDEV);
+        double exponential_part = exp(-exp_scale1 * x);
+        G += gaussian_value * exponential_part;
     }
     return G;
 }
-
 // Funzione definita dall'utente
 double myFunction(double x, int dim) {
     const double tau = 3.08;
@@ -94,8 +95,8 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
-        G[i] = Gaussian_sum(x[i], times);
-        F[i] = myFunction(y[i], times.size());
+      G[i] = Gaussian_sum(x[i], times,0.65,0.05);
+      F[i] = myFunction(y[i], times.size());
     }
 
     // Normalizzazione delle funzioni
@@ -112,7 +113,10 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
             G[i] = SATURATION_LIMIT;
         }
     }
-
+    // double minTime = *std::min_element(times.begin(), times.end());
+    for (int i=0; i< NUM_POINTS; ++i) {
+       x[i]=x[i]-x[0];
+    }
     // Calcolo ToT per soglia bassa
     int start_low = -1;
     double time_start_low = 0;
@@ -179,7 +183,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       
       gaussianGraph->SetLineColor(kMagenta);
       gaussianGraph->SetLineWidth(2);
-      gaussianGraph->GetXaxis()->SetLimits(-4, 10); 
+      gaussianGraph->GetXaxis()->SetLimits(0, 20); 
       /*expectedGraph->SetLineColor(kYellow);
 	expectedGraph->SetLineWidth(2);
       
@@ -203,7 +207,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "prova" + filename + ".png";
+      std::string outputFilename = "prova1" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
