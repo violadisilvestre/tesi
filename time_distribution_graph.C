@@ -29,7 +29,7 @@ double gaussian(double x, double mean, double stddev) {
 double Gaussian_sum(double x, const std::vector<double>& times) {
     double G = 0;
     for (double t : times) {
-      G += gaussian(x, t, GAUSSIAN_STDDEV)*exp(-0.65 * x);
+      G += gaussian(x, t, GAUSSIAN_STDDEV)*(exp(-0.65 * x)-exp(0.5*x));
     }
     return G;
 }
@@ -203,7 +203,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "time_distribution_exp0.65_TTS0.8_final_" + filename + ".png";
+      std::string outputFilename = "prova" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
