@@ -41,7 +41,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
     TCanvas *canvas = new TCanvas("c2", "Pe histogram", 800, 600);
     
     // Crea un istogramma
-    TH1F *hist = new TH1F("hist", "Pe histogram", 20, 79, 110);
+    TH1F *hist = new TH1F("hist", "Pe histogram", 20, 0, 20);
     
     // Riempie l'istogramma con i dati
     for(double value :times) {
@@ -59,7 +59,7 @@ void processFile(const std::string& filename, std::vector<double>& N) {
 
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "histo_pe_final_" + filename + ".png";
+      std::string outputFilename = "histo_pe_final1_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       delete hist;
