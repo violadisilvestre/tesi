@@ -51,7 +51,7 @@
      return t;
    };
    
-   auto get_time_pe_max_cell = [&i](ROOT::VecOps::RVec<dg_cell>& cells) {
+   auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
      std::vector<double> t_cell_max; // Vector to store times of pe for the cell with the most pe
      int max_pe_count = -1;
      int max_pe_cell_index = -1;
@@ -62,20 +62,19 @@
        //std::cout<<i<<std::endl;
        for (const auto& p : c.ps1) {
 	 pe_count = p.photo_el.size();
-	 if(c.id==15305){
 	   //std::cout<<"max:"<<c.id<<std::endl;
-	   std::cout << "TotEvt: " << i << " Pe: "<<pe_count<<std::endl;
+	   //std::cout  << " Pe: "<<pe_count<<std::endl;
 	   
-	   if (pe_count>=max_pe_count) {
+	   if (pe_count>=650 and pe_count<=750) {
 	     max_pe_count = pe_count;
 	    max_pe_cell_index = c.id;
-	   }
 	 }
-       }  //std::cout<< p.photo_el.size()<<std::endl;
+        std::cout<< p.photo_el.size()<<std::endl;
+       }
      }
      
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_18.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_test.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
@@ -97,7 +96,6 @@
        }
      }   // Close the file
     outFile.close();
-     ++i;
     return t_cell_max;
 };
     

@@ -113,10 +113,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
             G[i] = SATURATION_LIMIT;
         }
     }
-    // double minTime = *std::min_element(times.begin(), times.end());
-    for (int i=0; i< NUM_POINTS; ++i) {
-       x[i]=x[i]-x[0];
-    }
+
     // Calcolo ToT per soglia bassa
     int start_low = -1;
     double time_start_low = 0;
@@ -183,7 +180,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       
       gaussianGraph->SetLineColor(kMagenta);
       gaussianGraph->SetLineWidth(2);
-      gaussianGraph->GetXaxis()->SetLimits(0, 20); 
+      gaussianGraph->GetXaxis()->SetLimits(-7, 10); 
       /*expectedGraph->SetLineColor(kYellow);
 	expectedGraph->SetLineWidth(2);
       
