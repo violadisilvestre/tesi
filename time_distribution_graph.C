@@ -18,7 +18,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.8;
+const double GAUSSIAN_STDDEV = 0.6;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -26,7 +26,7 @@ double gaussian(double x, double mean, double stddev) {
 }
 
 // Somma di gaussiane
-double Gaussian_sum(double x, const std::vector<double>& times, double exp_scale1, double exp_scale2) {
+double Gaussian_sum(double x, const std::vector<double>& times, double exp_scale1) {
     double G = 0;
     for (double t : times) {
         double gaussian_value = gaussian(x, t, GAUSSIAN_STDDEV);
@@ -95,7 +95,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
-      G[i] = Gaussian_sum(x[i], times,0.65,0.05);
+      G[i] = Gaussian_sum(x[i], times,0.5);
       F[i] = myFunction(y[i], times.size());
     }
 
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "prova1" + filename + ".png";
+      std::string outputFilename = "TTS_0.5_SS_0.6" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -227,11 +227,11 @@ std::vector<double> tot_l;
 std::vector<double> tot_h;
 
 for (const std::string& filename : filenames) {
-      processFile(filename, N, tot_l, tot_h,1);
+  processFile(filename, N, tot_l, tot_h,1);
 }
 
 // Filtraggio dei valori negativi
-std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
+/*std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
 for (int i = 0; i < N.size(); ++i) {
       std::cout<<"file:"<<i+1<<" N:"<<N[i]<<" ToT_l:"<<tot_l[i]<<std::endl;
 if (tot_l[i] >= 0 && N[i]<=2700) {
@@ -310,7 +310,7 @@ delete c1;
     //GENERO GLI EVENTI PER LA RISOLUZIONE
     std::vector<double> N_evt;
     std::vector<double> tot_l_evt;
-    std::vector<double> tot_h_evt;
+    std::vector<double> tot_h_evt;*/
     /* for (int i=0; i<100;i++) {
       processFile("T_smear_test.txt", N_evt, tot_l_evt, tot_h_evt,0);
     }*/
