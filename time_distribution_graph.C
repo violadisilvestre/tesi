@@ -95,7 +95,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
-      G[i] = Gaussian_sum(x[i], times,0.07,0.05);
+      G[i] = Gaussian_sum(x[i], times,0.4,0);
       F[i] = myFunction(y[i], times.size());
     }
 
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "TTS_0.8_exp1_0.07_-exp2_0.05" + filename + ".png";
+      std::string outputFilename = "def" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -231,7 +231,7 @@ for (const std::string& filename : filenames) {
 }
 
 // Filtraggio dei valori negativi
-/*std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
+std::vector<double> N_filtered, N_filtered_h,tot_l_filtered, tot_h_filtered;
 for (int i = 0; i < N.size(); ++i) {
       std::cout<<"file:"<<i+1<<" N:"<<N[i]<<" ToT_l:"<<tot_l[i]<<std::endl;
 if (tot_l[i] >= 0 && N[i]<=2700) {
@@ -300,7 +300,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("voglio_morire5.png");
+c1->SaveAs("voglio_morire6.png");
 
 // Pulizia della memoria
 delete gr_low;
@@ -310,7 +310,7 @@ delete c1;
     //GENERO GLI EVENTI PER LA RISOLUZIONE
     std::vector<double> N_evt;
     std::vector<double> tot_l_evt;
-    std::vector<double> tot_h_evt;*/
+    std::vector<double> tot_h_evt;
     /* for (int i=0; i<100;i++) {
       processFile("T_smear_test.txt", N_evt, tot_l_evt, tot_h_evt,0);
     }*/
