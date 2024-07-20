@@ -30,7 +30,7 @@ double Gaussian_sum(double x, const std::vector<double>& times, double t1,double
     double G = 0;
     for (double t : times) {
         double gaussian_value = gaussian(x, t, GAUSSIAN_STDDEV);
-        double exponential_part = -exp(-(x*t1))-exp(x*t2);
+        double exponential_part = exp(-(x*t1))-exp(x*t2);
         G += gaussian_value * exponential_part;
     }
     return G;
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "TTS_0.8_exp1_0.7_exp2_0.5" + filename + ".png";
+      std::string outputFilename = "TTS_0.8_exp1_0.7_-exp2_0.5" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
