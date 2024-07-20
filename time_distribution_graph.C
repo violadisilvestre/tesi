@@ -18,7 +18,7 @@
 // Definizione delle costanti
 const double SATURATION_LIMIT = 2700;
 const int NUM_POINTS = 10000;
-const double GAUSSIAN_STDDEV = 0.6;
+const double GAUSSIAN_STDDEV = 0.8;
 
 // Funzione gaussiana
 double gaussian(double x, double mean, double stddev) {
@@ -95,7 +95,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
-      G[i] = Gaussian_sum(x[i], times,0.6,2.5);
+      G[i] = Gaussian_sum(x[i], times,0.8,2);
       F[i] = myFunction(y[i], times.size());
     }
 
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "TTS_0.6_exp0.6_tau_2.5_" + filename + ".png";
+      std::string outputFilename = "TTS_0.8_exp0.8_tau_2_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
