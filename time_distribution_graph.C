@@ -26,11 +26,11 @@ double gaussian(double x, double mean, double stddev) {
 }
 
 // Somma di gaussiane
-double Gaussian_sum(double x, const std::vector<double>& times, double exp_scale1) {
+double Gaussian_sum(double x, const std::vector<double>& times, double tpe,double tau) {
     double G = 0;
     for (double t : times) {
         double gaussian_value = gaussian(x, t, GAUSSIAN_STDDEV);
-        double exponential_part = exp(-exp_scale1 * x);
+        double exponential_part = exp(-(x-t)/tau);
         G += gaussian_value * exponential_part;
     }
     return G;
@@ -95,7 +95,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
     // Calcolo delle funzioni G e F
     std::vector<double> G(NUM_POINTS), F(NUM_POINTS);
     for (int i = 0; i < NUM_POINTS; ++i) {
-      G[i] = Gaussian_sum(x[i], times,0.4);
+      G[i] = Gaussian_sum(x[i], times,0.6,2.5);
       F[i] = myFunction(y[i], times.size());
     }
 
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "TTS_0.4_SS_0.6" + filename + ".png";
+      std::string outputFilename = "TTS_0.6_exp0.6_tau_2.5_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
