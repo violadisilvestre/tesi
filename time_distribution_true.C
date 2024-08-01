@@ -4,9 +4,9 @@
 #include <fstream>
 {
  
-  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/sand_ecal_max_pe/files/digi/sand-events.*.digi.root");
+ ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/mt/OLD/sand_ecal_max_pe/files/digi/sand-events.*.digi.root");
   //  ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/e_pos2_iso_1000.digi.root");
-  //ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/mu_pos2_user_1000.digit.root");
+  // ROOT::RDataFrame df("tDigit","/storage/gpfs_data/neutrino/users/gauzzi/sandreco/build_slf7.x86_64/Testing/mu_pos2_user_1000.digit.root");
   std::cout << "Total events " << df.Count().GetValue() << std::endl;
 
    Int_t TotEvt = -1;
@@ -14,7 +14,7 @@
    auto select_events = [&](){
      ++TotEvt;
      Bool_t IsGood = kFALSE;
-     if(TotEvt==50897) {
+     if(TotEvt==20) {
        IsGood = kTRUE;
     }
      return IsGood;
@@ -65,11 +65,14 @@
 	   //std::cout<<"max:"<<c.id<<std::endl;
 	   //std::cout  << " Pe: "<<pe_count<<std::endl;
 	   
-	   if (pe_count>=650 and pe_count<=750) {
-	     max_pe_count = pe_count;
-	    max_pe_cell_index = c.id;
-	 }
-        std::cout<< p.photo_el.size()<<std::endl;
+	   if (pe_count==3) {
+	     // max_pe_count = pe_count;
+	     max_pe_cell_index = c.id;
+	     std::cout<< c.id<<std::endl;
+	   }
+	   std::cout<< p.photo_el.size()<<std::endl;
+	   std::cout<< c.id<<std::endl;
+
        }
      }
      
