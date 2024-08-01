@@ -218,7 +218,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
 
 int main() {
-   std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_14.txt","T_smear_16.txt" ,"T_smear_12392.txt","T_smear_119.txt", "T_smear_16573.txt","T_smear_31027.txt","T_smear_54376.txt","T_smear_24044_1000.txt","T_smear_26539_2000.txt","T_smear_1000.txt"
+   std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_14.txt","T_smear_16.txt","T_smear_119.txt", "T_smear_16573.txt","T_smear_31027.txt","T_smear_24044_1000.txt","T_smear_26539_2000.txt","T_smear_1000.txt"
   //};
   // std::vector<std::string> filenames = { "T_smear_test.txt"
 };
@@ -302,7 +302,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("N_ToT_def_test0.png");
+c1->SaveAs("N_ToT_def.png");
 
 // Pulizia della memoria
 delete gr_low;
