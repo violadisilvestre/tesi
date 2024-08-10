@@ -286,11 +286,11 @@ legend->AddEntry(gr_high, "High Threshold ToT", "p");
 legend->Draw();
 
 // Esegui il fitting dei dati
-TF1 *fit_low = new TF1("fit_low","pol2", 0, 16); // Fitting con un polinomio di terzo grado
-TF1 *fit_high = new TF1("fit_high", "pol2", 0, 16);
+TF1 *fit_low = new TF1("fit_low","[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 16); // Fitting con un polinomio di terzo grado
+TF1 *fit_high = new TF1("fit_high", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 16);
 
-gr_low->Fit(fit_low, "R");
-gr_high->Fit(fit_high, "R");
+gr_low->Fit(fit_low, "F");
+gr_high->Fit(fit_high, "F");
 
 // Aggiungi le funzioni di fit al grafico
 fit_low->SetLineColor(kBlue);
@@ -302,7 +302,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("N_ToT_def_test2.png");
+c1->SaveAs("N_ToT_def_test3.png");
 
 // Pulizia della memoria
 delete gr_low;
