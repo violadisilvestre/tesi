@@ -59,14 +59,14 @@ void processFile(const std::string& filename, std::vector<double>& N) {
 
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "histo_pe_final1_" + filename + ".png";
+      std::string outputFilename = "histo_pe_tesi_def_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       delete hist;
       delete canvas;
     }
 int main() {
-  std::vector<std::string> filenames = {"T_smear_2.txt","T_smear_0_800.txt","T_smear_1000.txt", "T_smear_24044_1000.txt", "T_smear_325.txt","T_smear_test.txt"
+  std::vector<std::string> filenames = { "T_smear_0.txt", "T_smear_1.txt", "T_smear_2.txt", "T_smear_3.txt","T_smear_4.txt", "T_smear_5.txt", "T_smear_6.txt", "T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt","T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt", "T_smear_17.txt"
 };
   
   std::vector<double> N;

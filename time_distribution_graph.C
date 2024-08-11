@@ -31,7 +31,7 @@ double Gaussian_sum(double x, const std::vector<double>& times, double t1) {
     for (double t : times) {
         double gaussian_value = gaussian(x, t, GAUSSIAN_STDDEV);
         double exponential_part = exp(-(x*t1));
-        G += gaussian_value * exponential_part;
+        G += gaussian_value* exponential_part;
     }
     return G;
 }
@@ -204,7 +204,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
       //legend->Draw();
       
       // Salvataggio del canvas su file
-      std::string outputFilename = "def_" + filename + ".png";
+      std::string outputFilename = "time_dis_pe_tesi_def_" + filename + ".png";
       canvas->SaveAs(outputFilename.c_str());
       
       // Pulizia della memoria
@@ -218,7 +218,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
 
 int main() {
-   std::vector<std::string> filenames = { "T_smear_1.txt","T_smear_10.txt","T_smear_2.txt","T_smear_3.txt","T_smear_5.txt", "T_smear_6.txt", "T_smear_14.txt","T_smear_16.txt","T_smear_119.txt", "T_smear_16573.txt","T_smear_31027.txt","T_smear_54376.txt","T_smear_26539_2000.txt","T_smear_1000.txt"
+  std::vector<std::string> filenames = { "T_smear_0.txt", "T_smear_1.txt", "T_smear_2.txt", "T_smear_3.txt","T_smear_4.txt", "T_smear_5.txt", "T_smear_6.txt", "T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt","T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt", "T_smear_17.txt"
   //};
   // std::vector<std::string> filenames = { "T_smear_test.txt"
 };
@@ -265,7 +265,7 @@ TCanvas *c1 = new TCanvas("c1", "N vs ToT", 800, 600);
 c1->SetGrid();
 
 // Disegna il primo grafico
-gr_low->SetTitle("Calibration curve ;ToT (ns);Amplitude (mV)");
+gr_low->SetTitle("Calibration curve ;ToT (ns); #pe");
 gr_low->SetMarkerStyle(20); // Imposta lo stile dei punti
 gr_low->SetMarkerSize(1.1);
 gr_low->SetMarkerColor(kBlue);
@@ -289,8 +289,8 @@ legend->Draw();
 TF1 *fit_low = new TF1("fit_low","[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 16); // Fitting con un polinomio di terzo grado
 TF1 *fit_high = new TF1("fit_high", "[0]+[1]*x+[2]*x**2+[3]*x**3", 0, 16);
 
-gr_low->Fit(fit_low, "F");
-gr_high->Fit(fit_high, "F");
+ gr_low->Fit(fit_low, "R");
+ gr_high->Fit(fit_high, "R");
 
 // Aggiungi le funzioni di fit al grafico
 fit_low->SetLineColor(kBlue);
@@ -302,7 +302,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
-c1->SaveAs("N_ToT_def_test3.png");
+ c1->SaveAs("poly_fit_tesi_cell3402_.png");
 
 // Pulizia della memoria
 delete gr_low;

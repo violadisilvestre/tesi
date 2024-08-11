@@ -14,7 +14,7 @@
    auto select_events = [&](){
      ++TotEvt;
      Bool_t IsGood = kFALSE;
-     if(TotEvt==20) {
+     if(TotEvt==69857) {
        IsGood = kTRUE;
     }
      return IsGood;
@@ -51,7 +51,7 @@
      return t;
    };
    
-   auto get_time_pe_max_cell = [](ROOT::VecOps::RVec<dg_cell>& cells) {
+   auto get_time_pe_max_cell = [&](ROOT::VecOps::RVec<dg_cell>& cells) {
      std::vector<double> t_cell_max; // Vector to store times of pe for the cell with the most pe
      int max_pe_count = -1;
      int max_pe_cell_index = -1;
@@ -65,19 +65,23 @@
 	   //std::cout<<"max:"<<c.id<<std::endl;
 	   //std::cout  << " Pe: "<<pe_count<<std::endl;
 	   
-	   if (pe_count==3) {
-	     // max_pe_count = pe_count;
+	 if (c.id==3402) {
+	     max_pe_count = pe_count;
 	     max_pe_cell_index = c.id;
-	     std::cout<< c.id<<std::endl;
+	     
 	   }
-	   std::cout<< p.photo_el.size()<<std::endl;
-	   std::cout<< c.id<<std::endl;
+	 // std::cout<< p.photo_el.size()<<std::endl;
+	 //  std::cout<< c.id<<std::endl;
 
        }
      }
-     
+     if( max_pe_cell_index>1){
+       std::cout<<TotEvt <<std::endl;
+       std::cout<< max_pe_count<<std::endl;
+     }
+     // std::cout<<  max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_test.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_17.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
