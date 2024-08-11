@@ -14,7 +14,7 @@
    auto select_events = [&](){
      ++TotEvt;
      Bool_t IsGood = kFALSE;
-     if(TotEvt==84293) {
+     if(TotEvt==64899) {
        IsGood = kTRUE;
     }
      return IsGood;
@@ -65,7 +65,7 @@
 	   //std::cout<<"max:"<<c.id<<std::endl;
 	   //std::cout  << " Pe: "<<pe_count<<std::endl;
 	   
-	 if (c.id==3402) {
+	 if (c.id==3402 ) {
 	     max_pe_count = pe_count;
 	     max_pe_cell_index = c.id;
 	     
