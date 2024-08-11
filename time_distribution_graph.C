@@ -218,7 +218,7 @@ void processFile(const std::string& filename, std::vector<double>& N, std::vecto
 
 
 int main() {
-  std::vector<std::string> filenames = { "T_smear_0.txt", "T_smear_1.txt", "T_smear_2.txt", "T_smear_3.txt","T_smear_4.txt", "T_smear_5.txt", "T_smear_6.txt", "T_smear_7.txt", "T_smear_8.txt", "T_smear_9.txt", "T_smear_10.txt", "T_smear_11.txt","T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_15.txt","T_smear_16.txt", "T_smear_17.txt"
+  std::vector<std::string> filenames = { "T_smear_0.txt", "T_smear_1.txt", "T_smear_2.txt", "T_smear_3.txt","T_smear_4.txt", "T_smear_5.txt", "T_smear_6.txt", "T_smear_9.txt", "T_smear_11.txt","T_smear_12.txt", "T_smear_13.txt", "T_smear_14.txt", "T_smear_17.txt"
   //};
   // std::vector<std::string> filenames = { "T_smear_test.txt"
 };
@@ -302,7 +302,7 @@ fit_high->SetLineWidth(2);
 fit_high->Draw("same");
 
 // Salva il grafico in un file
- c1->SaveAs("poly_fit_tesi_cell3402_.png");
+ c1->SaveAs("poly_fit_tesi_cell3402_def.png");
 
 // Pulizia della memoria
 delete gr_low;
