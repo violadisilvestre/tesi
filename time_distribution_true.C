@@ -14,7 +14,7 @@
    auto select_events = [&](){
      ++TotEvt;
      Bool_t IsGood = kFALSE;
-     if(TotEvt==69857) {
+     if(TotEvt==84293) {
        IsGood = kTRUE;
     }
      return IsGood;
@@ -81,7 +81,7 @@
      }
      // std::cout<<  max_pe_cell_index<<std::endl;
     // Open a file for writing (overwriting the file if it already exists)
-    std::ofstream outFile("T_smear_17.txt", std::ios::trunc);
+    std::ofstream outFile("T_smear_13.txt", std::ios::trunc);
     // Check if the file is opened successfully
     if (!outFile.is_open()) {
         std::cerr << "Error opening file for writing!" << std::endl;
