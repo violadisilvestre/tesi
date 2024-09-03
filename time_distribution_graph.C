@@ -313,17 +313,17 @@ delete c1;
     std::vector<double> N_evt;
     std::vector<double> tot_l_evt;
     std::vector<double> tot_h_evt;
-    /* for (int i=0; i<100;i++) {
+     for (int i=0; i<100;i++) {
       processFile("T_smear_test.txt", N_evt, tot_l_evt, tot_h_evt,0);
-    }*/
+    }
     // Ottieni i parametri dal fit
-/* double par0 = fit_low->GetParameter(0);
+     double par0 = fit_low->GetParameter(0);
     double par1 = fit_low->GetParameter(1);
     double par2 = fit_low->GetParameter(2);
     double par3 = fit_low->GetParameter(3);
-    std::vector<double> A_l, A_h;*/
-    /*  for (int i = 0; i < N_evt.size(); ++i) {
-      //std::cout<<N_evt[i]<< " "<<tot_l_evt[i]<<std::endl;
+    std::vector<double> A_l, A_h;
+     for (int i = 0; i < N_evt.size(); ++i) {
+      std::cout<<N_evt[i]<< " "<<tot_l_evt[i]<<std::endl;
       double A=par0+par1*tot_l_evt[i]+par2*pow(tot_l_evt[i],2)+par3*pow(tot_l_evt[i],3);
       // std::cout<<A<<std::endl;
       A_l.push_back(A);
@@ -333,14 +333,14 @@ delete c1;
     TCanvas *c2 = new TCanvas("c2", "Amplitude histogram", 800, 600);
     
     // Crea un istogramma
-    TH1F *hist = new TH1F("hist", "Amplitude histogram", 30, 140, 170);
+    TH1F *hist = new TH1F("hist", "Amplitude histogram", 30, 80, 150);
     
     // Riempie l'istogramma con i dati
     for(double value : A_l) {
         hist->Fill(value);
-	}*/
+	}
     
-    /* // Definisce la funzione di fit Gaussiano
+     // Definisce la funzione di fit Gaussiano
     TF1 *gaus = new TF1("gaus", "gaus", 700, 1000);
     
     // Esegue il fit Gaussiano
@@ -349,31 +349,31 @@ delete c1;
     // Ottiene i parametri del fit
     double A = gaus->GetParameter(0);
     double mu = gaus->GetParameter(1);
-    double sigma = gaus->GetParameter(2);*/
+    double sigma = gaus->GetParameter(2);
     
     // Disegna l'istogramma
-    // hist->Draw();
-    //std::cout<<mu<< " "<< sigma<< " "<< N_evt[0]<<std::endl;
-    // Aggiunge il numero di eventi e i parametri del fit sul grafico
-    /* TText *text = new TText();
+     hist->Draw();
+     std::cout<<mu<< " "<< sigma<< " "<< N_evt[0]<<std::endl;
+     // Aggiunge il numero di eventi e i parametri del fit sul grafico
+     TText *text = new TText();
     text->SetNDC();
     text->SetTextSize(0.03);
     text->DrawText(0.1, 0.85, Form("N_evt = %d", static_cast<int>(N_evt[0])));
     text->DrawText(0.1, 0.80, Form("A = %.2f", A));
     text->DrawText(0.1, 0.75, Form("mu = %.2f", mu));
-    text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));*/
+    text->DrawText(0.1, 0.70, Form("sigma = %.2f", sigma));
     
-    /*   // Aggiunge una legenda
+       // Aggiunge una legenda
     TLegend *legend2 = new TLegend(0.7, 0.7, 0.9, 0.9);
     legend2->AddEntry(hist, "Dati", "l");
-    //legend2->AddEntry(gaus, "Fit Gaussiano", "l");
+    legend2->AddEntry(gaus, "Fit Gaussiano", "l");
     legend2->Draw();
     
     // Salva il canvas come immagine
-    c2->SaveAs("histogram_fit_test.png");
+    c2->SaveAs("histogram_fit_test1.png");
      // Cleanup
    
-     delete hist;*/
+     delete hist;
     
 
   return 0;
